@@ -1,0 +1,29 @@
+# ------------------------------------------------------------
+# FLO Barber Shop – Basis-Konfiguration für Hostinger (Apache/LiteSpeed)
+# Nur sichere, gängige Einstellungen – keine HTTPS-Weiterleitung
+# (HTTPS aktivierst du bequem im Hostinger-Panel unter "SSL").
+# ------------------------------------------------------------
+
+# Startseite
+DirectoryIndex index.html
+
+# Bei unbekannten Pfaden die Startseite zeigen (Onepager)
+ErrorDocument 404 /index.html
+
+# ---------- Gzip-Kompression ----------
+<IfModule mod_deflate.c>
+  AddOutputFilterByType DEFLATE text/html text/plain text/css text/xml \
+    application/javascript application/json image/svg+xml
+</IfModule>
+
+# ---------- Browser-Caching ----------
+<IfModule mod_expires.c>
+  ExpiresActive On
+  ExpiresByType text/css              "access plus 1 month"
+  ExpiresByType application/javascript "access plus 1 month"
+  ExpiresByType image/svg+xml         "access plus 1 month"
+  ExpiresByType image/jpeg            "access plus 6 months"
+  ExpiresByType image/png             "access plus 6 months"
+  ExpiresByType image/webp            "access plus 6 months"
+  ExpiresByType text/html             "access plus 1 day"
+</IfModule>
