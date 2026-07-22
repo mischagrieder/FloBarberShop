@@ -12,7 +12,7 @@ window.SHOP = {
   brandShort: "FLO",
   city: "Oftringen",
   // Kurzer Claim für Hero + <title>
-  tagline: "Fades, Bärte & scharfe Konturen – dein Barbershop in Oftringen.",
+  tagline: "Dein Coiffeur & Barber in Oftringen.",
   // Ein Satz für Meta-Description (SEO, ~150 Zeichen)
   metaDescription:
     "FLO Barber Shop in Oftringen – präzise Fades, Bart-Styling und klassische Herrenschnitte. Top bewertet auf Google. Jetzt Termin sichern.",
@@ -21,12 +21,16 @@ window.SHOP = {
 
   /* ---------- Farben (Theme) ---------- */
   colors: {
-    gold: "#c9a24b",     // Akzent / Gold
-    goldSoft: "#e6c877",
+    gold: "#a8842e",     // Akzent / Gold (tiefer, weniger gelb)
+    goldSoft: "#cba24a", // Highlight-Gold
     black: "#0c0c0d",    // Haupt-Hintergrund
     ink: "#141416",      // Karten-Hintergrund
     cream: "#f4f1ea"     // heller Text auf Dunkel
   },
+
+  /* ---------- Logo (KI-generiert, transparentes Icon, CDN) ---------- */
+  logo: "https://d8j0ntlcm91z4.cloudfront.net/user_3FuPVC4JIayU3rXUwYAnv5ZoEBp/hf_20260722_063225_a454bb9b-e255-438a-971e-3effa1fc13db.png",
+  logoAlt: "FLO Barber Shop Logo",
 
   /* ---------- Kontakt ---------- */
   phoneDisplay: "062 557 97 44",     // TODO bestätigen

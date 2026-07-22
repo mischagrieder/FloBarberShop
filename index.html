@@ -30,13 +30,13 @@
   <!-- ===================== HEADER ===================== -->
   <header class="site-header" id="siteHeader">
     <div class="container header-inner">
-      <a href="#top" class="logo" data-bind="brand">FLO<span>Barber</span></a>
+      <a href="#top" class="logo" data-logo>FLO<span>Barber</span></a>
       <nav class="nav" aria-label="Hauptnavigation">
         <a href="#leistungen">Leistungen</a>
-        <a href="#ueber">Über uns</a>
-        <a href="#galerie">Galerie</a>
-        <a href="#bewertungen">Bewertungen</a>
-        <a href="#kontakt">Kontakt</a>
+        <a href="#galerie">Ergebnisse</a>
+        <a href="#kontakt">Standort</a>
+        <a href="#bewertungen">Rezensionen</a>
+        <a href="ueber-uns.html">Über uns</a>
       </nav>
       <a href="#kontakt" class="btn btn-gold btn-sm nav-cta" data-cta>Termin</a>
       <button class="nav-toggle" aria-label="Menü öffnen" aria-expanded="false">
@@ -52,9 +52,7 @@
       <div class="hero-bg" data-hero-bg></div>
       <div class="hero-overlay"></div>
       <div class="container hero-content">
-        <p class="eyebrow" data-bind="cityEyebrow">Barbershop · Oftringen</p>
-        <h1 class="hero-title" data-bind="tagline">Fades, Bärte &amp; scharfe Konturen.</h1>
-        <p class="hero-sub" data-bind="heroSub"></p>
+        <h1 class="hero-title" data-bind="tagline">Dein Coiffeur &amp; Barber in Oftringen.</h1>
         <div class="hero-actions">
           <a href="#kontakt" class="btn btn-gold" data-cta>Termin anfragen</a>
           <a href="#leistungen" class="btn btn-ghost">Leistungen ansehen</a>
@@ -85,29 +83,13 @@
       </div>
     </section>
 
-    <!-- ===================== ÜBER UNS ===================== -->
-    <section class="section section-dark" id="ueber">
-      <div class="container about-grid">
-        <div class="about-media">
-          <div class="about-img" data-about-img></div>
-        </div>
-        <div class="about-text">
-          <p class="eyebrow">Über uns</p>
-          <h2 data-bind="aboutTitle">Handwerk, das man sieht</h2>
-          <p data-bind="aboutText"></p>
-          <ul class="checks" data-about-points></ul>
-          <a href="#kontakt" class="btn btn-ghost" data-cta>Vorbeikommen</a>
-        </div>
-      </div>
-    </section>
-
-    <!-- ===================== GALERIE ===================== -->
-    <section class="section" id="galerie">
+    <!-- ===================== ERGEBNISSE / GALERIE ===================== -->
+    <section class="section section-dark" id="galerie">
       <div class="container">
         <div class="section-head">
-          <p class="eyebrow">Galerie</p>
+          <p class="eyebrow">Ergebnisse</p>
           <h2>Frische Cuts</h2>
-          <p class="section-lead">Ein Blick auf unsere Arbeit – mehr davon auf Instagram.</p>
+          <p class="section-lead">Ein Blick auf unsere Arbeit.</p>
         </div>
         <div class="gallery-grid" data-gallery></div>
         <div class="section-cta">
@@ -116,24 +98,12 @@
       </div>
     </section>
 
-    <!-- ===================== BEWERTUNGEN ===================== -->
-    <section class="section section-dark" id="bewertungen">
-      <div class="container">
-        <div class="section-head">
-          <p class="eyebrow">Bewertungen</p>
-          <h2>Das sagen unsere Kunden</h2>
-          <div class="rating-big" data-rating></div>
-        </div>
-        <div class="testimonials-grid" data-testimonials></div>
-      </div>
-    </section>
-
-    <!-- ===================== KONTAKT / CTA ===================== -->
+    <!-- ===================== STANDORT / KONTAKT ===================== -->
     <section class="section" id="kontakt">
       <div class="container contact-grid">
         <div class="contact-info">
-          <p class="eyebrow">Kontakt &amp; Termin</p>
-          <h2>Komm vorbei oder ruf an</h2>
+          <p class="eyebrow">Standort &amp; Termin</p>
+          <h2>Hier findest du uns</h2>
           <p class="section-lead">Termine am liebsten telefonisch oder per WhatsApp – wir freuen uns auf dich.</p>
 
           <ul class="contact-list">
@@ -177,19 +147,36 @@
           allowfullscreen></iframe>
       </div>
     </section>
+
+    <!-- ===================== REZENSIONEN ===================== -->
+    <section class="section section-dark" id="bewertungen">
+      <div class="container">
+        <div class="section-head">
+          <p class="eyebrow">Rezensionen</p>
+          <h2>Das sagen unsere Kunden</h2>
+          <div class="rating-big" data-rating></div>
+        </div>
+        <div class="testimonials-grid" data-testimonials></div>
+        <div class="section-cta">
+          <a href="#" class="btn btn-ghost" data-reviews-link target="_blank" rel="noopener">Auf Google ansehen</a>
+        </div>
+      </div>
+    </section>
   </main>
 
   <!-- ===================== FOOTER ===================== -->
   <footer class="site-footer">
     <div class="container footer-inner">
       <div class="footer-brand">
-        <span class="logo" data-bind="brand">FLO<span>Barber</span></span>
+        <span class="logo" data-logo>FLO<span>Barber</span></span>
         <p data-bind="footerAddress"></p>
       </div>
       <nav class="footer-nav" aria-label="Footer">
         <a href="#leistungen">Leistungen</a>
-        <a href="#galerie">Galerie</a>
-        <a href="#kontakt">Kontakt</a>
+        <a href="#galerie">Ergebnisse</a>
+        <a href="#kontakt">Standort</a>
+        <a href="#bewertungen">Rezensionen</a>
+        <a href="ueber-uns.html">Über uns</a>
         <a href="#" data-instagram target="_blank" rel="noopener">Instagram</a>
       </nav>
       <p class="footer-copy" data-copy></p>

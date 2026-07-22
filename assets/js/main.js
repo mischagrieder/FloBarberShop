@@ -71,6 +71,24 @@
     return `${a.street || ""}, ${a.zip || ""} ${a.city || ""}`.trim().replace(/^,/, "");
   }
 
+  /* ---------- Logo-Icon (wird dem Schriftzug vorangestellt, wenn geladen) ---------- */
+  if (S.logo) {
+    probeImage(S.logo, (ok) => {
+      if (!ok) return;
+      $$("[data-logo]").forEach((el) => {
+        if (el.querySelector(".logo-mark")) return;
+        const img = document.createElement("img");
+        img.className = "logo-mark";
+        img.src = S.logo;
+        img.alt = S.logoAlt || S.brand;
+        el.insertBefore(img, el.firstChild);
+      });
+    });
+  }
+
+  /* ---------- Google-Reviews-Link ---------- */
+  $$("[data-reviews-link]").forEach((el) => (el.href = S.mapsUrl || "#"));
+
   /* ---------- Hero-Bild ---------- */
   if (S.heroImage) {
     const bg = $("[data-hero-bg]");
@@ -257,7 +275,12 @@
 
   /* ---------- Header scroll + Mobile-Menü ---------- */
   const header = $("#siteHeader");
-  const onScroll = () => header.classList.toggle("scrolled", window.scrollY > 40);
+  const stickyCta = $(".sticky-cta");
+  const onScroll = () => {
+    header.classList.toggle("scrolled", window.scrollY > 40);
+    // Sticky-CTA erst einblenden, wenn man vom Hero weggescrollt ist
+    if (stickyCta) stickyCta.classList.toggle("show", window.scrollY > window.innerHeight * 0.75);
+  };
   onScroll(); window.addEventListener("scroll", onScroll, { passive: true });
 
   const toggle = $(".nav-toggle");
