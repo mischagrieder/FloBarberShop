@@ -15,6 +15,7 @@
     const r = document.documentElement.style;
     if (S.colors.gold) r.setProperty("--gold", S.colors.gold);
     if (S.colors.goldSoft) r.setProperty("--gold-soft", S.colors.goldSoft);
+    if (S.colors.blue) r.setProperty("--blue", S.colors.blue);
     if (S.colors.black) r.setProperty("--black", S.colors.black);
     if (S.colors.ink) r.setProperty("--ink", S.colors.ink);
     if (S.colors.cream) r.setProperty("--cream", S.colors.cream);
@@ -150,21 +151,22 @@
     });
   }
 
-  /* ---------- Galerie ---------- */
+  /* ---------- Ergebnisse (Karten im Horizontal-Scroll) ---------- */
   const galEl = $("[data-gallery]");
   if (galEl && S.gallery) {
     galEl.innerHTML = S.gallery.map((g) => `
-      <figure class="gallery-item" data-reveal>
+      <figure class="result-card fly">
         <img src="${esc(g.src)}" alt="${esc(g.alt || S.brand)}" loading="lazy"
-             onerror="this.style.display='none'">
+             onerror="this.closest('.result-card').style.opacity=.001">
+        ${g.label ? `<figcaption>${esc(g.label)}</figcaption>` : ""}
       </figure>`).join("");
   }
 
-  /* ---------- Testimonials ---------- */
+  /* ---------- Rezensionen (gestapelte Karten) ---------- */
   const tEl = $("[data-testimonials]");
   if (tEl && S.testimonials) {
-    tEl.innerHTML = S.testimonials.map((t) => `
-      <blockquote class="testimonial" data-reveal>
+    tEl.innerHTML = S.testimonials.map((t, i) => `
+      <blockquote class="review-card" style="--i:${i};z-index:${i + 1}">
         <div class="t-stars">${stars(t.stars || 5)}</div>
         <p>„${esc(t.text)}"</p>
         <div class="t-author">${esc(t.author || "")}</div>
@@ -294,12 +296,75 @@
   }));
 
   /* ---------- Reveal on scroll ---------- */
+  const reduce = matchMedia("(prefers-reduced-motion: reduce)").matches;
   const io = new IntersectionObserver((entries) => {
     entries.forEach((e) => { if (e.isIntersecting) { e.target.classList.add("in"); io.unobserve(e.target); } });
   }, { threshold: 0.12 });
-  // data-reveal auch auf Sektions-Köpfe
   $$(".section-head, .about-text, .contact-hours").forEach((el) => el.setAttribute("data-reveal", ""));
   requestAnimationFrame(() => $$("[data-reveal]").forEach((el) => io.observe(el)));
+
+  /* ---------- Ergebnis-Karten gestaffelt einfliegen ---------- */
+  const galSection = $("#galerie");
+  if (galSection) {
+    const cards = $$(".result-card", galSection);
+    const gio = new IntersectionObserver((entries) => {
+      entries.forEach((e) => {
+        if (e.isIntersecting) {
+          cards.forEach((c, i) => { c.style.transitionDelay = (i * 90) + "ms"; c.classList.add("in"); });
+          gio.disconnect();
+        }
+      });
+    }, { threshold: 0.15 });
+    gio.observe(galSection);
+  }
+
+  /* ---------- Typewriter: Titel schreiben sich selbst ---------- */
+  function typeOn(el) {
+    if (el.dataset.typed || el.children.length) return; // HTML-Titel (z.B. Hero mit Gold-Span) auslassen
+    el.dataset.typed = "1";
+    const full = el.textContent;
+    if (reduce) return;
+    el.textContent = "";
+    el.classList.add("typing");
+    const speed = Math.max(16, Math.min(42, 700 / Math.max(full.length, 1)));
+    let i = 0;
+    (function step() {
+      el.textContent = full.slice(0, i);
+      if (i++ <= full.length) setTimeout(step, speed);
+      else el.classList.remove("typing");
+    })();
+  }
+  const tio = new IntersectionObserver((entries) => {
+    entries.forEach((e) => { if (e.isIntersecting) { typeOn(e.target); tio.unobserve(e.target); } });
+  }, { threshold: 0.6 });
+  $$(".type").forEach((el) => tio.observe(el));
+
+  /* ---------- Ergebnisse: horizontaler Scroll (Desktop) ---------- */
+  const hs = $(".hscroll");
+  if (hs) {
+    const track = $(".hscroll-track", hs);
+    const mq = matchMedia("(min-width: 861px) and (prefers-reduced-motion: no-preference)");
+    let extra = 0;
+    function layout() {
+      if (!mq.matches) { hs.classList.remove("hscroll--active"); hs.style.height = ""; track.style.transform = ""; return; }
+      hs.classList.add("hscroll--active");
+      extra = Math.max(0, track.scrollWidth - window.innerWidth + window.innerWidth * 0.05);
+      hs.style.height = (window.innerHeight + extra) + "px";
+      onHScroll();
+    }
+    function onHScroll() {
+      if (!hs.classList.contains("hscroll--active")) return;
+      const total = hs.offsetHeight - window.innerHeight;
+      if (total <= 0) { track.style.transform = ""; return; }
+      const prog = Math.min(1, Math.max(0, -hs.getBoundingClientRect().top / total));
+      track.style.transform = "translateX(" + (-prog * extra) + "px)";
+    }
+    window.addEventListener("scroll", onHScroll, { passive: true });
+    window.addEventListener("resize", layout);
+    window.addEventListener("load", layout);
+    layout();
+    setTimeout(layout, 700); // nach dem Nachladen der Bilder neu berechnen
+  }
 
   /* ---------- Helper: prüft ob ein Bild existiert ---------- */
   function probeImage(src, cb) {

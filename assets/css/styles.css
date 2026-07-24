@@ -3,14 +3,16 @@
    Farben werden zusätzlich via config.js als CSS-Variablen gesetzt.
 ========================================================= */
 :root{
-  --gold:#a8842e;
-  --gold-soft:#cba24a;
-  --black:#0c0c0d;
-  --ink:#141416;
-  --ink-2:#1c1c1f;
-  --cream:#f4f1ea;
-  --muted:#a5a29b;
-  --line:rgba(201,162,75,.22);
+  --gold:#d62828;        /* Haupt-Akzent: Barber-Rot */
+  --gold-soft:#ef4444;
+  --blue:#3b6fd4;        /* Zweit-Akzent: Barber-Blau */
+  --black:#0a1a33;       /* tiefes Marineblau */
+  --ink:#11294d;
+  --ink-2:#173461;
+  --cream:#f4f7fc;
+  --muted:#9fb0c9;
+  --line:rgba(255,255,255,.14);
+  --stripe:repeating-linear-gradient(45deg,var(--gold) 0 10px,#ffffff 10px 20px,var(--blue) 20px 30px);
   --shadow:0 20px 60px rgba(0,0,0,.45);
   --radius:16px;
   --maxw:1160px;
@@ -51,9 +53,9 @@ h3{font-size:1.6rem;letter-spacing:1px}
 .btn-sm{padding:.6rem 1.15rem;font-size:.9rem}
 .btn-gold{
   background:linear-gradient(135deg,var(--gold-soft),var(--gold));
-  color:#181206;box-shadow:0 10px 30px rgba(201,162,75,.28);
+  color:#fff;box-shadow:0 10px 30px rgba(214,40,40,.3);
 }
-.btn-gold:hover{transform:translateY(-2px);box-shadow:0 16px 40px rgba(201,162,75,.4)}
+.btn-gold:hover{transform:translateY(-2px);box-shadow:0 16px 40px rgba(214,40,40,.45)}
 .btn-ghost{border-color:var(--line);color:var(--cream)}
 .btn-ghost:hover{border-color:var(--gold);color:var(--gold)}
 
@@ -64,8 +66,12 @@ h3{font-size:1.6rem;letter-spacing:1px}
   background:transparent;
 }
 .site-header.scrolled{
-  background:rgba(10,10,11,.88);backdrop-filter:blur(12px);
-  padding:10px 0;border-bottom:1px solid var(--line);
+  background:rgba(9,22,44,.9);backdrop-filter:blur(12px);
+  padding:10px 0;
+}
+/* Barber-Pole-Streifen unter dem Header (sichtbar beim Scrollen) */
+.site-header.scrolled::after{
+  content:"";position:absolute;left:0;right:0;bottom:0;height:3px;background:var(--stripe);
 }
 .header-inner{display:flex;align-items:center;justify-content:space-between;gap:16px}
 .logo{font-family:var(--ff-head);font-size:1.7rem;letter-spacing:1.5px;color:var(--cream);display:inline-flex;align-items:center;gap:8px}
@@ -84,15 +90,15 @@ h3{font-size:1.6rem;letter-spacing:1px}
 .hero{position:relative;min-height:100vh;display:flex;align-items:center;overflow:hidden}
 .hero-bg{
   position:absolute;inset:0;background-size:cover;background-position:center;
-  background-image:linear-gradient(135deg,#1a1712,#0c0c0d 70%);
+  background-image:linear-gradient(135deg,#12294d,#0a1a33 70%);
   transform:scale(1.05);
 }
 .hero-overlay{
   position:absolute;inset:0;
   background:
-    radial-gradient(120% 90% at 70% 20%,rgba(201,162,75,.14),transparent 55%),
-    linear-gradient(90deg,rgba(8,8,9,.94) 0%,rgba(8,8,9,.75) 45%,rgba(8,8,9,.35) 100%),
-    linear-gradient(0deg,rgba(8,8,9,.9),transparent 45%);
+    radial-gradient(120% 90% at 72% 18%,rgba(214,40,40,.16),transparent 55%),
+    linear-gradient(90deg,rgba(10,26,51,.95) 0%,rgba(10,26,51,.78) 45%,rgba(10,26,51,.4) 100%),
+    linear-gradient(0deg,rgba(10,26,51,.92),transparent 45%);
 }
 .hero-content{position:relative;z-index:2;max-width:680px;padding-top:80px}
 .hero-title{font-size:clamp(3rem,9vw,6rem);color:var(--cream);margin:.2em 0 .35em}
@@ -115,6 +121,26 @@ h3{font-size:1.6rem;letter-spacing:1px}
 /* ---------- Sections ---------- */
 .section{padding:clamp(64px,9vw,110px) 0}
 .subpage{padding-top:clamp(110px,16vw,150px)}
+
+/* Section-Varianten: überschreiben die Farb-Variablen -> Komponenten färben automatisch um.
+   Buttons (btn-gold) bleiben rot, da --gold/--gold-soft NICHT überschrieben werden. */
+.section-light{
+  background:#eef2f8;
+  --cream:#0f2038;        /* Text dunkel */
+  --muted:#5a6b85;
+  --ink:#ffffff;          /* Karten weiss */
+  --ink-2:#ffffff;
+  --line:rgba(12,28,56,.12);
+}
+.section-light .service-card{box-shadow:0 10px 30px rgba(15,32,56,.08)}
+.section-blue{
+  background:linear-gradient(160deg,#1d4084,#132f5e);
+  --cream:#ffffff;
+  --muted:#c7d6f0;
+  --ink:rgba(255,255,255,.10);
+  --ink-2:rgba(255,255,255,.06);
+  --line:rgba(255,255,255,.24);
+}
 .subpage h1{font-size:clamp(2.4rem,6vw,3.6rem);color:var(--cream);margin:.2rem 0 1rem}
 .section-dark{background:var(--ink)}
 .section-head{max-width:640px;margin:0 auto 3rem;text-align:center}
@@ -145,7 +171,7 @@ h3{font-size:1.6rem;letter-spacing:1px}
 .about-grid{display:grid;grid-template-columns:1fr 1fr;gap:clamp(30px,5vw,64px);align-items:center}
 .about-img{
   aspect-ratio:4/5;border-radius:var(--radius);background-size:cover;background-position:center;
-  background-image:linear-gradient(135deg,#241f16,#0c0c0d);
+  background-image:linear-gradient(135deg,#173461,#0a1a33);
   border:1px solid var(--line);box-shadow:var(--shadow);
 }
 .about-text h2{margin:.2rem 0 1rem}
@@ -158,7 +184,7 @@ h3{font-size:1.6rem;letter-spacing:1px}
 .gallery-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:14px}
 .gallery-item{
   aspect-ratio:1/1;border-radius:14px;overflow:hidden;position:relative;
-  background:linear-gradient(135deg,#241f16,#0c0c0d);border:1px solid var(--line);
+  background:linear-gradient(135deg,#173461,#0a1a33);border:1px solid var(--line);
 }
 .gallery-item img{width:100%;height:100%;object-fit:cover;transition:.4s ease}
 .gallery-item:hover img{transform:scale(1.08)}
@@ -168,7 +194,64 @@ h3{font-size:1.6rem;letter-spacing:1px}
 }
 .gallery-item:hover::after{opacity:1}
 
-/* ---------- Testimonials ---------- */
+/* ---------- Ergebnisse: horizontaler Scroll ---------- */
+.hscroll{position:relative;background:var(--black)}
+.hscroll-sticky{
+  position:sticky;top:0;height:100vh;overflow:hidden;
+  display:flex;flex-direction:column;justify-content:center;gap:clamp(1.4rem,3vw,2.4rem);
+}
+.hscroll-head{text-align:center}
+.hscroll-head h2{margin:.3rem 0 .6rem}
+.hscroll-hint{color:var(--gold);font-weight:600}
+.hscroll-track{
+  display:flex;gap:22px;padding:0 max(5vw,20px);will-change:transform;
+}
+.result-card{
+  flex:0 0 auto;width:clamp(240px,72vw,330px);aspect-ratio:3/4;border-radius:18px;
+  overflow:hidden;position:relative;border:1px solid var(--line);
+  background:linear-gradient(135deg,#173461,#0a1a33);box-shadow:var(--shadow);
+}
+.result-card img{width:100%;height:100%;object-fit:cover;transition:transform .5s cubic-bezier(.2,.7,.2,1)}
+.result-card:hover img,.result-card:active img,.result-card:focus-within img{transform:scale(1.08)}
+.result-card figcaption{
+  position:absolute;left:0;right:0;bottom:0;padding:16px 18px;color:#fff;font-weight:600;
+  background:linear-gradient(0deg,rgba(6,15,30,.85),transparent);font-size:.98rem;
+}
+/* Fallback ohne JS / auf Touch: einfaches seitliches Wischen */
+.hscroll:not(.hscroll--active) .hscroll-sticky{position:static;height:auto;padding:clamp(64px,9vw,110px) 0}
+.hscroll:not(.hscroll--active) .hscroll-track{overflow-x:auto;scroll-snap-type:x mandatory;-webkit-overflow-scrolling:touch;padding-bottom:14px}
+.hscroll:not(.hscroll--active) .result-card{scroll-snap-align:center}
+
+/* ---------- Rezensionen: gestapelte Karten (UNO-Stapel) ---------- */
+.reviews-stack{max-width:640px;margin:0 auto;padding-bottom:10vh}
+.review-card{
+  position:sticky;top:calc(120px + var(--i,0) * 16px);
+  background:var(--ink);border:1px solid var(--line);border-radius:20px;
+  padding:30px 28px;margin-bottom:26px;box-shadow:0 24px 50px rgba(8,18,38,.35);
+  transform:rotate(calc((var(--i,0) - 1) * 1.1deg));
+  transition:transform .4s ease;
+}
+.review-card:hover{transform:rotate(0deg) translateY(-2px)}
+.review-card .t-stars{color:var(--gold);letter-spacing:2px;margin-bottom:.7rem;font-size:1.1rem}
+.review-card p{color:var(--cream);font-size:1.08rem;margin-bottom:1rem;line-height:1.55}
+.review-card .t-author{color:var(--muted);font-size:.9rem;font-weight:600}
+
+/* ---------- Typewriter ---------- */
+.type.typing::after{
+  content:"";display:inline-block;width:.6ch;height:1em;margin-left:2px;
+  background:var(--gold);vertical-align:-0.12em;animation:caret .8s step-end infinite;
+}
+@keyframes caret{50%{opacity:0}}
+
+/* ---------- Fly-in (Bilder/Karten) ---------- */
+.js .fly{opacity:0;transform:translateY(60px) scale(.94)}
+.js .fly.in{opacity:1;transform:none;transition:opacity .8s ease,transform .9s cubic-bezier(.2,.8,.2,1)}
+@media (prefers-reduced-motion:reduce){
+  .js .fly{opacity:1;transform:none;transition:none}
+  .type.typing::after{display:none}
+}
+
+/* ---------- Testimonials (alt, Fallback) ---------- */
 .rating-big{margin-top:1rem;font-size:1.05rem;color:var(--muted)}
 .rating-big .stars{color:var(--gold);font-size:1.4rem;letter-spacing:3px;display:block;margin-bottom:.3rem}
 .testimonials-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:18px}
@@ -203,7 +286,8 @@ h3{font-size:1.6rem;letter-spacing:1px}
 .map-wrap iframe{width:100%;height:420px;border:0;border-top:1px solid var(--line);filter:grayscale(.3) contrast(1.05)}
 
 /* ---------- Footer ---------- */
-.site-footer{background:#08080a;padding:54px 0 34px;border-top:1px solid var(--line)}
+.site-footer{background:#071426;padding:54px 0 34px;position:relative}
+.site-footer::before{content:"";position:absolute;top:0;left:0;right:0;height:3px;background:var(--stripe)}
 .footer-inner{display:flex;flex-wrap:wrap;gap:24px;align-items:center;justify-content:space-between}
 .footer-brand p{color:var(--muted);font-size:.9rem;margin-top:.4rem}
 .footer-nav{display:flex;gap:22px;flex-wrap:wrap}
@@ -215,7 +299,7 @@ h3{font-size:1.6rem;letter-spacing:1px}
 .sticky-cta{
   display:none;position:fixed;left:16px;right:16px;bottom:16px;z-index:60;
   text-align:center;padding:1rem;border-radius:999px;font-weight:700;
-  background:linear-gradient(135deg,var(--gold-soft),var(--gold));color:#181206;
+  background:linear-gradient(135deg,var(--gold-soft),var(--gold));color:#fff;
   box-shadow:0 12px 30px rgba(0,0,0,.5);
   opacity:0;transform:translateY(140%);pointer-events:none;
   transition:opacity .3s ease,transform .3s ease;
@@ -233,7 +317,7 @@ h3{font-size:1.6rem;letter-spacing:1px}
 @media (max-width:860px){
   .nav,.nav-cta{display:none}
   .nav-toggle{display:flex}
-  .site-header.menu-open{background:rgba(10,10,11,.97);backdrop-filter:blur(12px)}
+  .site-header.menu-open{background:rgba(9,22,44,.97);backdrop-filter:blur(12px)}
   .site-header.menu-open .nav{
     display:flex;position:absolute;top:100%;left:0;right:0;flex-direction:column;
     gap:0;padding:8px 22px 20px;margin:0;
@@ -244,6 +328,9 @@ h3{font-size:1.6rem;letter-spacing:1px}
   .gallery-grid{grid-template-columns:repeat(2,1fr)}
   .sticky-cta{display:block}
   .map-wrap iframe{height:320px}
+  /* Ergebnisse mobil: natives seitliches Wischen, Karten etwas kleiner */
+  .result-card{width:78vw}
+  .review-card{top:calc(88px + var(--i,0) * 12px);padding:24px 22px}
 }
 @media (max-width:420px){
   .hero-actions .btn{flex:1}

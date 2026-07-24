@@ -9,7 +9,7 @@
   <meta name="description" content="FLO Barber Shop in Oftringen – präzise Fades, Bart-Styling und klassische Herrenschnitte. Jetzt Termin sichern." />
   <meta name="robots" content="index, follow" />
   <link rel="canonical" href="https://flobarbershop.ch/" id="meta-canonical" />
-  <meta name="theme-color" content="#0c0c0d" />
+  <meta name="theme-color" content="#0a1a33" />
   <link rel="icon" type="image/svg+xml" href="assets/img/favicon.svg" />
   <meta property="og:locale" content="de_CH" />
 
@@ -52,7 +52,7 @@
       <div class="hero-bg" data-hero-bg></div>
       <div class="hero-overlay"></div>
       <div class="container hero-content">
-        <h1 class="hero-title" data-bind="tagline">Dein Coiffeur &amp; Barber in Oftringen.</h1>
+        <h1 class="hero-title type" data-bind="tagline">Dein Coiffeur &amp; Barber in Oftringen.</h1>
         <div class="hero-actions">
           <a href="#kontakt" class="btn btn-gold" data-cta>Termin anfragen</a>
           <a href="#leistungen" class="btn btn-ghost">Leistungen ansehen</a>
@@ -68,11 +68,11 @@
     </section>
 
     <!-- ===================== LEISTUNGEN ===================== -->
-    <section class="section" id="leistungen">
+    <section class="section section-light" id="leistungen">
       <div class="container">
         <div class="section-head">
           <p class="eyebrow">Leistungen</p>
-          <h2>Was wir am besten können</h2>
+          <h2 class="type">Was wir am besten können</h2>
           <p class="section-lead">Fokus auf Fades, Bart &amp; klare Konturen – Handwerk für den perfekten Look.</p>
         </div>
         <div class="services-grid" data-services></div>
@@ -83,27 +83,24 @@
       </div>
     </section>
 
-    <!-- ===================== ERGEBNISSE / GALERIE ===================== -->
-    <section class="section section-dark" id="galerie">
-      <div class="container">
-        <div class="section-head">
+    <!-- ===================== ERGEBNISSE (horizontaler Scroll) ===================== -->
+    <section class="hscroll" id="galerie" aria-label="Ergebnisse">
+      <div class="hscroll-sticky">
+        <div class="container hscroll-head">
           <p class="eyebrow">Ergebnisse</p>
-          <h2>Frische Cuts</h2>
-          <p class="section-lead">Ein Blick auf unsere Arbeit.</p>
+          <h2 class="type">Frische Cuts</h2>
+          <p class="section-lead hscroll-hint">Scroll weiter – die Ergebnisse laufen seitwärts&nbsp;➜</p>
         </div>
-        <div class="gallery-grid" data-gallery></div>
-        <div class="section-cta">
-          <a href="#" class="btn btn-ghost" data-instagram target="_blank" rel="noopener">Mehr auf Instagram</a>
-        </div>
+        <div class="hscroll-track" data-gallery></div>
       </div>
     </section>
 
     <!-- ===================== STANDORT / KONTAKT ===================== -->
-    <section class="section" id="kontakt">
+    <section class="section section-blue" id="kontakt">
       <div class="container contact-grid">
         <div class="contact-info">
           <p class="eyebrow">Standort &amp; Termin</p>
-          <h2>Hier findest du uns</h2>
+          <h2 class="type">Hier findest du uns</h2>
           <p class="section-lead">Termine am liebsten telefonisch oder per WhatsApp – wir freuen uns auf dich.</p>
 
           <ul class="contact-list">
@@ -148,15 +145,15 @@
       </div>
     </section>
 
-    <!-- ===================== REZENSIONEN ===================== -->
-    <section class="section section-dark" id="bewertungen">
+    <!-- ===================== REZENSIONEN (gestapelte Karten) ===================== -->
+    <section class="section section-light" id="bewertungen">
       <div class="container">
         <div class="section-head">
           <p class="eyebrow">Rezensionen</p>
-          <h2>Das sagen unsere Kunden</h2>
+          <h2 class="type">Das sagen unsere Kunden</h2>
           <div class="rating-big" data-rating></div>
         </div>
-        <div class="testimonials-grid" data-testimonials></div>
+        <div class="reviews-stack" data-testimonials></div>
         <div class="section-cta">
           <a href="#" class="btn btn-ghost" data-reviews-link target="_blank" rel="noopener">Auf Google ansehen</a>
         </div>

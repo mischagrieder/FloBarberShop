@@ -19,17 +19,19 @@ window.SHOP = {
   // Domain für SEO/OpenGraph (ohne Slash am Ende), z. B. "https://flobarbershop.ch"
   siteUrl: "https://flobarbershop.ch", // TODO bestätigen
 
-  /* ---------- Farben (Theme) ---------- */
+  /* ---------- Farben (Theme: Blau / Weiss / Rot – Barber-Pole) ----------
+     "gold" = Haupt-Akzent (hier Barber-Rot). "blue" = Zweit-Akzent. */
   colors: {
-    gold: "#a8842e",     // Akzent / Gold (tiefer, weniger gelb)
-    goldSoft: "#cba24a", // Highlight-Gold
-    black: "#0c0c0d",    // Haupt-Hintergrund
-    ink: "#141416",      // Karten-Hintergrund
-    cream: "#f4f1ea"     // heller Text auf Dunkel
+    gold: "#d62828",     // Haupt-Akzent (Barber-Rot) – CTAs, Highlights
+    goldSoft: "#ef4444", // helleres Rot (Verlauf)
+    blue: "#3b6fd4",     // Zweit-Akzent (Barber-Blau) – Streifen, Details
+    black: "#0a1a33",    // Haupt-Hintergrund (tiefes Marineblau)
+    ink: "#11294d",      // Karten-Hintergrund
+    cream: "#f4f7fc"     // heller Text auf Dunkel
   },
 
   /* ---------- Logo (KI-generiert, transparentes Icon, CDN) ---------- */
-  logo: "https://d8j0ntlcm91z4.cloudfront.net/user_3FuPVC4JIayU3rXUwYAnv5ZoEBp/hf_20260722_063225_a454bb9b-e255-438a-971e-3effa1fc13db.png",
+  logo: "https://d8j0ntlcm91z4.cloudfront.net/user_3FuPVC4JIayU3rXUwYAnv5ZoEBp/hf_20260722_064833_8464513f-84ea-424c-a744-95a32064c7b9.png",
   logoAlt: "FLO Barber Shop Logo",
 
   /* ---------- Kontakt ---------- */
@@ -108,10 +110,13 @@ window.SHOP = {
      KI-generierte Bilder (Higgsfield CDN). Zum Lokalisieren: Bilder herunterladen,
      in assets/img/ ablegen und die src auf z.B. "assets/img/gallery-1.jpg" ändern. */
   gallery: [
-    { src: "https://d8j0ntlcm91z4.cloudfront.net/user_3FuPVC4JIayU3rXUwYAnv5ZoEBp/hf_20260721_194158_0b9e2905-365e-44e8-a5a9-1eb88292b9f6.png", alt: "Moderner Fade mit sauberen Konturen bei FLO Barber Shop Oftringen" },
-    { src: "https://d8j0ntlcm91z4.cloudfront.net/user_3FuPVC4JIayU3rXUwYAnv5ZoEBp/hf_20260721_194151_35fcfd31-0d9c-4e63-be9b-fe4d6154aaa9.png", alt: "Frischer Skin Fade – sauberer Übergang von Haut zu Haar" },
-    { src: "https://d8j0ntlcm91z4.cloudfront.net/user_3FuPVC4JIayU3rXUwYAnv5ZoEBp/hf_20260721_194155_2986a0cf-2e85-49d7-a52e-e34042c127ab.png", alt: "Bart-Styling und heisse Rasur" },
-    { src: "https://d8j0ntlcm91z4.cloudfront.net/user_3FuPVC4JIayU3rXUwYAnv5ZoEBp/hf_20260721_194201_ad07db5e-e6aa-4098-904e-0de750050687.png", alt: "Barbershop Interieur in Schwarz und Gold" }
+    { src: "https://d8j0ntlcm91z4.cloudfront.net/user_3FuPVC4JIayU3rXUwYAnv5ZoEBp/hf_20260721_194151_35fcfd31-0d9c-4e63-be9b-fe4d6154aaa9.png", alt: "Frischer Skin Fade bei FLO Barber Shop Oftringen", label: "Skin Fade" },
+    { src: "https://d8j0ntlcm91z4.cloudfront.net/user_3FuPVC4JIayU3rXUwYAnv5ZoEBp/hf_20260724_073546_2f564b59-4858-4f8f-842c-8c6e8ae03e7d.png", alt: "Textured Crop mit Fade", label: "Textured Crop" },
+    { src: "https://d8j0ntlcm91z4.cloudfront.net/user_3FuPVC4JIayU3rXUwYAnv5ZoEBp/hf_20260721_194158_0b9e2905-365e-44e8-a5a9-1eb88292b9f6.png", alt: "Moderner Fade mit sauberen Konturen", label: "Classic Fade" },
+    { src: "https://d8j0ntlcm91z4.cloudfront.net/user_3FuPVC4JIayU3rXUwYAnv5ZoEBp/hf_20260724_073546_c54c895d-e146-4cf4-a06e-22c74e9b9fc5.png", alt: "Curly Hair Mid Fade", label: "Curly Fade" },
+    { src: "https://d8j0ntlcm91z4.cloudfront.net/user_3FuPVC4JIayU3rXUwYAnv5ZoEBp/hf_20260721_194155_2986a0cf-2e85-49d7-a52e-e34042c127ab.png", alt: "Bart-Styling und heisse Rasur", label: "Bart & Rasur" },
+    { src: "https://d8j0ntlcm91z4.cloudfront.net/user_3FuPVC4JIayU3rXUwYAnv5ZoEBp/hf_20260724_073547_1a877c91-ae41-41ae-b8a8-15bf88c963c6.png", alt: "Buzz Cut mit sauberem Line-Up", label: "Buzz & Line-Up" },
+    { src: "https://d8j0ntlcm91z4.cloudfront.net/user_3FuPVC4JIayU3rXUwYAnv5ZoEBp/hf_20260724_073548_469fe317-c610-42f0-80e0-20b5bf8b6e88.png", alt: "Klassischer Pompadour mit Skin Fade", label: "Pompadour Fade" }
   ],
   heroImage: "https://d8j0ntlcm91z4.cloudfront.net/user_3FuPVC4JIayU3rXUwYAnv5ZoEBp/hf_20260721_194148_8f41fc28-dea8-40f6-aa3b-649e56e1662d.png",
 
