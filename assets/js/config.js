@@ -116,7 +116,11 @@ window.SHOP = {
     { src: "https://d8j0ntlcm91z4.cloudfront.net/user_3FuPVC4JIayU3rXUwYAnv5ZoEBp/hf_20260724_073546_c54c895d-e146-4cf4-a06e-22c74e9b9fc5.png", alt: "Curly Hair Mid Fade", label: "Curly Fade" },
     { src: "https://d8j0ntlcm91z4.cloudfront.net/user_3FuPVC4JIayU3rXUwYAnv5ZoEBp/hf_20260721_194155_2986a0cf-2e85-49d7-a52e-e34042c127ab.png", alt: "Bart-Styling und heisse Rasur", label: "Bart & Rasur" },
     { src: "https://d8j0ntlcm91z4.cloudfront.net/user_3FuPVC4JIayU3rXUwYAnv5ZoEBp/hf_20260724_073547_1a877c91-ae41-41ae-b8a8-15bf88c963c6.png", alt: "Buzz Cut mit sauberem Line-Up", label: "Buzz & Line-Up" },
-    { src: "https://d8j0ntlcm91z4.cloudfront.net/user_3FuPVC4JIayU3rXUwYAnv5ZoEBp/hf_20260724_073548_469fe317-c610-42f0-80e0-20b5bf8b6e88.png", alt: "Klassischer Pompadour mit Skin Fade", label: "Pompadour Fade" }
+    { src: "https://d8j0ntlcm91z4.cloudfront.net/user_3FuPVC4JIayU3rXUwYAnv5ZoEBp/hf_20260724_073548_469fe317-c610-42f0-80e0-20b5bf8b6e88.png", alt: "Klassischer Pompadour mit Skin Fade", label: "Pompadour Fade" },
+    { src: "https://d8j0ntlcm91z4.cloudfront.net/user_3FuPVC4JIayU3rXUwYAnv5ZoEBp/hf_20260727_193706_40f0510c-d48f-4544-8932-c1ab0b86c09d.png", alt: "Barber bei einem sauberen Fade", label: "Am Werk" },
+    { src: "https://d8j0ntlcm91z4.cloudfront.net/user_3FuPVC4JIayU3rXUwYAnv5ZoEBp/hf_20260727_193706_46bcee30-23fa-44f8-94d8-76761cb27923.png", alt: "Zufriedener Kunde nach frischem Schnitt", label: "Frisch gemacht" },
+    { src: "https://d8j0ntlcm91z4.cloudfront.net/user_3FuPVC4JIayU3rXUwYAnv5ZoEBp/hf_20260727_193706_b6da5e10-1316-4b35-816c-418e32708dd7.png", alt: "Scharfe Bart-Konturen mit dem Rasiermesser", label: "Bart-Konturen" },
+    { src: "https://d8j0ntlcm91z4.cloudfront.net/user_3FuPVC4JIayU3rXUwYAnv5ZoEBp/hf_20260727_193706_7d58c9e3-2c07-4f34-ae16-153b9a21fbbb.png", alt: "Barber-Werkzeug: Maschine, Schere, Rasiermesser", label: "Werkzeug" }
   ],
   heroImage: "https://d8j0ntlcm91z4.cloudfront.net/user_3FuPVC4JIayU3rXUwYAnv5ZoEBp/hf_20260721_194148_8f41fc28-dea8-40f6-aa3b-649e56e1662d.png",
 

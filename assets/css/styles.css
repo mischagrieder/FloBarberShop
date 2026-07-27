@@ -194,33 +194,30 @@ h3{font-size:1.6rem;letter-spacing:1px}
 }
 .gallery-item:hover::after{opacity:1}
 
-/* ---------- Ergebnisse: horizontaler Scroll ---------- */
-.hscroll{position:relative;background:var(--black)}
-.hscroll-sticky{
-  position:sticky;top:0;height:100vh;overflow:hidden;
-  display:flex;flex-direction:column;justify-content:center;gap:clamp(1.4rem,3vw,2.4rem);
+/* ---------- Ergebnisse: Curved Gallery (ziehbar, 3D) ---------- */
+.cgal-section{overflow:hidden}
+.cgal{
+  position:relative;height:clamp(420px,58vh,600px);width:100%;margin-top:1.5rem;
+  overflow:hidden;perspective:1300px;cursor:grab;touch-action:pan-y;
 }
-.hscroll-head{text-align:center}
-.hscroll-head h2{margin:.3rem 0 .6rem}
-.hscroll-hint{color:var(--gold);font-weight:600}
-.hscroll-track{
-  display:flex;gap:22px;padding:0 max(5vw,20px);will-change:transform;
+.cgal.grabbing{cursor:grabbing}
+.cgal-item{
+  position:absolute;top:50%;left:50%;width:clamp(210px,44vw,290px);aspect-ratio:3/4;
+  transform-style:preserve-3d;will-change:transform,opacity;backface-visibility:hidden;
 }
-.result-card{
-  flex:0 0 auto;width:clamp(240px,72vw,330px);aspect-ratio:3/4;border-radius:18px;
-  overflow:hidden;position:relative;border:1px solid var(--line);
-  background:linear-gradient(135deg,#173461,#0a1a33);box-shadow:var(--shadow);
+.cgal-figure{
+  width:100%;height:100%;border-radius:16px;overflow:hidden;position:relative;
+  border:1px solid var(--line);box-shadow:0 34px 66px rgba(0,0,0,.55);
+  background:linear-gradient(135deg,#173461,#0a1a33);
 }
-.result-card img{width:100%;height:100%;object-fit:cover;transition:transform .5s cubic-bezier(.2,.7,.2,1)}
-.result-card:hover img,.result-card:active img,.result-card:focus-within img{transform:scale(1.08)}
-.result-card figcaption{
-  position:absolute;left:0;right:0;bottom:0;padding:16px 18px;color:#fff;font-weight:600;
-  background:linear-gradient(0deg,rgba(6,15,30,.85),transparent);font-size:.98rem;
+.cgal-figure img{width:100%;height:100%;object-fit:cover;-webkit-user-drag:none;user-select:none;pointer-events:none}
+.cgal-cap{
+  position:absolute;left:0;right:0;bottom:0;padding:14px 16px;color:#fff;font-weight:600;
+  font-size:1rem;text-align:center;background:linear-gradient(0deg,rgba(6,15,30,.82),transparent);
 }
-/* Fallback ohne JS / auf Touch: einfaches seitliches Wischen */
-.hscroll:not(.hscroll--active) .hscroll-sticky{position:static;height:auto;padding:clamp(64px,9vw,110px) 0}
-.hscroll:not(.hscroll--active) .hscroll-track{overflow-x:auto;scroll-snap-type:x mandatory;-webkit-overflow-scrolling:touch;padding-bottom:14px}
-.hscroll:not(.hscroll--active) .result-card{scroll-snap-align:center}
+/* Fallback ohne JS: einfaches seitliches Wischen */
+.no-js .cgal,html:not(.js) .cgal{height:auto;perspective:none;display:flex;gap:16px;overflow-x:auto;padding:1rem max(5vw,16px)}
+html:not(.js) .cgal-item{position:static;transform:none!important;width:min(70vw,280px);flex:0 0 auto}
 
 /* ---------- Rezensionen: gestapelte Karten (UNO-Stapel) ---------- */
 .reviews-stack{max-width:640px;margin:0 auto;padding-bottom:10vh}

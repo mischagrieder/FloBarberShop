@@ -151,15 +151,79 @@
     });
   }
 
-  /* ---------- Ergebnisse (Karten im Horizontal-Scroll) ---------- */
-  const galEl = $("[data-gallery]");
-  if (galEl && S.gallery) {
-    galEl.innerHTML = S.gallery.map((g) => `
-      <figure class="result-card fly">
-        <img src="${esc(g.src)}" alt="${esc(g.alt || S.brand)}" loading="lazy"
-             onerror="this.closest('.result-card').style.opacity=.001">
-        ${g.label ? `<figcaption>${esc(g.label)}</figcaption>` : ""}
-      </figure>`).join("");
+  /* ---------- Ergebnisse: Curved Gallery (ziehbar) ---------- */
+  const cgalEl = $("[data-cgal]");
+  if (cgalEl && S.gallery && S.gallery.length) buildCurvedGallery(cgalEl, S.gallery);
+
+  function buildCurvedGallery(root, items) {
+    const n = items.length;
+    const els = items.map((g) => {
+      const d = document.createElement("div");
+      d.className = "cgal-item";
+      d.innerHTML =
+        `<figure class="cgal-figure">
+           <img src="${esc(g.src)}" alt="${esc(g.alt || S.brand)}" draggable="false" loading="lazy" onerror="this.style.opacity=0">
+           ${g.label ? `<figcaption class="cgal-cap">${esc(g.label)}</figcaption>` : ""}
+         </figure>`;
+      root.appendChild(d);
+      return d;
+    });
+
+    let SPACING = 0, total = 0;
+    const W = () => root.clientWidth || 1;
+    function measure() {
+      const w = els[0].offsetWidth || 240;
+      SPACING = w + Math.max(30, w * 0.24);
+      total = n * SPACING;
+    }
+    measure();
+
+    let pos = 0, vel = 0, dragging = false, hovering = false, lastX = 0;
+    let auto = matchMedia("(prefers-reduced-motion: reduce)").matches ? 0 : 0.18;
+
+    function render() {
+      const spread = Math.max(W() * 0.6, 320);
+      for (let i = 0; i < n; i++) {
+        let x = i * SPACING - pos;
+        x = ((x + total / 2) % total + total) % total - total / 2; // Endlos-Schleife
+        const norm = Math.max(-1.5, Math.min(1.5, x / spread));
+        const rot = -norm * 42;
+        const tz = -Math.abs(norm) * 300;
+        const sc = 1 - Math.min(0.3, Math.abs(norm) * 0.2);
+        const el = els[i];
+        el.style.transform =
+          `translate(-50%,-50%) translateX(${x.toFixed(1)}px) rotateY(${rot.toFixed(2)}deg) translateZ(${tz.toFixed(1)}px) scale(${sc.toFixed(3)})`;
+        el.style.zIndex = String(2000 - Math.round(Math.abs(x)));
+        el.style.opacity = Math.abs(x) > W() * 0.85 ? "0" : "1";
+      }
+    }
+    function frame() {
+      if (!dragging) {
+        if (Math.abs(vel) > 0.05) { pos += vel; vel *= 0.94; }
+        else if (!hovering) { pos += auto; }
+      }
+      render();
+      requestAnimationFrame(frame);
+    }
+
+    root.addEventListener("pointerdown", (e) => {
+      dragging = true; root.classList.add("grabbing");
+      lastX = e.clientX; vel = 0;
+      try { root.setPointerCapture(e.pointerId); } catch (_) {}
+    });
+    root.addEventListener("pointermove", (e) => {
+      if (!dragging) return;
+      const dx = e.clientX - lastX; lastX = e.clientX;
+      pos -= dx; vel = -dx;
+    });
+    const end = () => { dragging = false; root.classList.remove("grabbing"); };
+    root.addEventListener("pointerup", end);
+    root.addEventListener("pointercancel", end);
+    root.addEventListener("pointerenter", () => (hovering = true));
+    root.addEventListener("pointerleave", () => { hovering = false; if (dragging) end(); });
+    window.addEventListener("resize", () => { measure(); render(); });
+
+    requestAnimationFrame(frame);
   }
 
   /* ---------- Rezensionen (gestapelte Karten) ---------- */
@@ -303,21 +367,6 @@
   $$(".section-head, .about-text, .contact-hours").forEach((el) => el.setAttribute("data-reveal", ""));
   requestAnimationFrame(() => $$("[data-reveal]").forEach((el) => io.observe(el)));
 
-  /* ---------- Ergebnis-Karten gestaffelt einfliegen ---------- */
-  const galSection = $("#galerie");
-  if (galSection) {
-    const cards = $$(".result-card", galSection);
-    const gio = new IntersectionObserver((entries) => {
-      entries.forEach((e) => {
-        if (e.isIntersecting) {
-          cards.forEach((c, i) => { c.style.transitionDelay = (i * 90) + "ms"; c.classList.add("in"); });
-          gio.disconnect();
-        }
-      });
-    }, { threshold: 0.15 });
-    gio.observe(galSection);
-  }
-
   /* ---------- Typewriter: Titel schreiben sich selbst ---------- */
   function typeOn(el) {
     if (el.dataset.typed || el.children.length) return; // HTML-Titel (z.B. Hero mit Gold-Span) auslassen
@@ -339,32 +388,6 @@
   }, { threshold: 0.6 });
   $$(".type").forEach((el) => tio.observe(el));
 
-  /* ---------- Ergebnisse: horizontaler Scroll (Desktop) ---------- */
-  const hs = $(".hscroll");
-  if (hs) {
-    const track = $(".hscroll-track", hs);
-    const mq = matchMedia("(min-width: 861px) and (prefers-reduced-motion: no-preference)");
-    let extra = 0;
-    function layout() {
-      if (!mq.matches) { hs.classList.remove("hscroll--active"); hs.style.height = ""; track.style.transform = ""; return; }
-      hs.classList.add("hscroll--active");
-      extra = Math.max(0, track.scrollWidth - window.innerWidth + window.innerWidth * 0.05);
-      hs.style.height = (window.innerHeight + extra) + "px";
-      onHScroll();
-    }
-    function onHScroll() {
-      if (!hs.classList.contains("hscroll--active")) return;
-      const total = hs.offsetHeight - window.innerHeight;
-      if (total <= 0) { track.style.transform = ""; return; }
-      const prog = Math.min(1, Math.max(0, -hs.getBoundingClientRect().top / total));
-      track.style.transform = "translateX(" + (-prog * extra) + "px)";
-    }
-    window.addEventListener("scroll", onHScroll, { passive: true });
-    window.addEventListener("resize", layout);
-    window.addEventListener("load", layout);
-    layout();
-    setTimeout(layout, 700); // nach dem Nachladen der Bilder neu berechnen
-  }
 
   /* ---------- Helper: prüft ob ein Bild existiert ---------- */
   function probeImage(src, cb) {
