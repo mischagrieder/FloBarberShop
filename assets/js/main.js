@@ -71,37 +71,16 @@
     el.innerHTML = `<span class="stars">${stars(S.rating.stars)}</span> <span>${S.rating.stars} / 5 · ${S.rating.count} ${esc(S.rating.source || "Google")}-Bewertungen</span>`;
   });
 
-  /* ---------- Marquee ---------- */
-  const mq = $("[data-marquee]");
-  if (mq && S.marquee && S.marquee.length) {
-    const one = S.marquee.map((t) => `<span class="marquee-item">${esc(t)}</span>`).join("");
-    mq.innerHTML = one + one; // 2 Kopien für nahtlose Schleife
-  }
-
-  /* ---------- Kennzahlen ---------- */
-  const statsEl = $("[data-stats]");
-  if (statsEl && S.stats) {
-    statsEl.innerHTML = S.stats.map((s) => `
-      <div class="stat" data-reveal>
-        <div class="hexwrap">
-          <span class="hex hex-border"></span><span class="hex hex-fill"></span>
-          <span class="hex-ico">${esc(s.icon || "◆")}</span>
-        </div>
-        <div class="stat-num"><span data-count data-target="${s.value}" data-decimals="${s.decimals || 0}" data-suffix="${esc(s.suffix || "")}" data-prefix="${esc(s.prefix || "")}">0</span></div>
-        <div class="stat-label">${esc(s.label)}</div>
-      </div>`).join("");
-  }
-
-  /* ---------- Leistungen ---------- */
+  /* ---------- Leistungen (Preisliste / Menü) ---------- */
   const servEl = $("[data-services]");
   if (servEl && S.services) servEl.innerHTML = S.services.map((s) => `
-    <article class="service-card" data-reveal>
-      <div class="service-head">
-        <h3 class="service-name">${esc(s.name)}</h3>
-        <span class="service-price">${s.price ? "CHF " + esc(s.price) : "auf Anfrage"}</span>
+    <div class="menu-row" data-reveal>
+      <div class="menu-info">
+        <span class="menu-name">${esc(s.name)}</span>
+        <span class="menu-desc">${esc(s.desc || "")}</span>
       </div>
-      <p class="service-desc">${esc(s.desc || "")}</p>
-    </article>`).join("");
+      <span class="menu-price">${s.price ? "CHF " + esc(s.price) : "auf Anfrage"}</span>
+    </div>`).join("");
 
   /* ---------- Ergebnisse: 2 Grayscale-Laufbänder ---------- */
   const galEl = $("[data-gallery]");
@@ -115,18 +94,23 @@
       `<div class="gal-row r2">${build(rowB.length ? rowB : S.gallery)}</div>`;
   }
 
-  /* ---------- Rezensionen: 2 Karten-Laufbänder ---------- */
+  /* ---------- Rezensionen: Karten-Grid ---------- */
   const revEl = $("[data-reviews]");
   if (revEl && S.testimonials && S.testimonials.length) {
-    const card = (t) => `<blockquote class="review-card"><div class="t-stars">${stars(t.stars || 5)}</div><p>„${esc(t.text)}"</p><div class="t-author">${esc(t.author || "Google-Bewertung")}</div></blockquote>`;
-    const half = Math.ceil(S.testimonials.length / 2);
-    const a = S.testimonials.slice(0, half), b = S.testimonials.slice(half);
-    const build = (arr) => { const h = arr.map(card).join(""); return h + h; };
-    revEl.innerHTML =
-      `<div class="review-row r1">${build(a.length ? a : S.testimonials)}</div>` +
-      `<div class="review-row r2">${build(b.length ? b : S.testimonials)}</div>`;
+    revEl.innerHTML = S.testimonials.map((t) => {
+      const name = (t.author || "Google-Bewertung").trim();
+      return `<blockquote class="rev" data-reveal>
+        <div class="rev-head">
+          <span class="rev-ava" aria-hidden="true">${esc(name[0] || "G")}</span>
+          <div class="rev-id"><span class="t-author">${esc(name)}</span><span class="rev-src">Google-Bewertung</span></div>
+          <span class="rev-stars">${stars(t.stars || 5)}</span>
+        </div>
+        <p>${esc(t.text)}</p>
+      </blockquote>`;
+    }).join("");
   }
   $$("[data-reviews-link]").forEach((el) => (el.href = S.mapsUrl || "#"));
+  $$("[data-rating-badge]").forEach((el) => { if (S.rating) el.innerHTML = `<span class="stars">${stars(S.rating.stars)}</span> <strong>${S.rating.stars}</strong> / 5 · ${S.rating.count} ${esc(S.rating.source || "Google")}-Bewertungen`; });
 
   /* ---------- Über uns ---------- */
   const pts = $("[data-about-points]");
@@ -215,22 +199,6 @@
   }
   const tio = new IntersectionObserver((es) => es.forEach((e) => { if (e.isIntersecting) { typeOn(e.target); tio.unobserve(e.target); } }), { threshold: 0.6 });
   $$(".type").forEach((el) => tio.observe(el));
-
-  /* ---------- Count-up Kennzahlen ---------- */
-  function countUp(el) {
-    const target = parseFloat(el.dataset.target) || 0, dec = parseInt(el.dataset.decimals) || 0;
-    const suf = el.dataset.suffix || "", pre = el.dataset.prefix || "";
-    const fmt = (n) => pre + n.toLocaleString("de-CH", { minimumFractionDigits: dec, maximumFractionDigits: dec }) + suf;
-    if (reduce) { el.textContent = fmt(target); return; }
-    const dur = 1400, t0 = performance.now();
-    (function tick(now) {
-      const p = Math.min(1, (now - t0) / dur), e = 1 - Math.pow(1 - p, 3); // easeOutCubic
-      el.textContent = fmt(target * e);
-      if (p < 1) requestAnimationFrame(tick); else el.textContent = fmt(target);
-    })(t0);
-  }
-  const cio = new IntersectionObserver((es) => es.forEach((e) => { if (e.isIntersecting) { countUp(e.target); cio.unobserve(e.target); } }), { threshold: 0.6 });
-  $$("[data-count]").forEach((el) => cio.observe(el));
 
   /* ---------- Helper ---------- */
   function probeImage(src, cb) { const img = new Image(); img.onload = () => cb(true); img.onerror = () => cb(false); img.src = src; }

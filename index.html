@@ -20,7 +20,7 @@
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet" />
-  <link rel="stylesheet" href="assets/css/styles.css?v=9" />
+  <link rel="stylesheet" href="assets/css/styles.css?v=10" />
 </head>
 <body>
 
@@ -58,30 +58,16 @@
         </div>
         <div class="hero-meta" data-hero-rating></div>
       </div>
-      <a href="#leistungen" class="scroll-cue" aria-label="Nach unten scrollen">↓</a>
     </section>
 
-    <!-- ===================== MARQUEE ===================== -->
-    <div class="marquee" aria-hidden="true">
-      <div class="marquee-track" data-marquee></div>
-    </div>
-
-    <!-- ===================== KENNZAHLEN ===================== -->
-    <section class="section section-soft" id="kennzahlen" aria-label="Kennzahlen">
-      <div class="container">
-        <div class="stats" data-stats></div>
-      </div>
-    </section>
-
-    <!-- ===================== LEISTUNGEN ===================== -->
+    <!-- ===================== LEISTUNGEN (Preisliste) ===================== -->
     <section class="section" id="leistungen">
       <div class="container">
         <div class="section-head">
-          <p class="eyebrow">Leistungen</p>
-          <h2 class="type">Was wir am besten können</h2>
-          <p class="lead">Fokus auf Fades, Bart &amp; klare Konturen – Handwerk für den perfekten Look.</p>
+          <h2 class="type">Preise &amp; Leistungen</h2>
+          <p class="lead">Fokus auf Fades, Bart &amp; klare Konturen – faire Preise, ehrliche Beratung.</p>
         </div>
-        <div class="services-grid" data-services></div>
+        <div class="menu" data-services></div>
         <p class="price-note" data-price-note></p>
         <div class="section-cta">
           <a href="#kontakt" class="btn btn-red" data-cta>Jetzt Termin vereinbaren</a>
@@ -104,15 +90,14 @@
     <!-- ===================== REZENSIONEN ===================== -->
     <section class="section section-soft" id="rezensionen" aria-label="Rezensionen">
       <div class="container">
-        <div class="section-head">
-          <p class="eyebrow">Rezensionen</p>
-          <h2 class="type">Das sagen unsere Kunden</h2>
-          <div class="hero-meta" style="justify-content:center;color:var(--gray)" data-hero-rating></div>
+        <div class="reviews-top">
+          <div>
+            <h2 class="type">Das sagen unsere Kunden</h2>
+            <div class="rating-badge" data-rating-badge></div>
+          </div>
+          <a href="#" class="btn btn-outline" data-reviews-link target="_blank" rel="noopener">Auf Google ansehen</a>
         </div>
-      </div>
-      <div class="reviews-rows" data-reviews></div>
-      <div class="reviews-foot">
-        <a href="#" class="btn btn-outline" data-reviews-link target="_blank" rel="noopener">Alle auf Google ansehen</a>
+        <div class="reviews-grid" data-reviews></div>
       </div>
     </section>
 
@@ -189,6 +174,8 @@
         <a href="#rezensionen">Rezensionen</a>
         <a href="#ueber">Über uns</a>
         <a href="#kontakt">Kontakt</a>
+        <a href="impressum.html">Impressum</a>
+        <a href="datenschutz.html">Datenschutz</a>
       </nav>
       <p class="footer-copy" data-copy></p>
     </div>
@@ -196,7 +183,7 @@
 
   <a href="#kontakt" class="sticky-cta" data-cta>Termin vereinbaren</a>
 
-  <script src="assets/js/config.js?v=9"></script>
-  <script src="assets/js/main.js?v=9"></script>
+  <script src="assets/js/config.js?v=10"></script>
+  <script src="assets/js/main.js?v=10"></script>
 </body>
 </html>
