@@ -4,16 +4,13 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
-  <!-- SEO: wird von main.js aus config.js zusätzlich befüllt/aktualisiert -->
-  <title>FLO Barber Shop Oftringen – Fades, Bart & Herrenschnitt</title>
-  <meta name="description" content="FLO Barber Shop in Oftringen – präzise Fades, Bart-Styling und klassische Herrenschnitte. Jetzt Termin sichern." />
+  <title>FLO Barber Shop Oftringen – Fades, Bart &amp; Herrenschnitt</title>
+  <meta name="description" content="FLO Barber Shop in Oftringen – präzise Fades, Bart-Styling und klassische Herrenschnitte. Top bewertet auf Google. Walk-ins willkommen." />
   <meta name="robots" content="index, follow" />
   <link rel="canonical" href="https://flobarbershop.ch/" id="meta-canonical" />
-  <meta name="theme-color" content="#0a1a33" />
+  <meta name="theme-color" content="#0e0e10" />
   <link rel="icon" type="image/svg+xml" href="assets/img/favicon.svg" />
   <meta property="og:locale" content="de_CH" />
-
-  <!-- Open Graph / Social -->
   <meta property="og:type" content="website" />
   <meta property="og:title" content="FLO Barber Shop Oftringen" id="meta-og-title" />
   <meta property="og:description" content="Fades, Bärte & scharfe Konturen – dein Barbershop in Oftringen." id="meta-og-desc" />
@@ -23,7 +20,7 @@
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet" />
-  <link rel="stylesheet" href="assets/css/styles.css?v=7" />
+  <link rel="stylesheet" href="assets/css/styles.css?v=8" />
 </head>
 <body>
 
@@ -33,12 +30,12 @@
       <a href="#top" class="logo" data-logo>FLO<span>Barber</span></a>
       <nav class="nav" aria-label="Hauptnavigation">
         <a href="#leistungen">Leistungen</a>
-        <a href="#galerie">Ergebnisse</a>
-        <a href="#kontakt">Standort</a>
-        <a href="#bewertungen">Rezensionen</a>
-        <a href="ueber-uns.html">Über uns</a>
+        <a href="#ergebnisse">Ergebnisse</a>
+        <a href="#rezensionen">Rezensionen</a>
+        <a href="#ueber">Über uns</a>
+        <a href="#kontakt">Kontakt</a>
       </nav>
-      <a href="#kontakt" class="btn btn-gold btn-sm nav-cta" data-cta>Termin</a>
+      <a href="#kontakt" class="btn btn-red btn-sm nav-cta" data-cta>Termin</a>
       <button class="nav-toggle" aria-label="Menü öffnen" aria-expanded="false">
         <span></span><span></span><span></span>
       </button>
@@ -52,56 +49,97 @@
       <div class="hero-bg" data-hero-bg></div>
       <div class="hero-overlay"></div>
       <div class="container hero-content">
-        <h1 class="hero-title type" data-bind="tagline">Dein Coiffeur &amp; Barber in Oftringen.</h1>
+        <p class="eyebrow">Barbershop · Oftringen</p>
+        <h1 class="hero-title" data-hero-title>Fades. Bärte. Präzision.</h1>
+        <p class="hero-sub" data-bind="heroSub"></p>
         <div class="hero-actions">
-          <a href="#kontakt" class="btn btn-gold" data-cta>Termin anfragen</a>
-          <a href="#leistungen" class="btn btn-ghost">Leistungen ansehen</a>
+          <a href="#kontakt" class="btn btn-red" data-cta>Termin anfragen</a>
+          <a href="#leistungen" class="btn btn-outline">Leistungen</a>
         </div>
-        <div class="hero-rating" data-rating></div>
+        <div class="hero-meta" data-hero-rating></div>
       </div>
       <a href="#leistungen" class="scroll-cue" aria-label="Nach unten scrollen">↓</a>
     </section>
 
-    <!-- ===================== TRUST BAR ===================== -->
-    <section class="trustbar" aria-label="Auszeichnungen">
-      <div class="container trustbar-track" data-badges></div>
+    <!-- ===================== MARQUEE ===================== -->
+    <div class="marquee" aria-hidden="true">
+      <div class="marquee-track" data-marquee></div>
+    </div>
+
+    <!-- ===================== KENNZAHLEN ===================== -->
+    <section class="section section-soft" id="kennzahlen" aria-label="Kennzahlen">
+      <div class="container">
+        <div class="stats" data-stats></div>
+      </div>
     </section>
 
     <!-- ===================== LEISTUNGEN ===================== -->
-    <section class="section section-light" id="leistungen">
+    <section class="section" id="leistungen">
       <div class="container">
         <div class="section-head">
           <p class="eyebrow">Leistungen</p>
           <h2 class="type">Was wir am besten können</h2>
-          <p class="section-lead">Fokus auf Fades, Bart &amp; klare Konturen – Handwerk für den perfekten Look.</p>
+          <p class="lead">Fokus auf Fades, Bart &amp; klare Konturen – Handwerk für den perfekten Look.</p>
         </div>
         <div class="services-grid" data-services></div>
         <p class="price-note" data-price-note></p>
         <div class="section-cta">
-          <a href="#kontakt" class="btn btn-gold" data-cta>Jetzt Termin anfragen</a>
+          <a href="#kontakt" class="btn btn-red" data-cta>Jetzt Termin anfragen</a>
         </div>
       </div>
     </section>
 
-    <!-- ===================== ERGEBNISSE (Curved Gallery) ===================== -->
-    <section class="section section-dark cgal-section" id="galerie" aria-label="Ergebnisse">
+    <!-- ===================== ERGEBNISSE ===================== -->
+    <section class="section section-dark" id="ergebnisse" aria-label="Ergebnisse">
       <div class="container">
         <div class="section-head">
           <p class="eyebrow">Ergebnisse</p>
           <h2 class="type">Frische Cuts</h2>
-          <p class="section-lead">Zieh dich seitwärts durch unsere Arbeit&nbsp;– klick &amp; zieh.</p>
+          <p class="lead">Ein Blick auf unsere Arbeit – fahr über ein Bild für Farbe.</p>
         </div>
       </div>
-      <div class="cgal" data-cgal aria-roledescription="Galerie – zum Ziehen"></div>
+      <div class="gal-rows" data-gallery></div>
     </section>
 
-    <!-- ===================== STANDORT / KONTAKT ===================== -->
-    <section class="section section-blue" id="kontakt">
+    <!-- ===================== REZENSIONEN ===================== -->
+    <section class="section section-soft" id="rezensionen" aria-label="Rezensionen">
+      <div class="container">
+        <div class="section-head">
+          <p class="eyebrow">Rezensionen</p>
+          <h2 class="type">Das sagen unsere Kunden</h2>
+          <div class="hero-meta" style="justify-content:center;color:var(--gray)" data-hero-rating></div>
+        </div>
+      </div>
+      <div class="reviews-rows" data-reviews></div>
+      <div class="reviews-foot">
+        <a href="#" class="btn btn-outline" data-reviews-link target="_blank" rel="noopener">Alle auf Google ansehen</a>
+      </div>
+    </section>
+
+    <!-- ===================== ÜBER UNS ===================== -->
+    <section class="section" id="ueber">
+      <div class="container about-grid">
+        <div class="about-media">
+          <div class="about-hex-ring" aria-hidden="true"></div>
+          <div class="about-hex" data-about-img></div>
+        </div>
+        <div class="about-text">
+          <p class="eyebrow">Über uns</p>
+          <h2 class="type" data-bind="aboutTitle">Mehr als ein Haarschnitt</h2>
+          <p class="lead" data-bind="aboutText"></p>
+          <ul class="checks" data-about-points></ul>
+          <a href="#kontakt" class="btn btn-red" data-cta>Vorbeikommen</a>
+        </div>
+      </div>
+    </section>
+
+    <!-- ===================== KONTAKT ===================== -->
+    <section class="section section-dark" id="kontakt" aria-label="Kontakt">
       <div class="container contact-grid">
         <div class="contact-info">
-          <p class="eyebrow">Standort &amp; Termin</p>
-          <h2 class="type">Hier findest du uns</h2>
-          <p class="section-lead">Termine am liebsten telefonisch oder per WhatsApp – wir freuen uns auf dich.</p>
+          <p class="eyebrow">Kontakt &amp; Termin</p>
+          <h2 class="type">Komm vorbei</h2>
+          <p class="lead">Termine am liebsten telefonisch – oder schau direkt vorbei.</p>
 
           <ul class="contact-list">
             <li class="contact-item">
@@ -116,46 +154,23 @@
               <span class="ci-label">WhatsApp</span>
               <a data-whatsapp target="_blank" rel="noopener"></a>
             </li>
-            <li class="contact-item">
+            <li class="contact-item" data-instagram-row hidden>
               <span class="ci-label">Instagram</span>
               <a data-instagram target="_blank" rel="noopener"></a>
             </li>
           </ul>
 
           <div class="contact-actions">
-            <a href="#" class="btn btn-gold" data-cta-phone>Anrufen</a>
-            <a href="#" class="btn btn-ghost" data-cta-whatsapp hidden>WhatsApp</a>
+            <a href="#" class="btn btn-red" data-cta-phone>Anrufen</a>
+            <a href="#" class="btn btn-outline" data-route target="_blank" rel="noopener">Route planen</a>
           </div>
+          <span class="walkin" data-walkin></span>
         </div>
 
-        <div class="contact-hours">
+        <div class="hours-card">
           <h3>Öffnungszeiten</h3>
           <p class="open-now" data-open-now></p>
           <table class="hours-table" data-hours></table>
-        </div>
-      </div>
-
-      <div class="map-wrap">
-        <iframe
-          title="Standort FLO Barber Shop Oftringen auf Google Maps"
-          data-map
-          loading="lazy"
-          referrerpolicy="no-referrer-when-downgrade"
-          allowfullscreen></iframe>
-      </div>
-    </section>
-
-    <!-- ===================== REZENSIONEN (gestapelte Karten) ===================== -->
-    <section class="section section-light" id="bewertungen">
-      <div class="container">
-        <div class="section-head">
-          <p class="eyebrow">Rezensionen</p>
-          <h2 class="type">Das sagen unsere Kunden</h2>
-          <div class="rating-big" data-rating></div>
-        </div>
-        <div class="reviews-stack" data-testimonials></div>
-        <div class="section-cta">
-          <a href="#" class="btn btn-ghost" data-reviews-link target="_blank" rel="noopener">Auf Google ansehen</a>
         </div>
       </div>
     </section>
@@ -166,24 +181,22 @@
     <div class="container footer-inner">
       <div class="footer-brand">
         <span class="logo" data-logo>FLO<span>Barber</span></span>
-        <p data-bind="footerAddress"></p>
+        <p data-footer-legal></p>
       </div>
       <nav class="footer-nav" aria-label="Footer">
         <a href="#leistungen">Leistungen</a>
-        <a href="#galerie">Ergebnisse</a>
-        <a href="#kontakt">Standort</a>
-        <a href="#bewertungen">Rezensionen</a>
-        <a href="ueber-uns.html">Über uns</a>
-        <a href="#" data-instagram target="_blank" rel="noopener">Instagram</a>
+        <a href="#ergebnisse">Ergebnisse</a>
+        <a href="#rezensionen">Rezensionen</a>
+        <a href="#ueber">Über uns</a>
+        <a href="#kontakt">Kontakt</a>
       </nav>
       <p class="footer-copy" data-copy></p>
     </div>
   </footer>
 
-  <!-- Sticky Mobile-CTA -->
   <a href="#kontakt" class="sticky-cta" data-cta>Termin anfragen</a>
 
-  <script src="assets/js/config.js?v=7"></script>
-  <script src="assets/js/main.js?v=7"></script>
+  <script src="assets/js/config.js?v=8"></script>
+  <script src="assets/js/main.js?v=8"></script>
 </body>
 </html>
