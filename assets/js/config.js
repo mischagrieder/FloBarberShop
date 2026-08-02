@@ -142,7 +142,8 @@ window.SHOP = {
     { text: "Moderner Laden, cooler Vibe, und der Skin Fade ist perfekt.", author: "Jonas H.", stars: 5 }
   ], // TODO durch echte Google-Bewertungen ersetzen
 
-  /* ---------- Call-to-Action ---------- */
-  primaryCta: { label: "Termin anfragen", type: "phone" },
-  bookingUrl: ""
+  /* ---------- Call-to-Action ----------
+     bookingUrl gesetzt => alle "Termin"-Buttons öffnen die Online-Buchung. */
+  primaryCta: { label: "Termin vereinbaren", type: "link" },
+  bookingUrl: "https://appt.link/flo-barbershop-I9jOfPvy"
 };

@@ -146,6 +146,9 @@
   const phoneHref = S.phoneLink ? "tel:" + S.phoneLink : (S.phoneDisplay ? "tel:" + S.phoneDisplay : "#");
   $$("[data-cta-phone]").forEach((el) => (el.href = phoneHref));
 
+  /* ---------- Termin-CTAs -> Online-Buchung (falls hinterlegt) ---------- */
+  if (S.bookingUrl) $$("[data-cta]").forEach((el) => { el.href = S.bookingUrl; el.target = "_blank"; el.rel = "noopener"; });
+
   const wa = S.whatsapp ? "https://wa.me/" + S.whatsapp.replace(/[^\d]/g, "") : "";
   if (wa) { $$("[data-whatsapp]").forEach((el) => { el.textContent = S.whatsapp; el.href = wa; }); const row = $("[data-whatsapp-row]"); if (row) row.hidden = false; }
   if (S.instagram) { $$("[data-instagram]").forEach((el) => { el.href = S.instagram; el.textContent = S.instagramHandle || "Instagram"; }); const row = $("[data-instagram-row]"); if (row) row.hidden = false; }
