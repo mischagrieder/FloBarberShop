@@ -16,7 +16,7 @@ window.SHOP = {
   heroSub: "Dein Barbershop in Oftringen: sauberes Handwerk, scharfe Konturen, entspannte Atmosphäre.",
   metaDescription:
     "FLO Barber Shop in Oftringen: präzise Fades, Bart Styling und klassische Herrenschnitte. Top bewertet auf Google. Ohne Voranmeldung willkommen.",
-  siteUrl: "https://flobarbershop.ch", // TODO bestätigen
+  siteUrl: "https://www.websitenprojekt1.com", // TODO: auf echte Domain ändern, sobald live
 
   /* ---------- Farben (Theme: Schwarz / Grau / Weiss + Rot) ---------- */
   colors: {

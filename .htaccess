@@ -1,8 +1,17 @@
 # ------------------------------------------------------------
 # FLO Barber Shop – Basis-Konfiguration für Hostinger (Apache/LiteSpeed)
-# Nur sichere, gängige Einstellungen – keine HTTPS-Weiterleitung
-# (HTTPS aktivierst du bequem im Hostinger-Panel unter "SSL").
 # ------------------------------------------------------------
+
+# ---------- Kanonische Adresse: immer auf www weiterleiten ----------
+# Sorgt dafür, dass https://domain.com und https://www.domain.com
+# NICHT zwei verschiedene Versionen zeigen, sondern eine (www).
+# Falls du lieber OHNE www willst: diesen Block gegen den www-entfernen-Block tauschen.
+<IfModule mod_rewrite.c>
+  RewriteEngine On
+  RewriteCond %{HTTP_HOST} !^www\. [NC]
+  RewriteCond %{HTTP_HOST} !=localhost [NC]
+  RewriteRule ^(.*)$ https://www.%{HTTP_HOST}/$1 [L,R=301]
+</IfModule>
 
 # Startseite
 DirectoryIndex index.html
@@ -16,7 +25,14 @@ ErrorDocument 404 /index.html
     application/javascript application/json image/svg+xml
 </IfModule>
 
-# ---------- Browser-Caching ----------
+# ---------- Caching ----------
+# HTML NICHT cachen -> Änderungen erscheinen nach dem Deploy sofort.
+# Assets (CSS/JS/Bilder) sind über ?v=… versioniert und dürfen lange cachen.
+<IfModule mod_headers.c>
+  <FilesMatch "\.html$">
+    Header set Cache-Control "no-cache, no-store, must-revalidate"
+  </FilesMatch>
+</IfModule>
 <IfModule mod_expires.c>
   ExpiresActive On
   ExpiresByType text/css              "access plus 1 month"
@@ -25,5 +41,5 @@ ErrorDocument 404 /index.html
   ExpiresByType image/jpeg            "access plus 6 months"
   ExpiresByType image/png             "access plus 6 months"
   ExpiresByType image/webp            "access plus 6 months"
-  ExpiresByType text/html             "access plus 1 day"
+  ExpiresByType text/html             "access plus 0 seconds"
 </IfModule>
