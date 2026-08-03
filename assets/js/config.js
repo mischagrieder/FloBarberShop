@@ -13,9 +13,9 @@ window.SHOP = {
   legalName: "FLO Coiffeur Barber GmbH",
   city: "Oftringen",
   tagline: "Fades. Bärte. Präzision.",
-  heroSub: "Dein Barbershop in Oftringen – sauberes Handwerk, scharfe Konturen, entspannte Atmosphäre.",
+  heroSub: "Dein Barbershop in Oftringen: sauberes Handwerk, scharfe Konturen, entspannte Atmosphäre.",
   metaDescription:
-    "FLO Barber Shop in Oftringen – präzise Fades, Bart-Styling und klassische Herrenschnitte. Top bewertet auf Google. Walk-ins willkommen.",
+    "FLO Barber Shop in Oftringen: präzise Fades, Bart Styling und klassische Herrenschnitte. Top bewertet auf Google. Ohne Voranmeldung willkommen.",
   siteUrl: "https://flobarbershop.ch", // TODO bestätigen
 
   /* ---------- Farben (Theme: Schwarz / Grau / Weiss + Rot) ---------- */
@@ -70,13 +70,13 @@ window.SHOP = {
     { day: "Samstag",    open: "08:00", close: "17:00" },
     { day: "Sonntag",    closed: true }
   ],
-  walkIn: "Walk-ins willkommen – oder ruf kurz an.",
+  walkIn: "Ohne Voranmeldung willkommen, oder ruf kurz an.",
 
   /* ---------- Bewertung ---------- */
-  rating: { stars: 4.4, count: 99, source: "Google" }, // TODO count bei Bedarf aktualisieren
+  rating: { stars: 4.4, count: 140, source: "Google" }, // wird als "140+" angezeigt
 
   /* ---------- Marquee-Keywords (Laufband) ---------- */
-  marquee: ["Skin Fade", "Bart & Rasur", "Line-Up", "Herrenschnitt", "Fades", "Kids Cut", "Konturen", "Hot Towel"],
+  marquee: ["Skin Fade", "Bart & Rasur", "Line Up", "Herrenschnitt", "Fades", "Kids Cut", "Konturen", "Hot Towel"],
 
   /* ---------- Kennzahlen (zählen sich hoch) ----------
      value = Zielzahl, decimals = Nachkommastellen, prefix/suffix optional */
@@ -87,31 +87,32 @@ window.SHOP = {
     { value: 100, decimals: 0, suffix: "%", label: "Handwerk & Leidenschaft", icon: "⬡" }
   ], // TODO Zahlen nach Wunsch anpassen
 
-  /* ---------- Leistungen (Fokus: Fades) ---------- */
+  /* ---------- Leistungen (Preise & Dauer) ---------- */
   services: [
-    { name: "Skin Fade",        desc: "Sauber ausrasierter Fade – von Haut bis Deckhaar perfekt verblendet.", price: "40" },
-    { name: "Herrenschnitt",    desc: "Klassischer bis moderner Cut, individuell auf dich abgestimmt.",        price: "35" },
-    { name: "Haar & Bart",      desc: "Kompletter Schnitt inkl. Bart-Konturierung und Styling.",               price: "55" },
-    { name: "Bart / Rasur",     desc: "Bart-Trim, Konturen und heisse Handtuch-Rasur.",                        price: "25" },
-    { name: "Line-Up / Konturen", desc: "Frische Konturen für den Look zwischendurch.",                        price: "20" },
-    { name: "Kids Cut",         desc: "Cooler Schnitt für die Kleinen (bis 12 J.).",                           price: "25" }
-  ], // TODO Preise bestätigen
-  priceNote: "Alle Preise in CHF. Barzahlung & TWINT.", // TODO bestätigen
+    { name: "Haarschnitt + Bart",                       price: "47",  duration: "40" },
+    { name: "Haarschnitt",                              price: "35",  duration: "25" },
+    { name: "Haarschnitt + Bart + Augenbrauen",         price: "60",  duration: "55" },
+    { name: "Haarschnitt & Bart + Färben (Bart)",       price: "60",  duration: "55" },
+    { name: "Bart",                                     price: "22",  duration: "20" },
+    { name: "3 Masken mit Gesichtsdampfer (1 Stunde)",  price: "50",  duration: "20" },
+    { name: "Platinum Blond (Haare färben, 2/3 Stunden)", price: "100", duration: "30" }
+  ],
+  priceNote: "Alle Preise in CHF. Barzahlung & TWINT.",
 
   /* ---------- Über uns ---------- */
   about: {
     title: "Mehr als ein Haarschnitt",
     text:
-      "Bei FLO dreht sich alles um sauberes Barber-Handwerk: präzise Fades, scharfe Konturen und " +
-      "gepflegte Bärte. In modernem Ambiente mitten in Oftringen nehmen wir uns Zeit für deinen Look – " +
+      "Bei FLO dreht sich alles um sauberes Barber Handwerk: präzise Fades, scharfe Konturen und " +
+      "gepflegte Bärte. In modernem Ambiente mitten in Oftringen nehmen wir uns Zeit für deinen Look, " +
       "vom klassischen Herrenschnitt bis zum perfekten Skin Fade.",
     points: [
-      "Spezialisiert auf Fades & Bart-Styling",
+      "Spezialisiert auf Fades & Bart Styling",
       "Top bewertet auf Google (4.4 / 5)",
       "Faire Preise, ehrliche Beratung",
-      "Walk-ins willkommen – zentral in Oftringen"
+      "Ohne Voranmeldung willkommen, zentral in Oftringen"
     ],
-    image: "https://d8j0ntlcm91z4.cloudfront.net/user_3FuPVC4JIayU3rXUwYAnv5ZoEBp/hf_20260727_193706_40f0510c-d48f-4544-8932-c1ab0b86c09d.png"
+    image: "https://d8j0ntlcm91z4.cloudfront.net/user_3FuPVC4JIayU3rXUwYAnv5ZoEBp/hf_20260803_190255_9f483bbd-17d5-4634-be76-4d4bbf5c7fb3.png"
   },
 
   /* ---------- Galerie / Ergebnisse (Grayscale, Farbe bei Hover) ---------- */
@@ -120,12 +121,12 @@ window.SHOP = {
     { src: "https://d8j0ntlcm91z4.cloudfront.net/user_3FuPVC4JIayU3rXUwYAnv5ZoEBp/hf_20260724_073546_2f564b59-4858-4f8f-842c-8c6e8ae03e7d.png", alt: "Textured Crop mit Fade", label: "Textured Crop" },
     { src: "https://d8j0ntlcm91z4.cloudfront.net/user_3FuPVC4JIayU3rXUwYAnv5ZoEBp/hf_20260721_194158_0b9e2905-365e-44e8-a5a9-1eb88292b9f6.png", alt: "Moderner Fade mit sauberen Konturen", label: "Classic Fade" },
     { src: "https://d8j0ntlcm91z4.cloudfront.net/user_3FuPVC4JIayU3rXUwYAnv5ZoEBp/hf_20260724_073546_c54c895d-e146-4cf4-a06e-22c74e9b9fc5.png", alt: "Curly Hair Mid Fade", label: "Curly Fade" },
-    { src: "https://d8j0ntlcm91z4.cloudfront.net/user_3FuPVC4JIayU3rXUwYAnv5ZoEBp/hf_20260721_194155_2986a0cf-2e85-49d7-a52e-e34042c127ab.png", alt: "Bart-Styling und heisse Rasur", label: "Bart & Rasur" },
-    { src: "https://d8j0ntlcm91z4.cloudfront.net/user_3FuPVC4JIayU3rXUwYAnv5ZoEBp/hf_20260724_073547_1a877c91-ae41-41ae-b8a8-15bf88c963c6.png", alt: "Buzz Cut mit sauberem Line-Up", label: "Buzz & Line-Up" },
+    { src: "https://d8j0ntlcm91z4.cloudfront.net/user_3FuPVC4JIayU3rXUwYAnv5ZoEBp/hf_20260721_194155_2986a0cf-2e85-49d7-a52e-e34042c127ab.png", alt: "Bart Styling und heisse Rasur", label: "Bart & Rasur" },
+    { src: "https://d8j0ntlcm91z4.cloudfront.net/user_3FuPVC4JIayU3rXUwYAnv5ZoEBp/hf_20260724_073547_1a877c91-ae41-41ae-b8a8-15bf88c963c6.png", alt: "Buzz Cut mit sauberem Line Up", label: "Buzz & Line Up" },
     { src: "https://d8j0ntlcm91z4.cloudfront.net/user_3FuPVC4JIayU3rXUwYAnv5ZoEBp/hf_20260724_073548_469fe317-c610-42f0-80e0-20b5bf8b6e88.png", alt: "Klassischer Pompadour mit Skin Fade", label: "Pompadour Fade" },
     { src: "https://d8j0ntlcm91z4.cloudfront.net/user_3FuPVC4JIayU3rXUwYAnv5ZoEBp/hf_20260727_193706_46bcee30-23fa-44f8-94d8-76761cb27923.png", alt: "Zufriedener Kunde nach frischem Schnitt", label: "Frisch gemacht" },
-    { src: "https://d8j0ntlcm91z4.cloudfront.net/user_3FuPVC4JIayU3rXUwYAnv5ZoEBp/hf_20260727_193706_b6da5e10-1316-4b35-816c-418e32708dd7.png", alt: "Scharfe Bart-Konturen mit dem Rasiermesser", label: "Bart-Konturen" },
-    { src: "https://d8j0ntlcm91z4.cloudfront.net/user_3FuPVC4JIayU3rXUwYAnv5ZoEBp/hf_20260727_193706_7d58c9e3-2c07-4f34-ae16-153b9a21fbbb.png", alt: "Barber-Werkzeug: Maschine, Schere, Rasiermesser", label: "Werkzeug" }
+    { src: "https://d8j0ntlcm91z4.cloudfront.net/user_3FuPVC4JIayU3rXUwYAnv5ZoEBp/hf_20260727_193706_b6da5e10-1316-4b35-816c-418e32708dd7.png", alt: "Scharfe Bart Konturen mit dem Rasiermesser", label: "Bart Konturen" },
+    { src: "https://d8j0ntlcm91z4.cloudfront.net/user_3FuPVC4JIayU3rXUwYAnv5ZoEBp/hf_20260727_193706_7d58c9e3-2c07-4f34-ae16-153b9a21fbbb.png", alt: "Barber Werkzeug: Maschine, Schere, Rasiermesser", label: "Werkzeug" }
   ],
 
   /* ---------- Rezensionen (viele – durch echte Google-Reviews ersetzen) ---------- */
@@ -136,9 +137,9 @@ window.SHOP = {
     { text: "Endlich ein Barber, der Fades wirklich kann. Komme sicher wieder.", author: "Samir A.", stars: 5 },
     { text: "Super sympathisch, schneller Termin, perfekter Schnitt. Danke!", author: "Timo R.", stars: 5 },
     { text: "Bart und Haare wie aus dem Magazin. Absolut zu empfehlen.", author: "Elton S.", stars: 5 },
-    { text: "Immer top Beratung und ein sauberes Line-Up. Mein Stammladen.", author: "Fabio D.", stars: 5 },
-    { text: "Sehr professionell und gepflegt. Preis-Leistung stimmt zu 100 %.", author: "Nico W.", stars: 4 },
-    { text: "Meinem Sohn gefällt sein Cut riesig – geduldig mit Kids. Top!", author: "Sandra P.", stars: 5 },
+    { text: "Immer top Beratung und ein sauberes Line Up. Mein Stammladen.", author: "Fabio D.", stars: 5 },
+    { text: "Sehr professionell und gepflegt. Preis Leistung stimmt zu 100 %.", author: "Nico W.", stars: 4 },
+    { text: "Meinem Sohn gefällt sein Cut riesig, geduldig mit Kids. Top!", author: "Sandra P.", stars: 5 },
     { text: "Moderner Laden, cooler Vibe, und der Skin Fade ist perfekt.", author: "Jonas H.", stars: 5 }
   ], // TODO durch echte Google-Bewertungen ersetzen
 

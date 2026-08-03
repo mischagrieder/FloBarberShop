@@ -23,7 +23,7 @@
   }
 
   /* ---------- SEO / Meta ---------- */
-  document.title = `${S.brand} ${S.city ? "– " + S.city : ""} | Fades, Bart & Herrenschnitt`;
+  document.title = `${S.brand}${S.city ? " " + S.city : ""} | Fades, Bart & Herrenschnitt`;
   setAttr('meta[name="description"]', "content", S.metaDescription);
   setAttr("#meta-og-title", "content", `${S.brand} ${S.city || ""}`.trim());
   setAttr("#meta-og-desc", "content", S.heroSub || S.metaDescription);
@@ -68,16 +68,17 @@
 
   /* ---------- Rating-Meta (Hero + Rezensionen) ---------- */
   if (S.rating) $$("[data-hero-rating]").forEach((el) => {
-    el.innerHTML = `<span class="stars">${stars(S.rating.stars)}</span> <span>${S.rating.stars} / 5 · ${S.rating.count} ${esc(S.rating.source || "Google")}-Bewertungen</span>`;
+    el.innerHTML = `<span class="stars">${stars(S.rating.stars)}</span> <span>${S.rating.stars} / 5 · ${S.rating.count}+ ${esc(S.rating.source || "Google")} Bewertungen</span>`;
   });
 
   /* ---------- Leistungen (Preisliste / Menü) ---------- */
   const servEl = $("[data-services]");
+  const clockSvg = `<svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M12 7.5V12l3 2"/></svg>`;
   if (servEl && S.services) servEl.innerHTML = S.services.map((s) => `
     <div class="menu-row" data-reveal>
       <div class="menu-info">
         <span class="menu-name">${esc(s.name)}</span>
-        <span class="menu-desc">${esc(s.desc || "")}</span>
+        ${s.duration ? `<span class="menu-meta">${clockSvg}${esc(s.duration)} Min</span>` : (s.desc ? `<span class="menu-meta">${esc(s.desc)}</span>` : "")}
       </div>
       <span class="menu-price">${s.price ? "CHF " + esc(s.price) : "auf Anfrage"}</span>
     </div>`).join("");
@@ -85,7 +86,7 @@
   /* ---------- Ergebnisse: 2 Grayscale-Laufbänder ---------- */
   const galEl = $("[data-gallery]");
   if (galEl && S.gallery && S.gallery.length) {
-    const card = (g) => `<figure class="gal-card"><img src="${esc(g.src)}" alt="${esc(g.alt || S.brand)}" loading="lazy" draggable="false" onerror="this.closest('.gal-card').style.display='none'">${g.label ? `<figcaption>${esc(g.label)}</figcaption>` : ""}</figure>`;
+    const card = (g) => `<figure class="gal-card"><img src="${esc(g.src)}" alt="${esc(g.alt || S.brand)}" loading="lazy" draggable="false" onerror="this.remove()">${g.label ? `<figcaption>${esc(g.label)}</figcaption>` : ""}</figure>`;
     const half = Math.ceil(S.gallery.length / 2);
     const rowA = S.gallery.slice(0, half), rowB = S.gallery.slice(half).concat(S.gallery.slice(0, half));
     const build = (arr) => { const html = arr.map(card).join(""); return html + html; };
@@ -102,7 +103,7 @@
       return `<blockquote class="rev" data-reveal>
         <div class="rev-head">
           <span class="rev-ava" aria-hidden="true">${esc(name[0] || "G")}</span>
-          <div class="rev-id"><span class="t-author">${esc(name)}</span><span class="rev-src">Google-Bewertung</span></div>
+          <div class="rev-id"><span class="t-author">${esc(name)}</span><span class="rev-src">Google Bewertung</span></div>
           <span class="rev-stars">${stars(t.stars || 5)}</span>
         </div>
         <p>${esc(t.text)}</p>
@@ -110,7 +111,7 @@
     }).join("");
   }
   $$("[data-reviews-link]").forEach((el) => (el.href = S.mapsUrl || "#"));
-  $$("[data-rating-badge]").forEach((el) => { if (S.rating) el.innerHTML = `<span class="stars">${stars(S.rating.stars)}</span> <strong>${S.rating.stars}</strong> / 5 · ${S.rating.count} ${esc(S.rating.source || "Google")}-Bewertungen`; });
+  $$("[data-rating-badge]").forEach((el) => { if (S.rating) el.innerHTML = `<span class="stars">${stars(S.rating.stars)}</span> <strong>${S.rating.stars}</strong> / 5 · ${S.rating.count}+ ${esc(S.rating.source || "Google")} Bewertungen`; });
 
   /* ---------- Über uns ---------- */
   const pts = $("[data-about-points]");
@@ -141,7 +142,7 @@
   const todayIdx = (new Date().getDay() + 6) % 7;
   const hoursEl = $("[data-hours]");
   if (hoursEl && S.hours) hoursEl.innerHTML = S.hours.map((h, i) => `
-    <tr class="${i === todayIdx ? "today" : ""}"><td>${esc(h.day)}</td><td>${h.closed ? "Geschlossen" : esc(h.open) + " – " + esc(h.close)}</td></tr>`).join("");
+    <tr class="${i === todayIdx ? "today" : ""}"><td>${esc(h.day)}</td><td>${h.closed ? "Geschlossen" : esc(h.open) + " bis " + esc(h.close)}</td></tr>`).join("");
   const openEl = $("[data-open-now]");
   if (openEl && S.hours) {
     const now = new Date(), t = now.getHours() * 60 + now.getMinutes(), h = S.hours[todayIdx];
