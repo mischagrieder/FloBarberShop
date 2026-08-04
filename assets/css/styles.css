@@ -46,7 +46,7 @@ h3{font-size:1.55rem;letter-spacing:1px}
 /* ---------- Buttons ---------- */
 .btn{
   display:inline-flex;align-items:center;justify-content:center;gap:.55rem;
-  padding:1rem 1.8rem;border-radius:6px;font-weight:700;font-size:.96rem;
+  padding:.72rem 1.4rem;border-radius:6px;font-weight:700;font-size:.85rem;
   letter-spacing:.04em;text-transform:uppercase;cursor:pointer;transition:.22s ease;
   border:2px solid transparent;white-space:nowrap;
 }
@@ -240,7 +240,7 @@ h3{font-size:1.55rem;letter-spacing:1px}
 /* ---------- Sticky Mobile-CTA ---------- */
 .sticky-cta{
   display:none;position:fixed;left:16px;right:16px;bottom:16px;z-index:70;text-align:center;
-  padding:1rem;border-radius:8px;font-weight:700;text-transform:uppercase;letter-spacing:.04em;
+  padding:.85rem;border-radius:8px;font-weight:700;font-size:.85rem;text-transform:uppercase;letter-spacing:.04em;
   background:var(--red);color:#fff;box-shadow:0 14px 34px rgba(0,0,0,.4);
   opacity:0;transform:translateY(140%);pointer-events:none;transition:opacity .3s ease,transform .3s ease;
 }
