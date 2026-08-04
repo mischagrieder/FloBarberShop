@@ -30,7 +30,7 @@ ErrorDocument 404 /index.html
 # Assets (CSS/JS/Bilder) sind über ?v=… versioniert und dürfen lange cachen.
 <IfModule mod_headers.c>
   <FilesMatch "\.html$">
-    Header set Cache-Control "no-cache, no-store, must-revalidate"
+    Header set Cache-Control "private, no-cache, no-store, must-revalidate"
   </FilesMatch>
 </IfModule>
 <IfModule mod_expires.c>
