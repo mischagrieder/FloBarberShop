@@ -25,7 +25,7 @@
 
 *{box-sizing:border-box;margin:0;padding:0}
 [hidden]{display:none !important}
-html{scroll-behavior:smooth}
+html{scroll-behavior:smooth;overflow-x:hidden}
 body{
   font-family:var(--ff-body);background:var(--bg);color:var(--ink);
   line-height:1.6;-webkit-font-smoothing:antialiased;overflow-x:hidden;
@@ -133,7 +133,7 @@ h3{font-size:1.55rem;letter-spacing:1px}
 .price-note{text-align:center;color:var(--gray);font-size:.88rem;margin-top:1.8rem}
 
 /* ---------- Ergebnisse: Grayscale-Laufband (2 Reihen) ---------- */
-.gal-rows{display:flex;flex-direction:column;gap:18px}
+.gal-rows{display:flex;flex-direction:column;gap:18px;overflow:hidden}
 .gal-row{display:flex;gap:18px;width:max-content;will-change:transform}
 .gal-row.r1{animation:scrollx 46s linear infinite}
 .gal-row.r2{animation:scrollx 46s linear infinite reverse}
@@ -271,5 +271,7 @@ h3{font-size:1.55rem;letter-spacing:1px}
 @media (max-width:520px){
   .hero-actions .btn{flex:1}
   .gal-card{width:64vw}
-  .review-card{width:80vw}
+  .hero-title{font-size:clamp(2.1rem,9.2vw,2.9rem)}
+  .hero-sub{font-size:1rem;margin:1rem auto 1.8rem}
+  .hero .eyebrow{font-size:.7rem;letter-spacing:.24em}
 }
