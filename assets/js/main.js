@@ -102,7 +102,6 @@
       const name = (t.author || "Google-Bewertung").trim();
       return `<blockquote class="rev" data-reveal>
         <div class="rev-head">
-          <span class="rev-ava" aria-hidden="true">${esc(name[0] || "G")}</span>
           <div class="rev-id"><span class="t-author">${esc(name)}</span><span class="rev-src">Google Bewertung</span></div>
           <span class="rev-stars">${stars(t.stars || 5)}</span>
         </div>

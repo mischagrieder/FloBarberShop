@@ -19,7 +19,7 @@
   --shadow:0 24px 60px rgba(14,14,16,.14);
   --shadow-dark:0 30px 70px rgba(0,0,0,.5);
   --ff-head:"Bebas Neue",Impact,sans-serif;
-  --ff-body:"Inter",system-ui,-apple-system,Segoe UI,Roboto,sans-serif;
+  --ff-body:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;
   --stripe:repeating-linear-gradient(45deg,var(--red) 0 10px,#111 10px 20px,#fff 20px 30px);
 }
 
@@ -38,7 +38,7 @@ h1,h2,h3{font-family:var(--ff-head);font-weight:400;line-height:.98;letter-spaci
 h2{font-size:clamp(2.3rem,5.5vw,3.8rem)}
 h3{font-size:1.55rem;letter-spacing:1px}
 .eyebrow{
-  font-size:.78rem;letter-spacing:.32em;text-transform:uppercase;color:var(--red);
+  font-size:.9rem;letter-spacing:.01em;color:var(--red);
   font-weight:700;margin-bottom:.7rem;display:inline-flex;align-items:center;
 }
 .lead{color:var(--gray);font-size:1.06rem;max-width:56ch}
@@ -46,13 +46,13 @@ h3{font-size:1.55rem;letter-spacing:1px}
 /* ---------- Buttons ---------- */
 .btn{
   display:inline-flex;align-items:center;justify-content:center;gap:.55rem;
-  padding:.72rem 1.4rem;border-radius:6px;font-weight:700;font-size:.85rem;
-  letter-spacing:.04em;text-transform:uppercase;cursor:pointer;transition:.22s ease;
+  padding:.72rem 1.4rem;border-radius:6px;font-weight:600;font-size:.95rem;
+  letter-spacing:normal;cursor:pointer;transition:.22s ease;
   border:2px solid transparent;white-space:nowrap;
 }
-.btn-sm{padding:.62rem 1.15rem;font-size:.82rem}
-.btn-red{background:var(--red);color:#fff;box-shadow:0 12px 30px rgba(225,29,42,.28)}
-.btn-red:hover{background:var(--red-dark);transform:translateY(-2px);box-shadow:0 18px 40px rgba(225,29,42,.4)}
+.btn-sm{padding:.62rem 1.15rem;font-size:.88rem}
+.btn-red{background:var(--red);color:#fff;box-shadow:0 4px 12px rgba(14,14,16,.08)}
+.btn-red:hover{background:var(--red-dark);transform:translateY(-2px);box-shadow:0 6px 16px rgba(14,14,16,.08)}
 .btn-outline{border-color:currentColor;color:var(--ink)}
 .btn-outline:hover{background:var(--ink);color:#fff;border-color:var(--ink)}
 .on-dark .btn-outline,.hero .btn-outline,.section-dark .btn-outline{color:#fff}
@@ -97,7 +97,7 @@ h3{font-size:1.55rem;letter-spacing:1px}
 .hero-overlay{position:absolute;inset:0;background:linear-gradient(180deg,rgba(10,10,11,.62),rgba(10,10,11,.5) 40%,rgba(10,10,11,.86));}
 .hero-content{position:relative;z-index:2;max-width:900px;padding:110px 24px 90px}
 .hero .eyebrow{color:#fff;justify-content:center}
-.hero-title{font-size:clamp(3.4rem,11vw,8rem);letter-spacing:1px;text-transform:uppercase}
+.hero-title{font-size:clamp(3.4rem,11vw,8rem);letter-spacing:1px}
 .hero-title .accent{color:var(--red)}
 .hero-sub{font-size:clamp(1.02rem,2.2vw,1.22rem);color:rgba(255,255,255,.9);max-width:640px;margin:1.2rem auto 2.2rem}
 .hero-actions{display:flex;gap:14px;justify-content:center;flex-wrap:wrap}
@@ -162,10 +162,6 @@ h3{font-size:1.55rem;letter-spacing:1px}
 }
 .rev:hover{transform:translateY(-4px);box-shadow:var(--shadow);border-color:transparent}
 .rev-head{display:flex;align-items:center;gap:12px;margin-bottom:1rem}
-.rev-ava{
-  flex:none;width:44px;height:44px;display:grid;place-items:center;border-radius:50%;
-  background:var(--ink);color:#fff;font-family:var(--ff-head);font-size:1.35rem;letter-spacing:1px;
-}
 .rev-id{display:flex;flex-direction:column;line-height:1.2;margin-right:auto}
 .rev-id .t-author{font-weight:700;font-size:1rem}
 .rev-src{color:var(--gray);font-size:.78rem}
@@ -192,7 +188,7 @@ h3{font-size:1.55rem;letter-spacing:1px}
 .contact-grid{display:grid;grid-template-columns:1.05fr .95fr;gap:clamp(30px,5vw,60px)}
 .contact-list{list-style:none;margin:1.8rem 0;display:grid;gap:1.1rem}
 .contact-item{display:grid;gap:.15rem}
-.ci-label{font-size:.72rem;letter-spacing:.22em;text-transform:uppercase;color:var(--red);font-weight:700}
+.ci-label{font-size:.82rem;letter-spacing:.01em;color:var(--red);font-weight:700}
 .contact-item a,.contact-item span{font-size:1.08rem}
 .contact-item a:hover{color:var(--red)}
 .contact-actions{display:flex;gap:12px;flex-wrap:wrap;margin-top:.4rem}
@@ -240,8 +236,8 @@ h3{font-size:1.55rem;letter-spacing:1px}
 /* ---------- Sticky Mobile-CTA ---------- */
 .sticky-cta{
   display:none;position:fixed;left:16px;right:16px;bottom:16px;z-index:70;text-align:center;
-  padding:.85rem;border-radius:8px;font-weight:700;font-size:.85rem;text-transform:uppercase;letter-spacing:.04em;
-  background:var(--red);color:#fff;box-shadow:0 14px 34px rgba(0,0,0,.4);
+  padding:.85rem;border-radius:8px;font-weight:600;font-size:.95rem;letter-spacing:normal;
+  background:var(--red);color:#fff;box-shadow:0 8px 20px rgba(14,14,16,.18);
   opacity:0;transform:translateY(140%);pointer-events:none;transition:opacity .3s ease,transform .3s ease;
 }
 .sticky-cta.show{opacity:1;transform:none;pointer-events:auto}
