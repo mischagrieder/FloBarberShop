@@ -103,9 +103,9 @@ window.SHOP = {
   about: {
     title: "Mehr als ein Haarschnitt",
     text:
-      "Bei FLO dreht sich alles um sauberes Barber Handwerk: präzise Fades, scharfe Konturen und " +
-      "gepflegte Bärte. In modernem Ambiente mitten in Oftringen nehmen wir uns Zeit für deinen Look, " +
-      "vom klassischen Herrenschnitt bis zum perfekten Skin Fade.",
+      "Für mich geht es nicht einfach darum, Haare zu schneiden. Ich möchte, dass du den Barbershop " +
+      "mit einem Look verlässt, der zu dir passt und mit dem du dich wohlfühlst. Deshalb nehme ich mir " +
+      "Zeit für saubere Übergänge, präzise Konturen und eine Bartpflege, bei der jedes Detail stimmt.",
     points: [
       "Spezialisiert auf Fades & Bart Styling",
       "Top bewertet auf Google (4.4 / 5)",
