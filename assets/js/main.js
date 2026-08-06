@@ -23,7 +23,7 @@
   }
 
   /* ---------- SEO / Meta ---------- */
-  document.title = `${S.brand}${S.city ? " " + S.city : ""} | Fades, Bart & Herrenschnitt`;
+  document.title = `${S.brand}${S.city ? " " + S.city : ""} | Übergänge, Bart & Herrenschnitt`;
   setAttr('meta[name="description"]', "content", S.metaDescription);
   setAttr("#meta-og-title", "content", `${S.brand} ${S.city || ""}`.trim());
   setAttr("#meta-og-desc", "content", S.heroSub || S.metaDescription);
