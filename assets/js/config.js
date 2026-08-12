@@ -125,31 +125,26 @@ window.SHOP = {
       "Zentral in Rothrist – einfach online buchen"
     ],
     image: "https://d2ol7oe51mr4n9.cloudfront.net/user_3FuPVC4JIayU3rXUwYAnv5ZoEBp/1894ca12-28e5-4327-8bb9-9e99b1937273.png",
-    // Über-uns-Bild wechselt: Inhaber-Portrait (#3) abwechselnd mit Salonbildern
+    // Über-uns-Bild wechselt: Inhaber-Portrait (#3, echtes Foto) abwechselnd mit
+    // KI-Studio-Bildern im Hochformat (kein Ergebnis-Foto).
     slides: [
       "https://d2ol7oe51mr4n9.cloudfront.net/user_3FuPVC4JIayU3rXUwYAnv5ZoEBp/1894ca12-28e5-4327-8bb9-9e99b1937273.png",
-      "https://d2ol7oe51mr4n9.cloudfront.net/user_3FuPVC4JIayU3rXUwYAnv5ZoEBp/1be855ab-7603-4d9c-ba32-43d0e553d4f8.png",
+      "https://d8j0ntlcm91z4.cloudfront.net/user_3FuPVC4JIayU3rXUwYAnv5ZoEBp/hf_20260812_233911_41d048b9-b7f2-4f75-8d7f-80280e7290e7.png",
       "https://d2ol7oe51mr4n9.cloudfront.net/user_3FuPVC4JIayU3rXUwYAnv5ZoEBp/1894ca12-28e5-4327-8bb9-9e99b1937273.png",
-      "https://d2ol7oe51mr4n9.cloudfront.net/user_3FuPVC4JIayU3rXUwYAnv5ZoEBp/bdd1443b-c7dd-485d-9279-477fb3fba1c4.png",
+      "https://d8j0ntlcm91z4.cloudfront.net/user_3FuPVC4JIayU3rXUwYAnv5ZoEBp/hf_20260812_233911_3afaf15f-6f26-4e77-851a-a8e03ac797d8.png",
       "https://d2ol7oe51mr4n9.cloudfront.net/user_3FuPVC4JIayU3rXUwYAnv5ZoEBp/1894ca12-28e5-4327-8bb9-9e99b1937273.png",
-      "https://d2ol7oe51mr4n9.cloudfront.net/user_3FuPVC4JIayU3rXUwYAnv5ZoEBp/8f8388eb-e63b-40d6-9264-d1b15735f3cd.png",
-      "https://d2ol7oe51mr4n9.cloudfront.net/user_3FuPVC4JIayU3rXUwYAnv5ZoEBp/1894ca12-28e5-4327-8bb9-9e99b1937273.png",
-      "https://d2ol7oe51mr4n9.cloudfront.net/user_3FuPVC4JIayU3rXUwYAnv5ZoEBp/340d4052-6f2a-4941-a52e-1fb0c1570fed.png"
+      "https://d8j0ntlcm91z4.cloudfront.net/user_3FuPVC4JIayU3rXUwYAnv5ZoEBp/hf_20260812_233911_2e574c31-dc81-47aa-84ad-66b6875b7e23.png"
     ]
   },
 
-  /* ---------- Slideshow (Kontakt / Termin – Impressionen aus dem Studio) ----------
-     Echte Fotos, blättern automatisch durch. */
+  /* ---------- Slideshow (Kontakt / Termin – Einblicke ins Studio) ----------
+     KI-Studio-Bilder im Querformat (passend zum breiten Band). */
   slides: [
-    "https://d2ol7oe51mr4n9.cloudfront.net/user_3FuPVC4JIayU3rXUwYAnv5ZoEBp/1be855ab-7603-4d9c-ba32-43d0e553d4f8.png",
-    "https://d2ol7oe51mr4n9.cloudfront.net/user_3FuPVC4JIayU3rXUwYAnv5ZoEBp/9e4a6098-e4da-41ae-8505-2cb5847fb714.png",
-    "https://d2ol7oe51mr4n9.cloudfront.net/user_3FuPVC4JIayU3rXUwYAnv5ZoEBp/bdd1443b-c7dd-485d-9279-477fb3fba1c4.png",
-    "https://d2ol7oe51mr4n9.cloudfront.net/user_3FuPVC4JIayU3rXUwYAnv5ZoEBp/8f8388eb-e63b-40d6-9264-d1b15735f3cd.png",
-    "https://d2ol7oe51mr4n9.cloudfront.net/user_3FuPVC4JIayU3rXUwYAnv5ZoEBp/d6cebbac-e3d4-472d-ad5d-0a4d61ac135a.png",
-    "https://d2ol7oe51mr4n9.cloudfront.net/user_3FuPVC4JIayU3rXUwYAnv5ZoEBp/00d99a19-8625-4159-b21f-8ace85340e02.png",
-    "https://d2ol7oe51mr4n9.cloudfront.net/user_3FuPVC4JIayU3rXUwYAnv5ZoEBp/340d4052-6f2a-4941-a52e-1fb0c1570fed.png",
-    "https://d2ol7oe51mr4n9.cloudfront.net/user_3FuPVC4JIayU3rXUwYAnv5ZoEBp/21d39946-521b-4c22-b7eb-c497afcc2361.png",
-    "https://d2ol7oe51mr4n9.cloudfront.net/user_3FuPVC4JIayU3rXUwYAnv5ZoEBp/1894ca12-28e5-4327-8bb9-9e99b1937273.png"
+    "https://d8j0ntlcm91z4.cloudfront.net/user_3FuPVC4JIayU3rXUwYAnv5ZoEBp/hf_20260812_233911_a69e1a06-79bc-41b2-96b6-1b0ec6b1cb45.png",
+    "https://d8j0ntlcm91z4.cloudfront.net/user_3FuPVC4JIayU3rXUwYAnv5ZoEBp/hf_20260812_233911_e453a450-6196-4fbd-8762-64085556b82d.png",
+    "https://d8j0ntlcm91z4.cloudfront.net/user_3FuPVC4JIayU3rXUwYAnv5ZoEBp/hf_20260812_233911_3f6f8199-173f-461a-9fcc-b3179f1b5831.png",
+    "https://d8j0ntlcm91z4.cloudfront.net/user_3FuPVC4JIayU3rXUwYAnv5ZoEBp/hf_20260812_233911_002bc4bc-b6eb-4771-8120-648511c07f06.png",
+    "https://d8j0ntlcm91z4.cloudfront.net/user_3FuPVC4JIayU3rXUwYAnv5ZoEBp/hf_20260812_233911_f68c1ed1-2530-461f-b669-e5492712e1c1.png"
   ],
 
   /* ---------- Galerie / Ergebnisse (Grayscale, Farbe bei Hover) ----------
