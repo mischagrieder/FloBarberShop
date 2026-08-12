@@ -1,11 +1,12 @@
-# FLO Barber Shop – Onepager
+# NOVUS Barber & Tattoo – Onepager
 
-Moderne, SEO-optimierte One-Page-Website für einen Barbershop.
-Design: **Schwarz / Gold**, Fokus auf **Fades & Bart**, klare Call-to-Actions.
+Moderne, SEO-optimierte One-Page-Website für einen Barber- & Tattoo-Shop.
+Design: **Schwarz / Grau / Weiss + Türkis** (angelehnt an die türkisen Salon-Stühle),
+Fokus auf **Übergänge, Bart & Tattoo**, klare Call-to-Actions.
 
 Reine statische Seite (HTML/CSS/JS) – **kein Build, kein Framework**.
-Einfach die Dateien auf einen beliebigen Webspace laden (Netlify, GitHub Pages,
-Vercel, klassisches Hosting …).
+Einfach die Dateien auf einen beliebigen Webspace laden (Hostinger, Netlify,
+GitHub Pages, Vercel …).
 
 ---
 
@@ -13,7 +14,7 @@ Vercel, klassisches Hosting …).
 
 ```
 index.html            → Struktur (Markup) + Meta-Tags
-assets/css/styles.css → Design (Schwarz/Gold-Theme)
+assets/css/styles.css → Design (Schwarz/Weiss + Türkis-Theme)
 assets/js/config.js   → ⭐ ALLE Inhalte pro Shop (nur hier etwas ändern)
 assets/js/main.js     → rendert die Seite aus config.js (inkl. SEO JSON-LD)
 assets/img/           → Favicon (Bilder kommen aktuell per KI-CDN-URL)
@@ -26,7 +27,7 @@ strukturierten Daten (schema.org `HairSalon`) für Google.
 
 ---
 
-## 🔁 Vorlage für weitere Barbershops nutzen (10er-Liste)
+## 🔁 Vorlage für weitere Shops nutzen
 
 Die Seite ist als **Template** gebaut. Für einen neuen Shop:
 
@@ -40,28 +41,28 @@ Die Seite ist als **Template** gebaut. Für einen neuen Shop:
 Nichts an `index.html`, `styles.css` oder `main.js` muss angefasst werden.
 
 ### Farben pro Shop ändern
-In `config.js` unter `colors` (`gold`, `black`, `ink`, `cream` …). Die Werte
-überschreiben automatisch die CSS-Variablen.
+In `config.js` unter `colors`. Die Akzentfarbe steckt in `red` (hier Türkis
+`#12b4c4`). Die Werte überschreiben automatisch die CSS-Variablen.
 
 ---
 
 ## ✅ Noch zu bestätigen (in `config.js` mit `// TODO` markiert)
 
-- **Telefonnummer(n)** – aktuell zwei Nummern hinterlegt (Festnetz + Handy/WhatsApp).
-- **Öffnungszeiten** – Quellen widersprüchlich, bitte prüfen.
-- **Preise** – aktuell Richtwerte in CHF.
-- **Instagram/TikTok** – aktuell leer (wird ausgeblendet), richtigen Account eintragen.
-- **Echte Google-Bewertungen** – aktuell Platzhalter-Testimonials, durch echte ersetzen.
-- **Auszeichnungen** – nur eintragen, wenn für diesen Shop verifiziert.
+- **Telefonnummer** – aktuell leer (Zeile ausgeblendet, CTA führt zur Online-Buchung).
+- **Öffnungszeiten** – aktuell Platzhalter, bitte mit den echten NOVUS-Zeiten ersetzen.
+- **Preise / Leistungen** – aktuell Richtwerte in CHF, bitte bestätigen.
+- **Echte Treatwell-Bewertungen** – aktuell Platzhalter-Testimonials, durch echte ersetzen.
+- **Impressum** – E-Mail, Telefon und UID (CHE-Nummer) ergänzen.
 
 ---
 
 ## 🖼️ Bilder
 
-Die Bilder sind KI-generiert und werden aktuell direkt vom Higgsfield-CDN
-geladen (siehe URLs in `config.js`). Zum **Lokalisieren** (empfohlen für
-Langlebigkeit): Bilder herunterladen, in `assets/img/` ablegen und die `src`
-in `config.js` auf z. B. `assets/img/hero.jpg` ändern.
+Die Bilder sind KI-generiert (im Stil des echten Salons: weiss, türkise Stühle,
+Hexagon-LEDs, Fades & Tattoos) und werden aktuell direkt vom Higgsfield-CDN
+geladen (siehe URLs in `config.js`). **Echte Fotos einsetzen:** Bild in
+`assets/img/` ablegen (Hero z. B. als `assets/img/hero.jpg`) und die `src` in
+`config.js` auf den lokalen Pfad ändern.
 
 ---
 

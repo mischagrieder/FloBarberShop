@@ -1,6 +1,6 @@
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64">
   <rect width="64" height="64" rx="12" fill="#0e0e10"/>
-  <path d="M32 6 54 18.5 54 45.5 32 58 10 45.5 10 18.5Z" fill="none" stroke="#e11d2a" stroke-width="2.5"/>
+  <path d="M32 6 54 18.5 54 45.5 32 58 10 45.5 10 18.5Z" fill="none" stroke="#12b4c4" stroke-width="2.5"/>
   <text x="50%" y="50%" dy=".07em" text-anchor="middle" dominant-baseline="middle"
-        font-family="Bebas Neue, Impact, sans-serif" font-size="34" fill="#ffffff">F</text>
+        font-family="Bebas Neue, Impact, sans-serif" font-size="32" fill="#ffffff">N</text>
 </svg>

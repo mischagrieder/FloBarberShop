@@ -1,66 +1,71 @@
 /* =============================================================
    SHOP-KONFIGURATION  —  nur diese Datei pro Barbershop anpassen
    =============================================================
-   Vorlage für beliebige Barbershops. Für einen neuen Shop:
+   Vorlage für beliebige Barber-/Tattoo-Shops. Für einen neuen Shop:
    Ordner kopieren und nur die Werte hier ändern.
-   Felder mit "// TODO" bitte vor dem Live-Gang prüfen.
+   Felder mit "// TODO" bitte vor dem Live-Gang prüfen/ergänzen.
 ============================================================= */
 
 window.SHOP = {
   /* ---------- Marke & Grunddaten ---------- */
-  brand: "FLO Barber Shop",
-  brandShort: "FLO",
-  legalName: "FLO Coiffeur Barber GmbH",
-  city: "Oftringen",
-  tagline: "Übergänge. Bärte. Präzision.",
-  heroSub: "Dein Barbershop in Oftringen: sauberes Handwerk, scharfe Konturen, entspannte Atmosphäre.",
+  brand: "NOVUS Barber & Tattoo",
+  brandShort: "NOVUS",
+  legalName: "NOVUS Barber & Tattoo",
+  city: "Rothrist",
+  titleSuffix: "Barber, Bart & Tattoo",
+  tagline: "Übergänge. Bärte. Tattoos.",
+  heroSub: "Dein Barber & Tattoo Studio in Rothrist: präzise Übergänge, saubere Bärte und individuelle Tattoos – in stylischem Ambiente.",
   metaDescription:
-    "FLO Barber Shop in Oftringen: präzise Übergänge, Bart Styling und klassische Herrenschnitte. Top bewertet auf Google. Ohne Voranmeldung willkommen.",
+    "NOVUS Barber & Tattoo in Rothrist: präzise Übergänge, saubere Bärte und individuelle Tattoos. Top bewertet auf Treatwell (4.9). Jetzt online buchen.",
   siteUrl: "https://www.websitenprojekt1.com", // TODO: auf echte Domain ändern, sobald live
 
-  /* ---------- Farben (Theme: Schwarz / Grau / Weiss + Rot) ---------- */
+  /* ---------- Farben (Theme: Schwarz / Grau / Weiss + Türkis) ----------
+     Türkis wie die Barber-Stühle im Salon – ersetzt das frühere Rot. */
   colors: {
-    red: "#e11d2a",      // Akzent / CTA / Keywords
-    redDark: "#b0141d",
+    red: "#12b4c4",      // Akzent / CTA / Keywords (Türkis)
+    redDark: "#0c8c99",  // dunkleres Türkis (Hover)
     ink: "#0e0e10",      // Text / Schwarz
     graphite: "#141417", // dunkle Sektionen
     gray: "#6f6f77",     // gedämpfter Text
     bg: "#ffffff"        // Haupt-Hintergrund (weiss)
   },
 
-  /* ---------- Logo (KI-generiert, transparentes Emblem) ---------- */
-  logo: "https://d8j0ntlcm91z4.cloudfront.net/user_3FuPVC4JIayU3rXUwYAnv5ZoEBp/hf_20260722_063225_a454bb9b-e255-438a-971e-3effa1fc13db.png",
-  logoAlt: "FLO Barber Shop Logo",
+  /* ---------- Logo ----------
+     Leer = nur Text-Logo im Header (NOVUS). Bei Bedarf echtes Emblem eintragen. */
+  logo: "",
+  logoAlt: "NOVUS Barber & Tattoo Logo",
 
   /* ---------- Hero-Bild ----------
      Zuerst wird assets/img/hero.jpg versucht (dein echtes Salon-Foto einfach
      dort ablegen!). Fehlt es, wird dieses KI-Bild als Fallback genutzt. */
   heroImageLocal: "assets/img/hero.jpg",
-  heroImage: "https://d8j0ntlcm91z4.cloudfront.net/user_3FuPVC4JIayU3rXUwYAnv5ZoEBp/hf_20260802_161618_d6b1a7a7-8970-42a8-b82f-3d5567c0772e.png", // KI-Fallback
+  heroImage: "https://d8j0ntlcm91z4.cloudfront.net/user_3FuPVC4JIayU3rXUwYAnv5ZoEBp/hf_20260812_174705_2d5ebdae-359b-4266-8a27-1856f9bf84a4.png", // KI-Fallback (weisser Salon, türkise Stühle)
 
   /* ---------- Kontakt ---------- */
-  phoneDisplay: "062 557 97 44",
-  phoneLink: "+41625579744",
-  whatsapp: "",          // TODO: Handy/WhatsApp eintragen (leer = ausgeblendet)
-  email: "",
+  phoneDisplay: "",      // TODO: Telefonnummer eintragen (leer = Zeile ausgeblendet, CTA -> Online-Buchung)
+  phoneLink: "",         // TODO: z. B. +41xxxxxxxxx
+  whatsapp: "",          // TODO: Handy/WhatsApp (leer = ausgeblendet)
+  email: "",             // TODO
   address: {
-    street: "Luzernerstrasse 29",
-    zip: "4665",
-    city: "Oftringen",
+    street: "Bernstrasse 176",
+    zip: "4852",
+    city: "Rothrist",
     country: "CH",
-    lat: 47.3096556,
-    lng: 7.9251169
+    lat: 47.3033,        // TODO: exakte Koordinaten bei Bedarf feinjustieren
+    lng: 7.8890
   },
-  mapsUrl: "https://www.google.com/maps/place/FLO+Barber+Shop+-+Oftringen/@47.3096556,7.9251169,17z",
-  routeUrl: "https://www.google.com/maps/dir/?api=1&destination=FLO+Barber+Shop+Oftringen+Luzernerstrasse+29+4665+Oftringen",
+  mapsUrl: "https://www.google.com/maps/search/?api=1&query=NOVUS+Barber+%26+Tattoo+Bernstrasse+176+4852+Rothrist",
+  routeUrl: "https://www.google.com/maps/dir/?api=1&destination=NOVUS+Barber+%26+Tattoo+Bernstrasse+176+4852+Rothrist",
+  reviewsUrl: "https://www.treatwell.ch/ort/novus-barber-tattoo/",
 
   /* ---------- Social (leer = ausgeblendet) ---------- */
-  instagram: "",         // TODO: richtigen Account eintragen
-  instagramHandle: "",
-  tiktok: "",
+  instagram: "https://www.instagram.com/novus.ch/",
+  instagramHandle: "@novus.ch",
+  tiktok: "https://www.tiktok.com/@novus.ch",
   facebook: "",
 
-  /* ---------- Öffnungszeiten ---------- */
+  /* ---------- Öffnungszeiten ----------
+     TODO: mit den echten Zeiten von NOVUS ersetzen (Platzhalter!). */
   hours: [
     { day: "Montag",     open: "09:00", close: "19:00" },
     { day: "Dienstag",   open: "09:00", close: "19:00" },
@@ -70,81 +75,81 @@ window.SHOP = {
     { day: "Samstag",    open: "08:00", close: "17:00" },
     { day: "Sonntag",    closed: true }
   ],
-  walkIn: "Ohne Voranmeldung willkommen, oder ruf kurz an.",
+  walkIn: "Termine bequem online buchen – oder schau direkt im Studio vorbei.",
 
   /* ---------- Bewertung ---------- */
-  rating: { stars: 4.4, count: 140, source: "Google" }, // wird als "140+" angezeigt
+  rating: { stars: 4.9, count: 1046, source: "Treatwell" }, // wird als "1046+" angezeigt
 
   /* ---------- Marquee-Keywords (Laufband) ---------- */
-  marquee: ["Übergang", "Bart & Rasur", "Line Up", "Herrenschnitt", "Übergänge", "Kids Cut", "Konturen", "Hot Towel"],
+  marquee: ["Übergang", "Bart & Rasur", "Line Up", "Herrenschnitt", "Tattoo", "Black & Grey", "Fine Line", "Kids Cut", "Konturen", "Hot Towel"],
 
-  /* ---------- Kennzahlen (zählen sich hoch) ----------
-     value = Zielzahl, decimals = Nachkommastellen, prefix/suffix optional */
+  /* ---------- Kennzahlen (aktuell nicht im Layout, bleibt als Reserve) ---------- */
   stats: [
-    { value: 4.4, decimals: 1, suffix: "", label: "Google-Bewertung", icon: "★" },
-    { value: 99, decimals: 0, suffix: "+", label: "zufriedene Bewertungen", icon: "❝" },
+    { value: 4.9, decimals: 1, suffix: "", label: "Treatwell-Bewertung", icon: "★" },
+    { value: 1000, decimals: 0, suffix: "+", label: "zufriedene Bewertungen", icon: "❝" },
     { value: 6, decimals: 0, suffix: "", label: "Tage die Woche offen", icon: "✂" },
     { value: 100, decimals: 0, suffix: "%", label: "Handwerk & Leidenschaft", icon: "⬡" }
-  ], // TODO Zahlen nach Wunsch anpassen
-
-  /* ---------- Leistungen (Preise & Dauer) ---------- */
-  services: [
-    { name: "Haarschnitt + Bart",                       price: "47",  duration: "40" },
-    { name: "Haarschnitt",                              price: "35",  duration: "25" },
-    { name: "Haarschnitt + Bart + Augenbrauen",         price: "60",  duration: "55" },
-    { name: "Haarschnitt & Bart + Färben (Bart)",       price: "60",  duration: "55" },
-    { name: "Bart",                                     price: "22",  duration: "20" },
-    { name: "3 Masken mit Gesichtsdampfer (1 Stunde)",  price: "50",  duration: "20" },
-    { name: "Platinum Blond (Haare färben, 2/3 Stunden)", price: "100", duration: "30" }
   ],
-  priceNote: "Alle Preise in CHF. Barzahlung & TWINT.",
+
+  /* ---------- Leistungen (Preise & Dauer) ----------
+     TODO: Preise/Dauer mit den echten NOVUS-Angaben bestätigen (aktuell Richtwerte). */
+  services: [
+    { name: "Haarschnitt",                          price: "40",  duration: "30" },
+    { name: "Haarschnitt + Bart",                   price: "55",  duration: "45" },
+    { name: "Bart / Rasur",                         price: "25",  duration: "20" },
+    { name: "Kids Cut (bis 12 Jahre)",              price: "30",  duration: "25" },
+    { name: "Line Up / Konturen",                   price: "20",  duration: "15" },
+    { name: "Tattoo – kostenlose Beratung",         price: "",    desc: "Termin nach Vereinbarung" },
+    { name: "Tattoo (Black & Grey / Fine Line)",    price: "ab 120", desc: "Preis nach Aufwand" }
+  ],
+  priceNote: "Alle Preise in CHF. Tattoos nach Aufwand – Preis auf Anfrage. Barzahlung, TWINT & Karte.",
 
   /* ---------- Über uns ---------- */
   about: {
-    title: "Mehr als ein Haarschnitt",
+    title: "Mehr als ein Schnitt – dein Style",
     text:
-      "Für mich geht es nicht einfach darum, Haare zu schneiden. Ich möchte, dass du den Barbershop " +
-      "mit einem Look verlässt, der zu dir passt und mit dem du dich wohlfühlst. Deshalb nehme ich mir " +
-      "Zeit für saubere Übergänge, präzise Konturen und eine Bartpflege, bei der jedes Detail stimmt.",
+      "Bei NOVUS geht es uns nicht nur ums Haareschneiden. Wir wollen, dass du unseren Barber & Tattoo " +
+      "Shop mit einem Look verlässt, der zu dir passt und mit dem du dich wohlfühlst. Ob sauberer " +
+      "Übergang, gepflegter Bart oder ein Tattoo, das deine Geschichte erzählt – wir nehmen uns Zeit " +
+      "für jedes Detail.",
     points: [
-      "Spezialisiert auf Übergänge & Bart Styling",
-      "Top bewertet auf Google (4.4 / 5)",
-      "Faire Preise, ehrliche Beratung",
-      "Ohne Voranmeldung willkommen, zentral in Oftringen"
+      "Barber, Bartpflege & Tattoo unter einem Dach",
+      "Top bewertet auf Treatwell (4.9 / 5)",
+      "Modernes Studio mit stylischem Ambiente",
+      "Zentral in Rothrist – einfach online buchen"
     ],
-    image: "https://d8j0ntlcm91z4.cloudfront.net/user_3FuPVC4JIayU3rXUwYAnv5ZoEBp/hf_20260803_190255_9f483bbd-17d5-4634-be76-4d4bbf5c7fb3.png"
+    image: "https://d8j0ntlcm91z4.cloudfront.net/user_3FuPVC4JIayU3rXUwYAnv5ZoEBp/hf_20260812_174404_998f97c3-56b2-4ed3-886f-75d33a812f2c.png"
   },
 
-  /* ---------- Galerie / Ergebnisse (Grayscale, Farbe bei Hover) ---------- */
+  /* ---------- Galerie / Ergebnisse (Grayscale, Farbe bei Hover) ----------
+     KI-Bilder im Stil des Salons – später gegen echte Fotos tauschen. */
   gallery: [
-    { src: "https://d8j0ntlcm91z4.cloudfront.net/user_3FuPVC4JIayU3rXUwYAnv5ZoEBp/hf_20260721_194151_35fcfd31-0d9c-4e63-be9b-fe4d6154aaa9.png", alt: "Frischer Übergang bei FLO Barber Shop Oftringen", label: "Übergang" },
-    { src: "https://d8j0ntlcm91z4.cloudfront.net/user_3FuPVC4JIayU3rXUwYAnv5ZoEBp/hf_20260724_073546_2f564b59-4858-4f8f-842c-8c6e8ae03e7d.png", alt: "Textured Crop mit Übergang", label: "Textured Crop" },
-    { src: "https://d8j0ntlcm91z4.cloudfront.net/user_3FuPVC4JIayU3rXUwYAnv5ZoEBp/hf_20260721_194158_0b9e2905-365e-44e8-a5a9-1eb88292b9f6.png", alt: "Moderner Übergang mit sauberen Konturen", label: "Classic Übergang" },
-    { src: "https://d8j0ntlcm91z4.cloudfront.net/user_3FuPVC4JIayU3rXUwYAnv5ZoEBp/hf_20260724_073546_c54c895d-e146-4cf4-a06e-22c74e9b9fc5.png", alt: "Curly Hair Mid Übergang", label: "Curly Übergang" },
-    { src: "https://d8j0ntlcm91z4.cloudfront.net/user_3FuPVC4JIayU3rXUwYAnv5ZoEBp/hf_20260721_194155_2986a0cf-2e85-49d7-a52e-e34042c127ab.png", alt: "Bart Styling und heisse Rasur", label: "Bart & Rasur" },
-    { src: "https://d8j0ntlcm91z4.cloudfront.net/user_3FuPVC4JIayU3rXUwYAnv5ZoEBp/hf_20260724_073547_1a877c91-ae41-41ae-b8a8-15bf88c963c6.png", alt: "Buzz Cut mit sauberem Line Up", label: "Buzz & Line Up" },
-    { src: "https://d8j0ntlcm91z4.cloudfront.net/user_3FuPVC4JIayU3rXUwYAnv5ZoEBp/hf_20260724_073548_469fe317-c610-42f0-80e0-20b5bf8b6e88.png", alt: "Klassischer Pompadour mit Übergang", label: "Pompadour Übergang" },
-    { src: "https://d8j0ntlcm91z4.cloudfront.net/user_3FuPVC4JIayU3rXUwYAnv5ZoEBp/hf_20260727_193706_46bcee30-23fa-44f8-94d8-76761cb27923.png", alt: "Zufriedener Kunde nach frischem Schnitt", label: "Frisch gemacht" },
-    { src: "https://d8j0ntlcm91z4.cloudfront.net/user_3FuPVC4JIayU3rXUwYAnv5ZoEBp/hf_20260727_193706_b6da5e10-1316-4b35-816c-418e32708dd7.png", alt: "Scharfe Bart Konturen mit dem Rasiermesser", label: "Bart Konturen" },
-    { src: "https://d8j0ntlcm91z4.cloudfront.net/user_3FuPVC4JIayU3rXUwYAnv5ZoEBp/hf_20260727_193706_7d58c9e3-2c07-4f34-ae16-153b9a21fbbb.png", alt: "Barber Werkzeug: Maschine, Schere, Rasiermesser", label: "Werkzeug" }
+    { src: "https://d8j0ntlcm91z4.cloudfront.net/user_3FuPVC4JIayU3rXUwYAnv5ZoEBp/hf_20260812_174403_3e1489ca-2f27-4a92-8ec5-541cd336e407.png", alt: "Frischer Übergang bei NOVUS Barber & Tattoo Rothrist", label: "Übergang" },
+    { src: "https://d8j0ntlcm91z4.cloudfront.net/user_3FuPVC4JIayU3rXUwYAnv5ZoEBp/hf_20260812_174705_db8f387f-8491-47b7-9db0-161cffd00c6b.png", alt: "Textured Crop mit sauberem Fade", label: "Textured Crop" },
+    { src: "https://d8j0ntlcm91z4.cloudfront.net/user_3FuPVC4JIayU3rXUwYAnv5ZoEBp/hf_20260812_174705_5028628b-05c9-4f87-ab57-cf7f1edce8a4.png", alt: "Bart Styling und saubere Konturen", label: "Bart & Konturen" },
+    { src: "https://d8j0ntlcm91z4.cloudfront.net/user_3FuPVC4JIayU3rXUwYAnv5ZoEBp/hf_20260812_174704_e6e010d4-37fe-46bb-b9b6-3bc89499320a.png", alt: "Türkiser Barber-Stuhl im weissen NOVUS Studio", label: "Studio" },
+    { src: "https://d8j0ntlcm91z4.cloudfront.net/user_3FuPVC4JIayU3rXUwYAnv5ZoEBp/hf_20260812_174403_b432ff7c-7f7b-48fe-891a-b37dad9c0886.png", alt: "Black & Grey Skorpion Tattoo", label: "Tattoo · Black & Grey" },
+    { src: "https://d8j0ntlcm91z4.cloudfront.net/user_3FuPVC4JIayU3rXUwYAnv5ZoEBp/hf_20260812_174403_ebf7bafe-57de-4930-962f-8474a36ad894.png", alt: "Detailliertes Sleeve Tattoo", label: "Tattoo · Sleeve" },
+    { src: "https://d8j0ntlcm91z4.cloudfront.net/user_3FuPVC4JIayU3rXUwYAnv5ZoEBp/hf_20260812_174403_6d15566a-034c-48c2-b7d4-1a2acc5c3055.png", alt: "Lettering Tattoo entlang der Wirbelsäule", label: "Tattoo · Lettering" },
+    { src: "https://d8j0ntlcm91z4.cloudfront.net/user_3FuPVC4JIayU3rXUwYAnv5ZoEBp/hf_20260812_174704_d4d72e21-205b-49c5-ba90-ffa0a4080be9.png", alt: "Barber Werkzeug: Maschine, Schere, Kamm", label: "Werkzeug" }
   ],
 
-  /* ---------- Rezensionen (viele – durch echte Google-Reviews ersetzen) ---------- */
+  /* ---------- Rezensionen (Platzhalter – durch echte Treatwell-Reviews ersetzen) ---------- */
   testimonials: [
     { text: "Sauberster Übergang, den ich je hatte. Schnell, präzise und mega freundlich.", author: "Marco B.", stars: 5 },
     { text: "Nimmt sich Zeit und achtet auf jedes Detail. Bester Barber in der Region.", author: "David K.", stars: 5 },
     { text: "Top Atmosphäre, faire Preise und ein Ergebnis, das sitzt. Klare Empfehlung.", author: "Luca M.", stars: 5 },
-    { text: "Endlich ein Barber, der Übergänge wirklich kann. Komme sicher wieder.", author: "Samir A.", stars: 5 },
+    { text: "Mein Tattoo ist der Wahnsinn – sauber gestochen und genau nach meiner Idee.", author: "Samir A.", stars: 5 },
     { text: "Super sympathisch, schneller Termin, perfekter Schnitt. Danke!", author: "Timo R.", stars: 5 },
     { text: "Bart und Haare wie aus dem Magazin. Absolut zu empfehlen.", author: "Elton S.", stars: 5 },
     { text: "Immer top Beratung und ein sauberes Line Up. Mein Stammladen.", author: "Fabio D.", stars: 5 },
-    { text: "Sehr professionell und gepflegt. Preis Leistung stimmt zu 100 %.", author: "Nico W.", stars: 4 },
-    { text: "Meinem Sohn gefällt sein Cut riesig, geduldig mit Kids. Top!", author: "Sandra P.", stars: 5 },
-    { text: "Moderner Laden, cooler Vibe, und der Übergang ist perfekt.", author: "Jonas H.", stars: 5 }
-  ], // TODO durch echte Google-Bewertungen ersetzen
+    { text: "Sehr professionell und gepflegt. Preis Leistung stimmt zu 100 %.", author: "Nico W.", stars: 5 },
+    { text: "Stylisches Studio, cooler Vibe – und das Tattoo sieht mega aus.", author: "Jonas H.", stars: 5 },
+    { text: "Meinem Sohn gefällt sein Cut riesig, geduldig mit Kids. Top!", author: "Sandra P.", stars: 5 }
+  ], // TODO durch echte Treatwell-Bewertungen ersetzen
 
   /* ---------- Call-to-Action ----------
      bookingUrl gesetzt => alle "Termin"-Buttons öffnen die Online-Buchung. */
-  primaryCta: { label: "Termin vereinbaren", type: "link" },
-  bookingUrl: "https://appt.link/flo-barbershop-I9jOfPvy"
+  primaryCta: { label: "Termin buchen", type: "link" },
+  bookingUrl: "https://outlaw-barber.mytreatwell.ch/"
 };

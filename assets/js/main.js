@@ -23,7 +23,7 @@
   }
 
   /* ---------- SEO / Meta ---------- */
-  document.title = `${S.brand}${S.city ? " " + S.city : ""} | Übergänge, Bart & Herrenschnitt`;
+  document.title = `${S.brand}${S.city ? " " + S.city : ""} | ${S.titleSuffix || "Übergänge, Bart & Herrenschnitt"}`;
   setAttr('meta[name="description"]', "content", S.metaDescription);
   setAttr("#meta-og-title", "content", `${S.brand} ${S.city || ""}`.trim());
   setAttr("#meta-og-desc", "content", S.heroSub || S.metaDescription);
@@ -99,17 +99,18 @@
   const revEl = $("[data-reviews]");
   if (revEl && S.testimonials && S.testimonials.length) {
     revEl.innerHTML = S.testimonials.map((t) => {
-      const name = (t.author || "Google-Bewertung").trim();
+      const src = (S.rating && S.rating.source) || "Google";
+      const name = (t.author || (src + "-Bewertung")).trim();
       return `<blockquote class="rev" data-reveal>
         <div class="rev-head">
-          <div class="rev-id"><span class="t-author">${esc(name)}</span><span class="rev-src">Google Bewertung</span></div>
+          <div class="rev-id"><span class="t-author">${esc(name)}</span><span class="rev-src">${esc(src)} Bewertung</span></div>
           <span class="rev-stars">${stars(t.stars || 5)}</span>
         </div>
         <p>${esc(t.text)}</p>
       </blockquote>`;
     }).join("");
   }
-  $$("[data-reviews-link]").forEach((el) => (el.href = S.mapsUrl || "#"));
+  $$("[data-reviews-link]").forEach((el) => (el.href = S.reviewsUrl || S.mapsUrl || "#"));
   $$("[data-rating-badge]").forEach((el) => { if (S.rating) el.innerHTML = `<span class="stars">${stars(S.rating.stars)}</span> <strong>${S.rating.stars}</strong> / 5 · ${S.rating.count}+ ${esc(S.rating.source || "Google")} Bewertungen`; });
 
   /* ---------- Über uns ---------- */
@@ -125,10 +126,17 @@
   const addr = addressLine();
   $$("[data-address]").forEach((el) => (el.textContent = addr));
   $$("[data-address-link]").forEach((el) => (el.href = S.mapsUrl || "#"));
-  $$("[data-phone]").forEach((el) => { if (S.phoneDisplay) { el.textContent = S.phoneDisplay; el.href = "tel:" + (S.phoneLink || S.phoneDisplay); } });
+  $$("[data-phone]").forEach((el) => {
+    if (S.phoneDisplay) { el.textContent = S.phoneDisplay; el.href = "tel:" + (S.phoneLink || S.phoneDisplay); }
+    else { const li = el.closest(".contact-item"); if (li) li.hidden = true; }
+  });
   $$("[data-route]").forEach((el) => (el.href = S.routeUrl || S.mapsUrl || "#"));
-  const phoneHref = S.phoneLink ? "tel:" + S.phoneLink : (S.phoneDisplay ? "tel:" + S.phoneDisplay : "#");
-  $$("[data-cta-phone]").forEach((el) => (el.href = phoneHref));
+  const hasPhone = !!(S.phoneLink || S.phoneDisplay);
+  const phoneHref = S.phoneLink ? "tel:" + S.phoneLink : (S.phoneDisplay ? "tel:" + S.phoneDisplay : (S.bookingUrl || "#"));
+  $$("[data-cta-phone]").forEach((el) => {
+    el.href = phoneHref;
+    if (!hasPhone && S.bookingUrl) { el.textContent = "Online buchen"; el.target = "_blank"; el.rel = "noopener"; }
+  });
 
   /* ---------- Termin-CTAs -> Online-Buchung (falls hinterlegt) ---------- */
   if (S.bookingUrl) $$("[data-cta]").forEach((el) => { el.href = S.bookingUrl; el.target = "_blank"; el.rel = "noopener"; });

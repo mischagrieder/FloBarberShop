@@ -1,11 +1,11 @@
 /* =========================================================
-   FLO Barber Shop – Theme: Schwarz / Grau / Weiss + Rot
+   NOVUS Barber & Tattoo – Theme: Schwarz / Grau / Weiss + Türkis
    Signatur: Hexagon-Motiv (angelehnt an die LED-Decke im Salon)
-   Farbwerte werden zusätzlich via config.js gesetzt.
+   Akzentfarbe (--red) = Türkis, wird zusätzlich via config.js gesetzt.
 ========================================================= */
 :root{
-  --red:#e11d2a;
-  --red-dark:#b0141d;
+  --red:#12b4c4;
+  --red-dark:#0c8c99;
   --ink:#0e0e10;
   --graphite:#141417;
   --graphite-2:#1c1c21;
@@ -68,8 +68,9 @@ h3{font-size:1.55rem;letter-spacing:1px}
 }
 .site-header.scrolled::after{content:"";position:absolute;left:0;right:0;bottom:-1px;height:2px;background:var(--stripe)}
 .header-inner{display:flex;align-items:center;justify-content:space-between;gap:16px}
-.logo{font-family:var(--ff-head);font-size:1.75rem;letter-spacing:1.5px;color:currentColor;display:inline-flex;align-items:center;gap:9px}
-.logo span{color:var(--red)}
+.logo{font-family:var(--ff-head);font-size:1.75rem;letter-spacing:1.5px;color:currentColor;display:inline-flex;align-items:center;gap:7px}
+.logo span{color:var(--red);font-size:.52em;letter-spacing:1.5px;white-space:nowrap;line-height:1}
+@media (max-width:640px){.logo span{display:none}}
 .logo-mark{height:38px;width:auto;display:block;transition:height .3s ease}
 .site-header.scrolled .logo-mark{height:32px}
 /* Navigation: immer im Hamburger-Menü (Onepager) */
