@@ -64,21 +64,20 @@ window.SHOP = {
   tiktok: "https://www.tiktok.com/@novus.ch",
   facebook: "",
 
-  /* ---------- Öffnungszeiten ----------
-     TODO: mit den echten Zeiten von NOVUS ersetzen (Platzhalter!). */
+  /* ---------- Öffnungszeiten (echt, gemäss Treatwell) ---------- */
   hours: [
-    { day: "Montag",     open: "09:00", close: "19:00" },
-    { day: "Dienstag",   open: "09:00", close: "19:00" },
-    { day: "Mittwoch",   open: "09:00", close: "19:00" },
-    { day: "Donnerstag", open: "09:00", close: "19:00" },
+    { day: "Montag",     closed: true },
+    { day: "Dienstag",   open: "09:00", close: "18:30" },
+    { day: "Mittwoch",   open: "09:00", close: "18:30" },
+    { day: "Donnerstag", open: "09:00", close: "20:00" },
     { day: "Freitag",    open: "09:00", close: "19:00" },
-    { day: "Samstag",    open: "08:00", close: "17:00" },
+    { day: "Samstag",    open: "09:00", close: "15:00" },
     { day: "Sonntag",    closed: true }
   ],
   walkIn: "Termine bequem online buchen – oder schau direkt im Studio vorbei.",
 
   /* ---------- Bewertung ---------- */
-  rating: { stars: 4.9, count: 1046, source: "Treatwell" }, // wird als "1046+" angezeigt
+  rating: { stars: 4.9, count: 1206, source: "Treatwell" }, // wird als "1206+" angezeigt
 
   /* ---------- Marquee-Keywords (Laufband) ---------- */
   marquee: ["Übergang", "Bart & Rasur", "Line Up", "Herrenschnitt", "Tattoo", "Black & Grey", "Fine Line", "Kids Cut", "Konturen", "Hot Towel"],
@@ -91,18 +90,17 @@ window.SHOP = {
     { value: 100, decimals: 0, suffix: "%", label: "Handwerk & Leidenschaft", icon: "⬡" }
   ],
 
-  /* ---------- Leistungen (Preise & Dauer) ----------
-     TODO: Preise/Dauer mit den echten NOVUS-Angaben bestätigen (aktuell Richtwerte). */
+  /* ---------- Leistungen (echte Preise & Dauer, gemäss Treatwell) ---------- */
   services: [
-    { name: "Haarschnitt",                          price: "40",  duration: "30" },
-    { name: "Haarschnitt + Bart",                   price: "55",  duration: "45" },
-    { name: "Bart / Rasur",                         price: "25",  duration: "20" },
-    { name: "Kids Cut (bis 12 Jahre)",              price: "30",  duration: "25" },
-    { name: "Line Up / Konturen",                   price: "20",  duration: "15" },
-    { name: "Tattoo – kostenlose Beratung",         price: "",    desc: "Termin nach Vereinbarung" },
-    { name: "Tattoo (Black & Grey / Fine Line)",    price: "ab 120", desc: "Preis nach Aufwand" }
+    { name: "Herren – Haarschnitt",            price: "37",  duration: "25" },
+    { name: "Herren – Haarschnitt & Bart",     price: "50",  duration: "40" },
+    { name: "Herren – Waschen & Schneiden",    price: "40",  duration: "30" },
+    { name: "Herren – langer Vollbart",        price: "25",  duration: "20" },
+    { name: "Herren – Bart kurz",              price: "20",  duration: "15" },
+    { name: "Herren – Bart färben",            price: "18",  duration: "15" },
+    { name: "Tattoo",                          price: "",    desc: "Individuelle Motive – nach Vereinbarung" }
   ],
-  priceNote: "Alle Preise in CHF. Tattoos nach Aufwand – Preis auf Anfrage. Barzahlung, TWINT & Karte.",
+  priceNote: "Alle Preise in CHF. Tattoo-Termine auf Anfrage. Weitere Services (u. a. Waxing) im Studio & auf Treatwell.",
 
   /* ---------- Über uns ---------- */
   about: {
@@ -114,8 +112,8 @@ window.SHOP = {
       "für jedes Detail.",
     points: [
       "Barber, Bartpflege & Tattoo unter einem Dach",
-      "Top bewertet auf Treatwell (4.9 / 5)",
-      "Modernes Studio mit stylischem Ambiente",
+      "Top bewertet auf Treatwell (4.9 / 5 · 1206 Bewertungen)",
+      "Inhaber Rabit Hysenaj – Retro-Charme & echtes Handwerk",
       "Zentral in Rothrist – einfach online buchen"
     ],
     image: "https://d8j0ntlcm91z4.cloudfront.net/user_3FuPVC4JIayU3rXUwYAnv5ZoEBp/hf_20260812_174404_998f97c3-56b2-4ed3-886f-75d33a812f2c.png"
@@ -134,19 +132,14 @@ window.SHOP = {
     { src: "https://d8j0ntlcm91z4.cloudfront.net/user_3FuPVC4JIayU3rXUwYAnv5ZoEBp/hf_20260812_174704_d4d72e21-205b-49c5-ba90-ffa0a4080be9.png", alt: "Barber Werkzeug: Maschine, Schere, Kamm", label: "Werkzeug" }
   ],
 
-  /* ---------- Rezensionen (Platzhalter – durch echte Treatwell-Reviews ersetzen) ---------- */
+  /* ---------- Rezensionen (echte, verifizierte Treatwell-Bewertungen) ---------- */
   testimonials: [
-    { text: "Sauberster Übergang, den ich je hatte. Schnell, präzise und mega freundlich.", author: "Marco B.", stars: 5 },
-    { text: "Nimmt sich Zeit und achtet auf jedes Detail. Bester Barber in der Region.", author: "David K.", stars: 5 },
-    { text: "Top Atmosphäre, faire Preise und ein Ergebnis, das sitzt. Klare Empfehlung.", author: "Luca M.", stars: 5 },
-    { text: "Mein Tattoo ist der Wahnsinn – sauber gestochen und genau nach meiner Idee.", author: "Samir A.", stars: 5 },
-    { text: "Super sympathisch, schneller Termin, perfekter Schnitt. Danke!", author: "Timo R.", stars: 5 },
-    { text: "Bart und Haare wie aus dem Magazin. Absolut zu empfehlen.", author: "Elton S.", stars: 5 },
-    { text: "Immer top Beratung und ein sauberes Line Up. Mein Stammladen.", author: "Fabio D.", stars: 5 },
-    { text: "Sehr professionell und gepflegt. Preis Leistung stimmt zu 100 %.", author: "Nico W.", stars: 5 },
-    { text: "Stylisches Studio, cooler Vibe – und das Tattoo sieht mega aus.", author: "Jonas H.", stars: 5 },
-    { text: "Meinem Sohn gefällt sein Cut riesig, geduldig mit Kids. Top!", author: "Sandra P.", stars: 5 }
-  ], // TODO durch echte Treatwell-Bewertungen ersetzen
+    { text: "Hab mich schnell wohlgefühlt – sauber und präzise, genau nach meinem Wunsch.", author: "", stars: 5 },
+    { text: "Nummer 1.", author: "Nedim", stars: 5 },
+    { text: "Der beste Barber, den ich seit Langem hatte.", author: "Ajdin", stars: 5 },
+    { text: "Wie immer war der Besuch bei Rabit eine 10/10.", author: "Ajdin", stars: 5 },
+    { text: "Super Service.", author: "Nedim", stars: 5 }
+  ], // Quelle: verifizierte Treatwell-Bewertungen
 
   /* ---------- Call-to-Action ----------
      bookingUrl gesetzt => alle "Termin"-Buttons öffnen die Online-Buchung. */
