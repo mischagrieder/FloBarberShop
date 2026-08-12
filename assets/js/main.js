@@ -59,6 +59,21 @@
     if (cdn || local) setAttr("#meta-og-image", "content", absUrl(local ? local : cdn));
   })();
 
+  /* ---------- Hero-Video (Clips nacheinander abspielen, dann Loop) ---------- */
+  (function heroVideo() {
+    const vid = $("[data-hero-video]");
+    const clips = S.heroVideos || [];
+    if (!vid) return;
+    if (!clips.length || reduce) { vid.remove(); return; }
+    let i = 0;
+    const play = () => { vid.src = clips[i]; vid.load(); const p = vid.play(); if (p && p.catch) p.catch(() => {}); };
+    vid.muted = true; vid.playsInline = true;
+    vid.addEventListener("canplay", () => vid.classList.add("on"));
+    vid.addEventListener("ended", () => { i = (i + 1) % clips.length; play(); });
+    vid.addEventListener("error", () => vid.classList.remove("on"));
+    play();
+  })();
+
   /* ---------- Hero-Titel: letztes Wort rot ---------- */
   const ht = $("[data-hero-title]");
   if (ht && S.tagline) {

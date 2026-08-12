@@ -41,6 +41,14 @@ window.SHOP = {
   heroImageLocal: "assets/img/hero.jpg",
   heroImage: "https://d8j0ntlcm91z4.cloudfront.net/user_3FuPVC4JIayU3rXUwYAnv5ZoEBp/hf_20260812_174705_2d5ebdae-359b-4266-8a27-1856f9bf84a4.png", // KI-Fallback (weisser Salon, türkise Stühle)
 
+  /* ---------- Hero-Video (Clips laufen nacheinander, dann Loop) ----------
+     Leer = nur Bild. KI-Platzhalter (Haarschnitt + Tattoo) – später durch echtes
+     Video ersetzen. Das Bild oben bleibt Fallback, falls Video nicht lädt. */
+  heroVideos: [
+    "https://d8j0ntlcm91z4.cloudfront.net/user_3FuPVC4JIayU3rXUwYAnv5ZoEBp/hf_20260812_182353_a818db0a-1ee2-4f22-9e69-92a74e686cc8.mp4", // Haarschnitt
+    "https://d8j0ntlcm91z4.cloudfront.net/user_3FuPVC4JIayU3rXUwYAnv5ZoEBp/hf_20260812_182354_5e954c82-c6e5-44dc-b6a2-d7b97ee318d7.mp4"  // Tattoo
+  ],
+
   /* ---------- Kontakt ---------- */
   phoneDisplay: "",      // TODO: Telefonnummer eintragen (leer = Zeile ausgeblendet, CTA -> Online-Buchung)
   phoneLink: "",         // TODO: z. B. +41xxxxxxxxx
