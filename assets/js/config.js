@@ -120,16 +120,18 @@ window.SHOP = {
   },
 
   /* ---------- Galerie / Ergebnisse (Grayscale, Farbe bei Hover) ----------
-     KI-Bilder im Stil des Salons – später gegen echte Fotos tauschen. */
+     ECHTE Fotos von NOVUS (im Widget hochgeladen). Reihenfolge/Labels bei Bedarf
+     anpassen. Hero- und Über-uns-Bild werden separat oben gesetzt. */
   gallery: [
-    { src: "https://d8j0ntlcm91z4.cloudfront.net/user_3FuPVC4JIayU3rXUwYAnv5ZoEBp/hf_20260812_174403_3e1489ca-2f27-4a92-8ec5-541cd336e407.png", alt: "Frischer Übergang bei NOVUS Barber & Tattoo Rothrist", label: "Übergang" },
-    { src: "https://d8j0ntlcm91z4.cloudfront.net/user_3FuPVC4JIayU3rXUwYAnv5ZoEBp/hf_20260812_174705_db8f387f-8491-47b7-9db0-161cffd00c6b.png", alt: "Textured Crop mit sauberem Fade", label: "Textured Crop" },
-    { src: "https://d8j0ntlcm91z4.cloudfront.net/user_3FuPVC4JIayU3rXUwYAnv5ZoEBp/hf_20260812_174705_5028628b-05c9-4f87-ab57-cf7f1edce8a4.png", alt: "Bart Styling und saubere Konturen", label: "Bart & Konturen" },
-    { src: "https://d8j0ntlcm91z4.cloudfront.net/user_3FuPVC4JIayU3rXUwYAnv5ZoEBp/hf_20260812_174704_e6e010d4-37fe-46bb-b9b6-3bc89499320a.png", alt: "Türkiser Barber-Stuhl im weissen NOVUS Studio", label: "Studio" },
-    { src: "https://d8j0ntlcm91z4.cloudfront.net/user_3FuPVC4JIayU3rXUwYAnv5ZoEBp/hf_20260812_174403_b432ff7c-7f7b-48fe-891a-b37dad9c0886.png", alt: "Black & Grey Skorpion Tattoo", label: "Tattoo · Black & Grey" },
-    { src: "https://d8j0ntlcm91z4.cloudfront.net/user_3FuPVC4JIayU3rXUwYAnv5ZoEBp/hf_20260812_174403_ebf7bafe-57de-4930-962f-8474a36ad894.png", alt: "Detailliertes Sleeve Tattoo", label: "Tattoo · Sleeve" },
-    { src: "https://d8j0ntlcm91z4.cloudfront.net/user_3FuPVC4JIayU3rXUwYAnv5ZoEBp/hf_20260812_174403_6d15566a-034c-48c2-b7d4-1a2acc5c3055.png", alt: "Lettering Tattoo entlang der Wirbelsäule", label: "Tattoo · Lettering" },
-    { src: "https://d8j0ntlcm91z4.cloudfront.net/user_3FuPVC4JIayU3rXUwYAnv5ZoEBp/hf_20260812_174704_d4d72e21-205b-49c5-ba90-ffa0a4080be9.png", alt: "Barber Werkzeug: Maschine, Schere, Kamm", label: "Werkzeug" }
+    { src: "https://d2ol7oe51mr4n9.cloudfront.net/user_3FuPVC4JIayU3rXUwYAnv5ZoEBp/1be855ab-7603-4d9c-ba32-43d0e553d4f8.png", alt: "NOVUS Barber & Tattoo Rothrist" },
+    { src: "https://d2ol7oe51mr4n9.cloudfront.net/user_3FuPVC4JIayU3rXUwYAnv5ZoEBp/9e4a6098-e4da-41ae-8505-2cb5847fb714.png", alt: "NOVUS Barber & Tattoo Rothrist" },
+    { src: "https://d2ol7oe51mr4n9.cloudfront.net/user_3FuPVC4JIayU3rXUwYAnv5ZoEBp/1894ca12-28e5-4327-8bb9-9e99b1937273.png", alt: "NOVUS Barber & Tattoo Rothrist" },
+    { src: "https://d2ol7oe51mr4n9.cloudfront.net/user_3FuPVC4JIayU3rXUwYAnv5ZoEBp/bdd1443b-c7dd-485d-9279-477fb3fba1c4.png", alt: "NOVUS Barber & Tattoo Rothrist" },
+    { src: "https://d2ol7oe51mr4n9.cloudfront.net/user_3FuPVC4JIayU3rXUwYAnv5ZoEBp/8f8388eb-e63b-40d6-9264-d1b15735f3cd.png", alt: "NOVUS Barber & Tattoo Rothrist" },
+    { src: "https://d2ol7oe51mr4n9.cloudfront.net/user_3FuPVC4JIayU3rXUwYAnv5ZoEBp/d6cebbac-e3d4-472d-ad5d-0a4d61ac135a.png", alt: "NOVUS Barber & Tattoo Rothrist" },
+    { src: "https://d2ol7oe51mr4n9.cloudfront.net/user_3FuPVC4JIayU3rXUwYAnv5ZoEBp/00d99a19-8625-4159-b21f-8ace85340e02.png", alt: "NOVUS Barber & Tattoo Rothrist" },
+    { src: "https://d2ol7oe51mr4n9.cloudfront.net/user_3FuPVC4JIayU3rXUwYAnv5ZoEBp/340d4052-6f2a-4941-a52e-1fb0c1570fed.png", alt: "NOVUS Barber & Tattoo Rothrist" },
+    { src: "https://d2ol7oe51mr4n9.cloudfront.net/user_3FuPVC4JIayU3rXUwYAnv5ZoEBp/21d39946-521b-4c22-b7eb-c497afcc2361.png", alt: "NOVUS Barber & Tattoo Rothrist" }
   ],
 
   /* ---------- Rezensionen (echte, verifizierte Treatwell-Bewertungen) ---------- */
