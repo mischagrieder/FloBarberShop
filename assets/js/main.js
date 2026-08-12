@@ -118,8 +118,36 @@
   if (pts && S.about && S.about.points) pts.innerHTML = S.about.points.map((p) => `<li>${esc(p)}</li>`).join("");
   const aboutImg = $("[data-about-img]");
   if (aboutImg) {
-    const src = (S.about && S.about.image) || (S.gallery && S.gallery[0] && S.gallery[0].src);
-    if (src) probeImage(src, (ok) => ok && (aboutImg.style.backgroundImage = `url("${src}")`));
+    const aSlides = (S.about && S.about.slides) || [];
+    if (aSlides.length > 1) {
+      slideshow(aboutImg, aSlides, 3500, false);
+    } else {
+      const src = (S.about && S.about.image) || (S.gallery && S.gallery[0] && S.gallery[0].src);
+      if (src) probeImage(src, (ok) => ok && (aboutImg.style.backgroundImage = `url("${src}")`));
+    }
+  }
+
+  /* ---------- Salon-Slideshow (Kontakt) ---------- */
+  const slidesEl = $("[data-slides]");
+  if (slidesEl && S.slides && S.slides.length) slideshow(slidesEl, S.slides, 4000, true);
+
+  /* Wiederverwendbare Slideshow (Crossfade + optionale Punkte) */
+  function slideshow(el, urls, interval, withDots) {
+    el.innerHTML =
+      urls.map((u, i) => `<div class="slide${i === 0 ? " active" : ""}" style="background-image:url('${esc(u)}')"></div>`).join("") +
+      (withDots ? `<div class="slide-dots">${urls.map((_, i) => `<button type="button" class="${i === 0 ? "on" : ""}" aria-label="Bild ${i + 1}"></button>`).join("")}</div>` : "");
+    const slides = $$(".slide", el), dots = $$(".slide-dots button", el);
+    if (slides.length < 2) return;
+    let idx = 0, timer = null;
+    const go = (n) => {
+      slides[idx].classList.remove("active"); if (dots[idx]) dots[idx].classList.remove("on");
+      idx = (n + slides.length) % slides.length;
+      slides[idx].classList.add("active"); if (dots[idx]) dots[idx].classList.add("on");
+    };
+    const start = () => { if (reduce) return; stop(); timer = setInterval(() => go(idx + 1), interval); };
+    const stop = () => { if (timer) { clearInterval(timer); timer = null; } };
+    dots.forEach((d, i) => d.addEventListener("click", () => { go(i); start(); }));
+    start();
   }
 
   /* ---------- Kontakt ---------- */

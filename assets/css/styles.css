@@ -25,7 +25,7 @@
 
 *{box-sizing:border-box;margin:0;padding:0}
 [hidden]{display:none !important}
-html{scroll-behavior:smooth;overflow-x:hidden}
+html{scroll-behavior:smooth;overflow-x:hidden;scroll-padding-top:76px}
 body{
   font-family:var(--ff-body);background:var(--bg);color:var(--ink);
   line-height:1.6;-webkit-font-smoothing:antialiased;overflow-x:hidden;
@@ -179,7 +179,19 @@ h3{font-size:1.55rem;letter-spacing:1px}
 .about-rect{
   width:min(420px,82vw);aspect-ratio:4/5;background-size:cover;background-position:center;
   background-image:linear-gradient(135deg,#26262b,#0d0d0f);display:block;
+  position:relative;overflow:hidden;
 }
+.about-rect .slide{position:absolute;inset:0;background-size:cover;background-position:center;opacity:0;transition:opacity 1s ease}
+.about-rect .slide.active{opacity:1}
+
+/* ---------- Salon-Slideshow (Kontakt / Termin) ---------- */
+.salon-slideshow{position:relative;width:100%;height:clamp(260px,42vw,460px);overflow:hidden;background:var(--graphite-2);margin:8px 0 clamp(30px,5vw,52px)}
+.salon-slideshow .slide{position:absolute;inset:0;background-size:cover;background-position:center;opacity:0;transition:opacity 1.1s ease}
+.salon-slideshow .slide.active{opacity:1}
+.salon-slideshow::after{content:"";position:absolute;inset:0;background:linear-gradient(180deg,rgba(0,0,0,.12),rgba(0,0,0,0) 30%,rgba(0,0,0,.28));pointer-events:none}
+.slide-dots{position:absolute;left:0;right:0;bottom:16px;display:flex;gap:9px;justify-content:center;z-index:2}
+.slide-dots button{width:9px;height:9px;border-radius:50%;border:0;padding:0;background:rgba(255,255,255,.45);cursor:pointer;transition:.25s}
+.slide-dots button.on{background:var(--red);transform:scale(1.25)}
 .about-text h2{margin:.2rem 0 1rem}
 .checks{list-style:none;margin:1.6rem 0 2rem;display:grid;gap:.75rem}
 .checks li{display:flex;gap:.65rem;align-items:flex-start}
