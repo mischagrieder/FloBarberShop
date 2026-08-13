@@ -35,8 +35,10 @@ window.SHOP = {
   logo: "",
   logoAlt: "NOVUS Barber & Tattoo Logo",
 
-  /* ---------- Hero-Logo (echtes NOVUS-Logo, wird im Hero weiss dargestellt) ----------
-     Original-Upload (scharf); die weisse Darstellung macht CSS via invert + screen. */
+  /* ---------- Hero-Logo ----------
+     heroWordmark (Text) hat Vorrang und wird als scharfer weisser Schriftzug
+     gerendert. heroLogo (Bild) nur nutzen, wenn kein Wordmark gesetzt ist. */
+  heroWordmark: { name: "novus", sub: "Barber & Tattoo" },
   heroLogo: "https://d2ol7oe51mr4n9.cloudfront.net/user_3FuPVC4JIayU3rXUwYAnv5ZoEBp/01be915f-0f09-48b8-bcde-2efa88943abd.png",
 
   /* ---------- Hero-Bild ----------

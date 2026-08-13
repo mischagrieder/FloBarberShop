@@ -49,11 +49,20 @@
     el.insertBefore(img, el.firstChild);
   }); });
 
-  /* ---------- Hero-Logo ---------- */
+  /* ---------- Hero-Wordmark (Text-Logo) / Hero-Logo (Bild) ---------- */
+  const wmEl = $("[data-hero-wordmark]");
+  if (wmEl) {
+    if (S.heroWordmark && S.heroWordmark.name) {
+      wmEl.innerHTML = `<span class="wm-name">${esc(S.heroWordmark.name)}</span>` +
+        (S.heroWordmark.sub ? `<span class="wm-sub">${esc(S.heroWordmark.sub)}</span>` : "");
+      wmEl.hidden = false;
+    } else wmEl.remove();
+  }
   const heroLogoEl = $("[data-hero-logo]");
   if (heroLogoEl) {
-    if (S.heroLogo) { heroLogoEl.src = S.heroLogo; heroLogoEl.alt = S.logoAlt || S.brand; heroLogoEl.hidden = false; }
-    else heroLogoEl.remove();
+    if (S.heroLogo && !(S.heroWordmark && S.heroWordmark.name)) {
+      heroLogoEl.src = S.heroLogo; heroLogoEl.alt = S.logoAlt || S.brand; heroLogoEl.hidden = false;
+    } else heroLogoEl.remove();
   }
 
   /* ---------- Hero-Bild (lokal bevorzugt, sonst KI-Fallback) ---------- */
