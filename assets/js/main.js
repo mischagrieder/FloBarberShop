@@ -49,6 +49,13 @@
     el.insertBefore(img, el.firstChild);
   }); });
 
+  /* ---------- Hero-Logo ---------- */
+  const heroLogoEl = $("[data-hero-logo]");
+  if (heroLogoEl) {
+    if (S.heroLogo) { heroLogoEl.src = S.heroLogo; heroLogoEl.alt = S.logoAlt || S.brand; heroLogoEl.hidden = false; }
+    else heroLogoEl.remove();
+  }
+
   /* ---------- Hero-Bild (lokal bevorzugt, sonst KI-Fallback) ---------- */
   const heroBg = $("[data-hero-bg]");
   function setHero(src) { if (heroBg) heroBg.style.backgroundImage = `url("${src}")`; }

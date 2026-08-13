@@ -13,7 +13,7 @@ window.SHOP = {
   legalName: "NOVUS Barber & Tattoo",
   city: "Rothrist",
   titleSuffix: "Barber, Bart & Tattoo",
-  tagline: "Übergänge. Bärte. Tattoos.",
+  tagline: "Dein Barber und Tätowierer in Rothrist",
   heroSub: "Dein Barber & Tattoo Studio in Rothrist: präzise Übergänge, saubere Bärte und individuelle Tattoos – in stylischem Ambiente.",
   metaDescription:
     "NOVUS Barber & Tattoo in Rothrist: präzise Übergänge, saubere Bärte und individuelle Tattoos. Top bewertet auf Treatwell (4.9). Jetzt online buchen.",
@@ -34,6 +34,10 @@ window.SHOP = {
      Leer = nur Text-Logo im Header (NOVUS). Bei Bedarf echtes Emblem eintragen. */
   logo: "",
   logoAlt: "NOVUS Barber & Tattoo Logo",
+
+  /* ---------- Hero-Logo (echtes NOVUS-Logo, wird im Hero weiss dargestellt) ----------
+     Leer = kein Logo im Hero. Transparentes PNG bevorzugt. */
+  heroLogo: "",
 
   /* ---------- Hero-Bild ----------
      Zuerst wird assets/img/hero.jpg versucht (dein echtes Salon-Foto einfach

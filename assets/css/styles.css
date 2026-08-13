@@ -102,6 +102,7 @@ h3{font-size:1.55rem;letter-spacing:1px}
 .hero .eyebrow{color:#fff;justify-content:center}
 .hero-title{font-size:clamp(3.4rem,11vw,8rem);letter-spacing:1px}
 .hero-title .accent{color:var(--red)}
+.hero-logo{max-width:min(460px,84vw);height:auto;display:block;margin:0 auto clamp(20px,3.5vw,36px);filter:brightness(0) invert(1) drop-shadow(0 6px 22px rgba(0,0,0,.45))}
 .hero-sub{font-size:clamp(1.02rem,2.2vw,1.22rem);color:rgba(255,255,255,.9);max-width:640px;margin:1.2rem auto 2.2rem}
 .hero-actions{display:flex;gap:14px;justify-content:center;flex-wrap:wrap}
 .hero-meta{margin-top:2rem;display:flex;gap:10px;justify-content:center;align-items:center;color:rgba(255,255,255,.85);font-size:.95rem;flex-wrap:wrap}
