@@ -36,8 +36,8 @@ window.SHOP = {
   logoAlt: "NOVUS Barber & Tattoo Logo",
 
   /* ---------- Hero-Logo (echtes NOVUS-Logo, wird im Hero weiss dargestellt) ----------
-     Leer = kein Logo im Hero. Transparentes PNG (Hintergrund via KI entfernt). */
-  heroLogo: "https://d8j0ntlcm91z4.cloudfront.net/user_3FuPVC4JIayU3rXUwYAnv5ZoEBp/hf_20260813_192032_3b74cc5a-aae1-4b0b-9cfe-e6d17ef688b3.png",
+     Original-Upload (scharf); die weisse Darstellung macht CSS via invert + screen. */
+  heroLogo: "https://d2ol7oe51mr4n9.cloudfront.net/user_3FuPVC4JIayU3rXUwYAnv5ZoEBp/01be915f-0f09-48b8-bcde-2efa88943abd.png",
 
   /* ---------- Hero-Bild ----------
      Zuerst wird assets/img/hero.jpg versucht (dein echtes Salon-Foto einfach
