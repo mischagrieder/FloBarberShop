@@ -117,8 +117,8 @@ h3{font-size:1.55rem;letter-spacing:1px}
   box-shadow:0 0 0 .055em #fff, 0 14px 44px rgba(0,0,0,.55);
   overflow:hidden;flex:none;
 }
-.wm-o-photo{position:absolute;inset:0;background-size:cover;background-position:center 22%;filter:grayscale(1) contrast(1.06)}
-.wm-o::after{content:"";position:absolute;inset:0;border-radius:50%;background:linear-gradient(180deg,rgba(0,0,0,0) 55%,rgba(0,0,0,.35))}
+.wm-o-photo{position:absolute;inset:0;background-size:cover;background-position:center 25%;filter:saturate(1.02) contrast(1.03)}
+.wm-o::after{content:"";position:absolute;inset:0;border-radius:50%;background:linear-gradient(180deg,rgba(0,0,0,0) 62%,rgba(0,0,0,.22))}
 .wm-o-plain{box-shadow:none;overflow:visible;width:auto;height:auto;margin:0}
 .wm-sub{
   font-family:"Comfortaa",var(--ff-body);font-weight:500;text-transform:uppercase;

@@ -44,7 +44,7 @@ window.SHOP = {
     sub: "Barber & Tattoo",   // Zeile darunter
     // Portrait, das im "O" sitzt (leer = normales O). KI-Portrait im Premium-Look;
     // gegen ein echtes Foto tauschbar (z. B. Inhaber-Portrait).
-    photo: "https://d8j0ntlcm91z4.cloudfront.net/user_3FuPVC4JIayU3rXUwYAnv5ZoEBp/hf_20260813_193747_15099031-0328-475a-8bf0-01681c603207.png"
+    photo: "https://d8j0ntlcm91z4.cloudfront.net/user_3FuPVC4JIayU3rXUwYAnv5ZoEBp/hf_20260813_194829_e0e0b018-ca47-47f5-8aa4-3558ae5f11e5.png"
   },
   heroLogo: "https://d2ol7oe51mr4n9.cloudfront.net/user_3FuPVC4JIayU3rXUwYAnv5ZoEBp/01be915f-0f09-48b8-bcde-2efa88943abd.png",
 
