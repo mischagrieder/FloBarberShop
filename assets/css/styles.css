@@ -103,9 +103,29 @@ h3{font-size:1.55rem;letter-spacing:1px}
 .hero-title{font-size:clamp(3.4rem,11vw,8rem);letter-spacing:1px}
 .hero-title .accent{color:var(--red)}
 .hero-logo{max-width:min(560px,86vw);height:auto;display:block;margin:0 auto clamp(26px,4vw,44px);filter:invert(1);mix-blend-mode:screen}
-.hero-wordmark{display:flex;flex-direction:column;align-items:center;gap:.5rem;margin:0 auto clamp(28px,4.5vw,48px);color:#fff;text-shadow:0 4px 24px rgba(0,0,0,.45)}
-.wm-name{font-family:"Comfortaa",var(--ff-body);font-weight:700;font-size:clamp(4rem,15vw,9rem);line-height:.85;letter-spacing:.01em}
-.wm-sub{font-family:"Comfortaa",var(--ff-body);font-weight:500;text-transform:uppercase;font-size:clamp(.72rem,2.6vw,1.4rem);letter-spacing:.44em;padding-left:.44em}
+.hero-wordmark{display:flex;flex-direction:column;align-items:center;gap:clamp(.5rem,1.4vw,1rem);margin:0 auto clamp(30px,5vw,54px);color:#fff}
+.wm-name{
+  font-family:"Comfortaa",var(--ff-body);font-weight:700;
+  font-size:clamp(3.6rem,15vw,10rem);line-height:.9;letter-spacing:.02em;
+  display:flex;align-items:center;justify-content:center;
+  text-shadow:0 6px 34px rgba(0,0,0,.5);
+}
+/* Foto im "O" */
+.wm-o{
+  position:relative;display:inline-block;vertical-align:middle;
+  width:.86em;height:.86em;margin:0 .04em;border-radius:50%;
+  box-shadow:0 0 0 .055em #fff, 0 14px 44px rgba(0,0,0,.55);
+  overflow:hidden;flex:none;
+}
+.wm-o-photo{position:absolute;inset:0;background-size:cover;background-position:center 22%;filter:grayscale(1) contrast(1.06)}
+.wm-o::after{content:"";position:absolute;inset:0;border-radius:50%;background:linear-gradient(180deg,rgba(0,0,0,0) 55%,rgba(0,0,0,.35))}
+.wm-o-plain{box-shadow:none;overflow:visible;width:auto;height:auto;margin:0}
+.wm-sub{
+  font-family:"Comfortaa",var(--ff-body);font-weight:500;text-transform:uppercase;
+  font-size:clamp(.7rem,2.4vw,1.25rem);letter-spacing:.5em;padding-left:.5em;
+  color:rgba(255,255,255,.92);display:flex;align-items:center;gap:clamp(12px,2.5vw,26px);
+}
+.wm-sub::before,.wm-sub::after{content:"";height:1px;width:clamp(26px,7vw,90px);background:linear-gradient(90deg,transparent,rgba(255,255,255,.55),transparent)}
 .sr-only{position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0,0,0,0);white-space:nowrap;border:0}
 .hero-sub{font-size:clamp(1.02rem,2.2vw,1.22rem);color:rgba(255,255,255,.9);max-width:640px;margin:1.2rem auto 2.2rem}
 .hero-actions{display:flex;gap:14px;justify-content:center;flex-wrap:wrap}

@@ -38,7 +38,13 @@ window.SHOP = {
   /* ---------- Hero-Logo ----------
      heroWordmark (Text) hat Vorrang und wird als scharfer weisser Schriftzug
      gerendert. heroLogo (Bild) nur nutzen, wenn kein Wordmark gesetzt ist. */
-  heroWordmark: { name: "novus", sub: "Barber & Tattoo" },
+  heroWordmark: {
+    before: "N",              // Buchstaben vor dem Foto-Kreis
+    after: "VUS",             // Buchstaben nach dem Foto-Kreis
+    sub: "Barber & Tattoo",   // Zeile darunter
+    // Portrait, das im "O" sitzt (leer = normales O)
+    photo: "https://d2ol7oe51mr4n9.cloudfront.net/user_3FuPVC4JIayU3rXUwYAnv5ZoEBp/1894ca12-28e5-4327-8bb9-9e99b1937273.png"
+  },
   heroLogo: "https://d2ol7oe51mr4n9.cloudfront.net/user_3FuPVC4JIayU3rXUwYAnv5ZoEBp/01be915f-0f09-48b8-bcde-2efa88943abd.png",
 
   /* ---------- Hero-Bild ----------

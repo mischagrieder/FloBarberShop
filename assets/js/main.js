@@ -51,16 +51,24 @@
 
   /* ---------- Hero-Wordmark (Text-Logo) / Hero-Logo (Bild) ---------- */
   const wmEl = $("[data-hero-wordmark]");
+  const wmActive = !!(S.heroWordmark && (S.heroWordmark.before || S.heroWordmark.after || S.heroWordmark.name));
   if (wmEl) {
-    if (S.heroWordmark && S.heroWordmark.name) {
-      wmEl.innerHTML = `<span class="wm-name">${esc(S.heroWordmark.name)}</span>` +
-        (S.heroWordmark.sub ? `<span class="wm-sub">${esc(S.heroWordmark.sub)}</span>` : "");
+    const wm = S.heroWordmark;
+    if (wmActive) {
+      const before = wm.before != null ? wm.before : (wm.name || "");
+      const after = wm.after || "";
+      const ring = wm.photo
+        ? `<span class="wm-o"><span class="wm-o-photo" style="background-image:url('${esc(wm.photo)}')"></span></span>`
+        : (after ? `<span class="wm-o wm-o-plain">O</span>` : "");
+      wmEl.innerHTML =
+        `<span class="wm-name">${esc(before)}${ring}${esc(after)}</span>` +
+        (wm.sub ? `<span class="wm-sub">${esc(wm.sub)}</span>` : "");
       wmEl.hidden = false;
     } else wmEl.remove();
   }
   const heroLogoEl = $("[data-hero-logo]");
   if (heroLogoEl) {
-    if (S.heroLogo && !(S.heroWordmark && S.heroWordmark.name)) {
+    if (S.heroLogo && !wmActive) {
       heroLogoEl.src = S.heroLogo; heroLogoEl.alt = S.logoAlt || S.brand; heroLogoEl.hidden = false;
     } else heroLogoEl.remove();
   }
