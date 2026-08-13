@@ -294,27 +294,8 @@
   /* ---------- Hero-Intro ---------- */
   if (wmEl && !wmEl.hidden) requestAnimationFrame(() => setTimeout(() => wmEl.classList.add("in"), 120));
 
-  /* ---------- Sanftes Momentum-Scrollen (nur Desktop/Maus) ---------- */
-  if (!reduce && matchMedia("(pointer:fine)").matches) {
-    let target = window.scrollY, running = false;
-    const maxY = () => document.documentElement.scrollHeight - window.innerHeight;
-    window.addEventListener("wheel", (e) => {
-      if (e.ctrlKey || e.defaultPrevented) return;
-      if (e.target.closest && e.target.closest(".hours-table, [data-native-scroll]")) return;
-      e.preventDefault();
-      const d = e.deltaMode === 1 ? e.deltaY * 18 : e.deltaMode === 2 ? e.deltaY * window.innerHeight : e.deltaY;
-      target = Math.max(0, Math.min(maxY(), target + d));
-      if (!running) { running = true; requestAnimationFrame(step); }
-    }, { passive: false });
-    window.addEventListener("scroll", () => { if (!running) target = window.scrollY; }, { passive: true });
-    window.addEventListener("resize", () => { target = window.scrollY; });
-    function step() {
-      const cur = window.scrollY, diff = target - cur;
-      if (Math.abs(diff) < 0.6) { window.scrollTo(0, target); running = false; return; }
-      window.scrollTo(0, cur + diff * 0.14);
-      requestAnimationFrame(step);
-    }
-  }
+  /* Scrollen bleibt nativ (das Rad steuert die Seite 1:1); sanfte Anker-Sprünge
+     macht CSS via scroll-behavior:smooth. */
 
   /* ---------- Helper ---------- */
   function probeImage(src, cb) { const img = new Image(); img.onload = () => cb(true); img.onerror = () => cb(false); img.src = src; }
