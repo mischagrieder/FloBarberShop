@@ -42,8 +42,9 @@ window.SHOP = {
     before: "N",              // Buchstaben vor dem Foto-Kreis
     after: "VUS",             // Buchstaben nach dem Foto-Kreis
     sub: "Barber & Tattoo",   // Zeile darunter
-    // Portrait, das im "O" sitzt (leer = normales O)
-    photo: "https://d2ol7oe51mr4n9.cloudfront.net/user_3FuPVC4JIayU3rXUwYAnv5ZoEBp/1894ca12-28e5-4327-8bb9-9e99b1937273.png"
+    // Portrait, das im "O" sitzt (leer = normales O). KI-Portrait im Premium-Look;
+    // gegen ein echtes Foto tauschbar (z. B. Inhaber-Portrait).
+    photo: "https://d8j0ntlcm91z4.cloudfront.net/user_3FuPVC4JIayU3rXUwYAnv5ZoEBp/hf_20260813_193747_15099031-0328-475a-8bf0-01681c603207.png"
   },
   heroLogo: "https://d2ol7oe51mr4n9.cloudfront.net/user_3FuPVC4JIayU3rXUwYAnv5ZoEBp/01be915f-0f09-48b8-bcde-2efa88943abd.png",
 
