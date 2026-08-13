@@ -243,21 +243,26 @@
     document.head.appendChild(sc);
   })();
 
-  /* ---------- Header, Menü, Sticky-CTA ---------- */
+  /* ---------- Header, Sticky-CTA & Parallax (gebündelt in einem Frame) ----------
+     Ein einziger rAF-gedrosselter Handler statt mehrerer Scroll-Listener –
+     verhindert ruckeliges Scrollen. */
   const header = $("#siteHeader"), sticky = $(".sticky-cta");
-  const onScroll = () => {
-    header.classList.toggle("scrolled", window.scrollY > 60);
-    if (sticky) sticky.classList.toggle("show", window.scrollY > window.innerHeight * 0.7);
+  let sTicking = false;
+  const paint = () => {
+    const y = window.scrollY;
+    header.classList.toggle("scrolled", y > 60);
+    if (sticky) sticky.classList.toggle("show", y > window.innerHeight * 0.7);
+    if (heroBg && !reduce && y < window.innerHeight) heroBg.style.transform = `scale(1.06) translate3d(0,${y * 0.15}px,0)`;
+    sTicking = false;
   };
-  onScroll(); window.addEventListener("scroll", onScroll, { passive: true });
+  paint();
+  window.addEventListener("scroll", () => {
+    if (!sTicking) { sTicking = true; requestAnimationFrame(paint); }
+  }, { passive: true });
+
   const toggle = $(".nav-toggle");
   if (toggle) toggle.addEventListener("click", () => { const o = header.classList.toggle("menu-open"); toggle.setAttribute("aria-expanded", o); });
   $$(".nav a").forEach((a) => a.addEventListener("click", () => { header.classList.remove("menu-open"); if (toggle) toggle.setAttribute("aria-expanded", "false"); }));
-
-  /* ---------- Hero-Parallax ---------- */
-  if (heroBg && !reduce) window.addEventListener("scroll", () => {
-    const y = window.scrollY; if (y < window.innerHeight) heroBg.style.transform = `scale(1.06) translateY(${y * 0.15}px)`;
-  }, { passive: true });
 
   /* ---------- Reveal (mit Richtungen & Staffelung) ---------- */
   $$(".section-head, .hours-card").forEach((el) => el.setAttribute("data-reveal", ""));
@@ -294,8 +299,41 @@
   /* ---------- Hero-Intro ---------- */
   if (wmEl && !wmEl.hidden) requestAnimationFrame(() => setTimeout(() => wmEl.classList.add("in"), 120));
 
-  /* Scrollen bleibt nativ (das Rad steuert die Seite 1:1); sanfte Anker-Sprünge
-     macht CSS via scroll-behavior:smooth. */
+  /* ---------- Sanftes Scrollen ohne Nachlaufen ----------
+     Glättet nur die groben Sprünge eines klassischen Mausrads (Rasterung),
+     rastet nach ~150 ms exakt ein. Trackpads/Touch scrollen unverändert nativ,
+     da sie bereits feine Deltas liefern. */
+  if (!reduce && matchMedia("(pointer:fine)").matches) {
+    let target = window.scrollY, running = false, last = 0;
+    const maxY = () => document.documentElement.scrollHeight - window.innerHeight;
+
+    window.addEventListener("wheel", (e) => {
+      if (e.ctrlKey || e.defaultPrevented || e.deltaMode === 0 && Math.abs(e.deltaY) < 45) return; // Trackpad: nativ
+      if (e.target.closest && e.target.closest(".hours-table, [data-native-scroll]")) return;
+      const d = e.deltaMode === 1 ? e.deltaY * 18 : e.deltaMode === 2 ? e.deltaY * window.innerHeight : e.deltaY;
+      const now = performance.now();
+      if (!running || now - last > 220) target = window.scrollY; // frisch andocken
+      last = now;
+      const next = Math.max(0, Math.min(maxY(), target + d));
+      if (next === target) return;
+      e.preventDefault();
+      target = next;
+      if (!running) { running = true; requestAnimationFrame(step); }
+    }, { passive: false });
+
+    window.addEventListener("scroll", () => { if (!running) target = window.scrollY; }, { passive: true });
+    window.addEventListener("resize", () => { target = window.scrollY; });
+
+    /* behavior:"instant" ist wichtig: sonst animiert das CSS scroll-behavior
+       jeden Einzelschritt mit und die Seite kriecht nach. */
+    const jump = (y) => window.scrollTo({ top: y, behavior: "instant" });
+    function step() {
+      const cur = window.scrollY, diff = target - cur;
+      if (Math.abs(diff) < 2.5) { jump(target); running = false; return; } // sauber einrasten statt kriechen
+      jump(cur + diff * 0.19); // dezentes Nachlaufen: in ~300 ms am Ziel
+      requestAnimationFrame(step);
+    }
+  }
 
   /* ---------- Helper ---------- */
   function probeImage(src, cb) { const img = new Image(); img.onload = () => cb(true); img.onerror = () => cb(false); img.src = src; }
