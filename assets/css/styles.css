@@ -283,14 +283,34 @@ h3{font-size:1.55rem;letter-spacing:1px}
 .sticky-cta.show{opacity:1;transform:none;pointer-events:auto}
 
 /* ---------- Animationen ---------- */
-.js [data-reveal]{opacity:0;transform:translateY(30px);transition:opacity .8s ease,transform .9s cubic-bezier(.2,.8,.2,1)}
+.js [data-reveal]{opacity:0;transform:translateY(30px);transition:opacity .8s ease,transform .9s cubic-bezier(.16,1,.3,1)}
 .js [data-reveal].in{opacity:1;transform:none}
-.type.typing::after{content:"";display:inline-block;width:.55ch;height:1em;margin-left:2px;background:var(--red);vertical-align:-.12em;animation:caret .8s step-end infinite}
-@keyframes caret{50%{opacity:0}}
+.js [data-reveal="left"]{transform:translateX(-46px)}
+.js [data-reveal="right"]{transform:translateX(46px)}
+.js [data-reveal="scale"]{transform:scale(.93)}
+.js [data-reveal="blur"]{filter:blur(9px)}
+.js [data-reveal="blur"].in{filter:none;transition:opacity .9s ease,transform .9s cubic-bezier(.16,1,.3,1),filter .9s ease}
+
+/* Wörter gleiten hinter einer Maske hoch */
+.js .type .w{display:inline-block;overflow:hidden;vertical-align:top;padding-bottom:.06em}
+.js .type .w > i{display:inline-block;font-style:normal;transform:translateY(115%);transition:transform .85s cubic-bezier(.16,1,.3,1)}
+.js .type.in .w > i{transform:none}
+
+/* Hero-Intro */
+.js .hero-wordmark{opacity:0;transform:translateY(24px);transition:opacity 1.1s ease,transform 1.2s cubic-bezier(.16,1,.3,1)}
+.js .hero-wordmark.in{opacity:1;transform:none}
+.js .hero-wordmark .wm-o{opacity:0;transform:scale(.6);transition:opacity .9s ease .35s,transform 1s cubic-bezier(.16,1,.3,1) .35s}
+.js .hero-wordmark.in .wm-o{opacity:1;transform:none}
+.js .hero-wordmark .wm-sub{opacity:0;transform:translateY(14px);transition:opacity .9s ease .5s,transform .9s cubic-bezier(.16,1,.3,1) .5s}
+.js .hero-wordmark.in .wm-sub{opacity:1;transform:none}
+.js .hero-wordmark ~ .hero-actions{opacity:0;transform:translateY(18px);transition:opacity .9s ease .7s,transform .9s cubic-bezier(.16,1,.3,1) .7s}
+.js .hero-wordmark.in ~ .hero-actions{opacity:1;transform:none}
 @media (prefers-reduced-motion:reduce){
   html{scroll-behavior:auto}
-  .js [data-reveal]{opacity:1;transform:none;transition:none}
-  .type.typing::after{display:none}
+  .js [data-reveal]{opacity:1;transform:none;filter:none;transition:none}
+  .js .type .w > i,
+  .js .hero-wordmark,.js .hero-wordmark .wm-o,.js .hero-wordmark .wm-sub,
+  .js .hero-wordmark ~ .hero-actions{opacity:1;transform:none;transition:none}
   .marquee-track,.gal-row,.review-row{animation:none!important}
   .gal-row,.review-row{flex-wrap:wrap;width:auto;justify-content:center}
 }
