@@ -253,7 +253,6 @@
   const header = $("#siteHeader"), sticky = $(".sticky-cta");
   let sTicking = false;
   const heroActions = $(".hero-actions"), heroWhite = $("[data-hero-white]"), heroPin = $("[data-hero-pin]");
-  const smoothWrap = $("#smoothWrap"), smoothOn = !!smoothWrap && !reduce;
   /* Scroll-Weg, über den der Zoom läuft (der Hero steht dabei still) */
   const zoomRange = () => Math.max(1, heroPin ? heroPin.offsetHeight - window.innerHeight : window.innerHeight * 0.85);
 
@@ -278,9 +277,6 @@
   const paint = (yIn) => {
     const y = yIn == null ? window.scrollY : yIn, vh = window.innerHeight;
     header.classList.toggle("scrolled", y > 60);
-    // Hero fixieren, solange der Zoom läuft (im Smooth-Wrapper wirkt sticky nicht)
-    if (heroSection && smoothOn) heroSection.style.transform =
-      `translate3d(0,${Math.min(Math.max(y, 0), zoomRange())}px,0)`;
     // Sticky-CTA erst zeigen, wenn der Hero-Zoom durch ist
     if (sticky) sticky.classList.toggle("show", y > zoomRange() + vh * 0.2);
 
@@ -301,7 +297,9 @@
   };
   paint();
   window.addEventListener("scroll", () => {
-    if (!sTicking) { sTicking = true; requestAnimationFrame(paint); }
+    // Wichtig: paint() gekapselt aufrufen – rAF würde sonst den Zeitstempel
+    // als Scrollposition übergeben und den Zoom sofort auf Maximum setzen.
+    if (!sTicking) { sTicking = true; requestAnimationFrame(() => paint()); }
   }, { passive: true });
 
   const toggle = $(".nav-toggle");
@@ -347,37 +345,50 @@
     setTimeout(() => { wmEl.classList.add("ready"); paint(); }, 1500);
   }, 120));
 
-  /* ---------- Smooth Scrolling: der Inhalt läuft der Scrollposition nach ----------
-     Funktioniert auf allen Eingaben (Mausrad, Trackpad, Touch, Tastatur),
-     weil nicht die Scrollposition manipuliert wird, sondern der Inhalt ihr
-     verzögert folgt. Bei prefers-reduced-motion bleibt alles nativ. */
+  /* ---------- Smooth Scrolling (Desktop) ----------
+     Glättet das Mausrad mit spürbarem Nachlauf. Touch-Geräte bleiben nativ:
+     iOS pausiert requestAnimationFrame beim Scrollen, dort würde jede
+     JS-Steuerung ruckeln und den Hero-Zoom blockieren. */
+  const desktopSmooth = !reduce && matchMedia("(hover:hover) and (pointer:fine)").matches;
   let smoothPos = window.scrollY;
-  if (smoothOn) {
-    document.documentElement.classList.add("smooth-on");
+  if (desktopSmooth) {
+    let target = window.scrollY, running = false, last = 0;
+    const maxY = () => document.documentElement.scrollHeight - window.innerHeight;
+    const jump = (v) => window.scrollTo({ top: v, behavior: "instant" });
 
-    const syncHeight = () => { document.body.style.height = smoothWrap.scrollHeight + "px"; };
-    syncHeight();
-    if (window.ResizeObserver) new ResizeObserver(syncHeight).observe(smoothWrap);
-    window.addEventListener("resize", syncHeight);
-    window.addEventListener("load", syncHeight);
+    window.addEventListener("wheel", (e) => {
+      if (e.ctrlKey || e.defaultPrevented) return;               // Zoom-Geste in Ruhe lassen
+      if (e.target.closest && e.target.closest("[data-native-scroll]")) return;
+      const d = e.deltaMode === 1 ? e.deltaY * 18
+              : e.deltaMode === 2 ? e.deltaY * window.innerHeight : e.deltaY;
+      const now = performance.now();
+      if (!running || now - last > 200) target = window.scrollY; // frisch andocken
+      last = now;
+      const next = Math.max(0, Math.min(maxY(), target + d));
+      if (next === target) return;                               // am Rand: nativ lassen
+      e.preventDefault();
+      target = next;
+      if (!running) { running = true; requestAnimationFrame(step); }
+    }, { passive: false });
 
-    (function loop() {
-      const target = window.scrollY, diff = target - smoothPos;
-      // 0.085 = spürbarer Nachlauf; Mindestschritt verhindert Sub-Pixel-Hänger
-      if (Math.abs(diff) < 0.5) smoothPos = target;
-      else smoothPos += Math.abs(diff * 0.085) < 0.5 ? Math.sign(diff) * 0.5 : diff * 0.085;
-      smoothWrap.style.transform = "translate3d(0," + (-smoothPos).toFixed(2) + "px,0)";
-      paint(smoothPos);
-      requestAnimationFrame(loop);
-    })();
+    window.addEventListener("scroll", () => { if (!running) target = window.scrollY; }, { passive: true });
+    window.addEventListener("resize", () => { target = window.scrollY; });
+
+    function step() {
+      const cur = window.scrollY, diff = target - cur;
+      if (Math.abs(diff) < 3) { jump(target); running = false; return; }
+      const d = diff * 0.085;                                    // weiches Nachlaufen
+      jump(cur + (Math.abs(d) < 1 ? Math.sign(diff) : d));       // Mindestschritt gegen Sub-Pixel-Hänger
+      requestAnimationFrame(step);
+    }
   }
 
   /* ---------- Ankerlinks ----------
-     Im fixierten Smooth-Wrapper kann der Browser die Zielposition nicht selbst
-     berechnen, deshalb springen wir hier gezielt an die richtige Stelle. */
+     Eigener Sprung mit Header-Abstand, damit er auch mit der Radglättung sauber
+     zusammenspielt. */
   const HEADER_OFFSET = 76;
   function scrollToTarget(el) {
-    const y = el.getBoundingClientRect().top + (smoothOn ? smoothPos : window.scrollY) - HEADER_OFFSET;
+    const y = el.getBoundingClientRect().top + window.scrollY - HEADER_OFFSET;
     window.scrollTo({ top: Math.max(0, y), behavior: "smooth" });
   }
   document.addEventListener("click", (e) => {
