@@ -60,8 +60,12 @@
       const ring = wm.photo
         ? `<span class="wm-o"><span class="wm-o-photo" style="background-image:url('${esc(wm.photo)}')"></span></span>`
         : (after ? `<span class="wm-o wm-o-plain">O</span>` : "");
+      // Erster Buchstabe nach dem Foto-Kreis (das "V") wird zum Zoom-Ziel
+      const afterHtml = after
+        ? `<span class="wm-v">${esc(after.charAt(0))}</span>${esc(after.slice(1))}`
+        : "";
       wmEl.innerHTML =
-        `<span class="wm-name">${esc(before)}${ring}${esc(after)}</span>` +
+        `<span class="wm-name">${esc(before)}${ring}${afterHtml}</span>` +
         (wm.sub ? `<span class="wm-sub">${esc(wm.sub)}</span>` : "");
       wmEl.hidden = false;
     } else wmEl.remove();
@@ -248,22 +252,42 @@
      verhindert ruckeliges Scrollen. */
   const header = $("#siteHeader"), sticky = $(".sticky-cta");
   let sTicking = false;
-  const heroActions = $(".hero-actions");
+  const heroActions = $(".hero-actions"), heroWhite = $("[data-hero-white]");
+
+  /* Zoom-Ursprung exakt auf das "V" legen (in die weisse Fläche des Buchstabens),
+     damit die Seite optisch in das V hineinfährt. */
+  function setZoomOrigin() {
+    if (!wmEl || wmEl.hidden) return;
+    const v = $(".wm-v", wmEl);
+    if (!v) return;
+    const prev = wmEl.style.transform;
+    wmEl.style.transform = "none"; // ungezoomt messen
+    const w = wmEl.getBoundingClientRect(), r = v.getBoundingClientRect();
+    wmEl.style.transform = prev;
+    if (!r.width) return;
+    // etwas unterhalb der Mitte: dort treffen sich die Striche des V (volles Weiss)
+    wmEl.style.transformOrigin = (r.left - w.left + r.width / 2) + "px " + (r.top - w.top + r.height * 0.72) + "px";
+  }
+  if (document.fonts && document.fonts.ready) document.fonts.ready.then(setZoomOrigin);
+  window.addEventListener("resize", setZoomOrigin);
+
   const paint = () => {
     const y = window.scrollY, vh = window.innerHeight;
     header.classList.toggle("scrolled", y > 60);
     if (sticky) sticky.classList.toggle("show", y > vh * 0.7);
     if (heroBg && !reduce && y < vh) heroBg.style.transform = `scale(1.06) translate3d(0,${y * 0.15}px,0)`;
 
-    /* Logo zoomt beim Runterscrollen aus dem Bild */
+    /* In das "V" hineinzoomen, bis dessen Weiss den Bildschirm füllt */
     if (wmEl && !reduce && wmEl.classList.contains("ready")) {
       const p = Math.min(1, y / (vh * 0.85));
       if (p < 1 || wmEl.dataset.zoomed !== "1") {
-        wmEl.style.transform = `translate3d(0,${y * 0.35}px,0) scale(${1 + p * 6})`;
-        wmEl.style.opacity = String(Math.max(0, 1 - Math.pow(p, 1.7) * 1.2));
+        // Wortmarke bleibt sichtbar; das V füllt zum Schluss das Bild
+        wmEl.style.transform = `translate3d(0,${y * 0.3}px,0) scale(${1 + p * p * 26})`;
         wmEl.dataset.zoomed = p >= 1 ? "1" : "0";
       }
-      if (heroActions) heroActions.style.opacity = String(Math.max(0, 1 - p * 1.8));
+      if (heroActions) heroActions.style.opacity = String(Math.max(0, 1 - p * 2.4));
+      // Weiss-Übergang zur anschliessenden hellen Sektion
+      if (heroWhite) heroWhite.style.opacity = String(Math.max(0, Math.min(1, (p - 0.55) / 0.35)));
     }
     sTicking = false;
   };
@@ -324,7 +348,7 @@
     const maxY = () => document.documentElement.scrollHeight - window.innerHeight;
 
     window.addEventListener("wheel", (e) => {
-      if (e.ctrlKey || e.defaultPrevented || e.deltaMode === 0 && Math.abs(e.deltaY) < 45) return; // Trackpad: nativ
+      if (e.ctrlKey || e.defaultPrevented) return; // Zoom-Geste unangetastet lassen
       if (e.target.closest && e.target.closest(".hours-table, [data-native-scroll]")) return;
       const d = e.deltaMode === 1 ? e.deltaY * 18 : e.deltaMode === 2 ? e.deltaY * window.innerHeight : e.deltaY;
       const now = performance.now();
