@@ -338,12 +338,30 @@
   }), { threshold: 0.35 });
   $$(".type").forEach((el) => tio.observe(el));
 
-  /* ---------- Hero-Intro ---------- */
-  if (wmEl && !wmEl.hidden) requestAnimationFrame(() => setTimeout(() => {
-    wmEl.classList.add("in");
-    // Nach dem Intro übernimmt der Scroll-Zoom (siehe paint())
-    setTimeout(() => { wmEl.classList.add("ready"); paint(); }, 1500);
-  }, 120));
+  /* ---------- Hero-Intro ----------
+     Der Zoom ist erst scharf, wenn die Wortmarke "ready" ist. Damit direktes
+     Scrollen nach dem Laden sofort zoomt (und die Einblendung nicht mitten im
+     gescrollten Zustand nachläuft), wird das Intro dann sofort beendet. */
+  let introTimer = null;
+  function finishIntro() {
+    if (!wmEl || wmEl.hidden || wmEl.classList.contains("ready")) return;
+    clearTimeout(introTimer);
+    wmEl.classList.add("in", "ready");
+    setZoomOrigin();
+    paint();
+  }
+  if (wmEl && !wmEl.hidden) {
+    if (window.scrollY > 4 || reduce) {
+      finishIntro();                       // Seite startet bereits gescrollt
+    } else {
+      requestAnimationFrame(() => setTimeout(() => {
+        wmEl.classList.add("in");
+        introTimer = setTimeout(() => { wmEl.classList.add("ready"); setZoomOrigin(); paint(); }, 1500);
+      }, 120));
+      // Sobald gescrollt wird, Intro sofort abschliessen und zoomen
+      window.addEventListener("scroll", () => { if (window.scrollY > 4) finishIntro(); }, { passive: true });
+    }
+  }
 
   /* ---------- Smooth Scrolling (Desktop) ----------
      Glättet das Mausrad mit spürbarem Nachlauf. Touch-Geräte bleiben nativ:
