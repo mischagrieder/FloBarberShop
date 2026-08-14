@@ -77,10 +77,14 @@ h3{font-size:1.25rem;letter-spacing:0}
 .nav{display:none;gap:28px}
 .nav a{font-size:1.05rem;font-weight:600;letter-spacing:.02em;color:currentColor;transition:.2s;position:relative}
 .nav-cta{margin-left:auto;margin-right:8px}
-.nav-toggle{display:flex;flex-direction:column;gap:5px;background:none;border:0;cursor:pointer;padding:8px;z-index:2}
-.nav-toggle span{width:26px;height:2px;background:currentColor;transition:.3s}
+.nav-toggle{display:flex;flex-direction:column;gap:5px;background:none;border:0;cursor:pointer;padding:8px;z-index:2;margin-left:auto}
+/* Über dem Hero: weiss mit leichtem Schatten – immer gut sichtbar */
+.nav-toggle span{width:26px;height:2.5px;border-radius:2px;background:#fff;filter:drop-shadow(0 1px 3px rgba(0,0,0,.55));transition:background .3s ease,transform .3s ease,opacity .3s ease,filter .3s ease}
+/* Sobald die Leiste weiss wird (oder auf Unterseiten): türkis */
+.site-header.scrolled .nav-toggle span,
+.subpage .site-header .nav-toggle span{background:var(--red);filter:none}
 .site-header.menu-open{background:rgba(255,255,255,.98);backdrop-filter:blur(12px);color:var(--ink)}
-.site-header.menu-open .nav-toggle span{background:var(--ink)}
+.site-header.menu-open .nav-toggle span{background:var(--red);filter:none}
 .site-header.menu-open .nav-toggle span:nth-child(1){transform:translateY(7px) rotate(45deg)}
 .site-header.menu-open .nav-toggle span:nth-child(2){opacity:0}
 .site-header.menu-open .nav-toggle span:nth-child(3){transform:translateY(-7px) rotate(-45deg)}
