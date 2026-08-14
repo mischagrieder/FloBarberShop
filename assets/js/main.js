@@ -248,11 +248,23 @@
      verhindert ruckeliges Scrollen. */
   const header = $("#siteHeader"), sticky = $(".sticky-cta");
   let sTicking = false;
+  const heroActions = $(".hero-actions");
   const paint = () => {
-    const y = window.scrollY;
+    const y = window.scrollY, vh = window.innerHeight;
     header.classList.toggle("scrolled", y > 60);
-    if (sticky) sticky.classList.toggle("show", y > window.innerHeight * 0.7);
-    if (heroBg && !reduce && y < window.innerHeight) heroBg.style.transform = `scale(1.06) translate3d(0,${y * 0.15}px,0)`;
+    if (sticky) sticky.classList.toggle("show", y > vh * 0.7);
+    if (heroBg && !reduce && y < vh) heroBg.style.transform = `scale(1.06) translate3d(0,${y * 0.15}px,0)`;
+
+    /* Logo zoomt beim Runterscrollen aus dem Bild */
+    if (wmEl && !reduce && wmEl.classList.contains("ready")) {
+      const p = Math.min(1, y / (vh * 0.85));
+      if (p < 1 || wmEl.dataset.zoomed !== "1") {
+        wmEl.style.transform = `translate3d(0,${y * 0.35}px,0) scale(${1 + p * 6})`;
+        wmEl.style.opacity = String(Math.max(0, 1 - Math.pow(p, 1.7) * 1.2));
+        wmEl.dataset.zoomed = p >= 1 ? "1" : "0";
+      }
+      if (heroActions) heroActions.style.opacity = String(Math.max(0, 1 - p * 1.8));
+    }
     sTicking = false;
   };
   paint();
@@ -297,7 +309,11 @@
   $$(".type").forEach((el) => tio.observe(el));
 
   /* ---------- Hero-Intro ---------- */
-  if (wmEl && !wmEl.hidden) requestAnimationFrame(() => setTimeout(() => wmEl.classList.add("in"), 120));
+  if (wmEl && !wmEl.hidden) requestAnimationFrame(() => setTimeout(() => {
+    wmEl.classList.add("in");
+    // Nach dem Intro übernimmt der Scroll-Zoom (siehe paint())
+    setTimeout(() => { wmEl.classList.add("ready"); paint(); }, 1500);
+  }, 120));
 
   /* ---------- Sanftes Scrollen ohne Nachlaufen ----------
      Glättet nur die groben Sprünge eines klassischen Mausrads (Rasterung),

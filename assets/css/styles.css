@@ -309,6 +309,10 @@ h3{font-size:1.25rem;letter-spacing:0}
 .js .hero-wordmark.in .wm-sub{opacity:1;transform:none}
 .js .hero-wordmark ~ .hero-actions{opacity:0;transform:translateY(18px);transition:opacity .9s ease .7s,transform .9s cubic-bezier(.16,1,.3,1) .7s}
 .js .hero-wordmark.in ~ .hero-actions{opacity:1;transform:none}
+/* Nach dem Intro: folgt dem Scrollen direkt (kein Übergang) und zoomt aus dem Bild */
+.js .hero-wordmark.ready{transition:none;will-change:transform,opacity;transform-origin:50% 45%}
+.js .hero-wordmark.ready .wm-o,.js .hero-wordmark.ready .wm-sub{transition:none}
+.js .hero-wordmark.ready ~ .hero-actions{transition:none}
 @media (prefers-reduced-motion:reduce){
   html{scroll-behavior:auto}
   .js [data-reveal]{opacity:1;transform:none;filter:none;transition:none}
