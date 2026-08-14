@@ -252,7 +252,9 @@
      verhindert ruckeliges Scrollen. */
   const header = $("#siteHeader"), sticky = $(".sticky-cta");
   let sTicking = false;
-  const heroActions = $(".hero-actions"), heroWhite = $("[data-hero-white]");
+  const heroActions = $(".hero-actions"), heroWhite = $("[data-hero-white]"), heroPin = $("[data-hero-pin]");
+  /* Scroll-Weg, über den der Zoom läuft (der Hero steht dabei still) */
+  const zoomRange = () => Math.max(1, heroPin ? heroPin.offsetHeight - window.innerHeight : window.innerHeight * 0.85);
 
   /* Zoom-Ursprung exakt auf das "V" legen (in die weisse Fläche des Buchstabens),
      damit die Seite optisch in das V hineinfährt. */
@@ -274,15 +276,16 @@
   const paint = () => {
     const y = window.scrollY, vh = window.innerHeight;
     header.classList.toggle("scrolled", y > 60);
-    if (sticky) sticky.classList.toggle("show", y > vh * 0.7);
-    if (heroBg && !reduce && y < vh) heroBg.style.transform = `scale(1.06) translate3d(0,${y * 0.15}px,0)`;
+    // Sticky-CTA erst zeigen, wenn der Hero-Zoom durch ist
+    if (sticky) sticky.classList.toggle("show", y > zoomRange() + vh * 0.2);
 
     /* In das "V" hineinzoomen, bis dessen Weiss den Bildschirm füllt */
     if (wmEl && !reduce && wmEl.classList.contains("ready")) {
-      const p = Math.min(1, y / (vh * 0.85));
+      const p = Math.min(1, Math.max(0, y / zoomRange()));
+      if (heroBg) heroBg.style.transform = `scale(${1.06 + p * 0.22})`;
       if (p < 1 || wmEl.dataset.zoomed !== "1") {
-        // Wortmarke bleibt sichtbar; das V füllt zum Schluss das Bild
-        wmEl.style.transform = `translate3d(0,${y * 0.3}px,0) scale(${1 + p * p * 26})`;
+        // Hero steht still, die Wortmarke zoomt zentriert ins V
+        wmEl.style.transform = `scale(${1 + p * p * 26})`;
         wmEl.dataset.zoomed = p >= 1 ? "1" : "0";
       }
       if (heroActions) heroActions.style.opacity = String(Math.max(0, 1 - p * 2.4));
