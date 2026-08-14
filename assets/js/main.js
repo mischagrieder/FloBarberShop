@@ -329,8 +329,10 @@
     const jump = (y) => window.scrollTo({ top: y, behavior: "instant" });
     function step() {
       const cur = window.scrollY, diff = target - cur;
-      if (Math.abs(diff) < 2.5) { jump(target); running = false; return; } // sauber einrasten statt kriechen
-      jump(cur + diff * 0.19); // dezentes Nachlaufen: in ~300 ms am Ziel
+      if (Math.abs(diff) < 4) { jump(target); running = false; return; } // sauber einrasten statt kriechen
+      const d = diff * 0.12; // weiches Nachlaufen
+      // Mindestschritt: sonst runden Sub-Pixel-Schritte auf 0 und die Schleife hängt
+      jump(cur + (Math.abs(d) < 1 ? Math.sign(diff) : d));
       requestAnimationFrame(step);
     }
   }
