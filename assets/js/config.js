@@ -63,8 +63,8 @@ window.SHOP = {
   ],
 
   /* ---------- Kontakt ---------- */
-  phoneDisplay: "",      // TODO: Telefonnummer eintragen (leer = Zeile ausgeblendet, CTA -> Online-Buchung)
-  phoneLink: "",         // TODO: z. B. +41xxxxxxxxx
+  phoneDisplay: "076 616 46 22",
+  phoneLink: "+41766164622",
   whatsapp: "",          // TODO: Handy/WhatsApp (leer = ausgeblendet)
   email: "",             // TODO
   address: {
