@@ -26,7 +26,10 @@
 *{box-sizing:border-box;margin:0;padding:0}
 [hidden]{display:none !important}
 /* overflow-x:clip statt hidden – hidden würde position:sticky (Hero-Zoom) aushebeln */
-html{scroll-behavior:smooth;overflow-x:clip;scroll-padding-top:76px}
+/* scroll-behavior wird von der JS-Engine übernommen; CSS-smooth würde mit jedem
+   programmatischen Scroll kollidieren (Ruckeln). overflow-x:clip statt hidden,
+   sonst würde position:sticky (Hero-Zoom) ausgehebelt. */
+html{overflow-x:clip;scroll-padding-top:76px}
 body{
   font-family:var(--ff-body);background:var(--bg);color:var(--ink);
   line-height:1.6;-webkit-font-smoothing:antialiased;overflow-x:clip;

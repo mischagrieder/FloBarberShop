@@ -363,56 +363,54 @@
     }
   }
 
-  /* ---------- Momentum-Scrolling (nur Mausrad) ----------
-     Jeder Radklick gibt der Seite Schwung (Geschwindigkeit); die Reibung bremst
-     sie danach sanft aus – es rollt also noch ein Stück weiter und stoppt weich,
-     scrollt aber nie von selbst. Touch löst kein "wheel" aus und bleibt nativ. */
-  let smoothPos = window.scrollY;
-  if (!reduce) {
-    console.info("%cNOVUS momentum-scroll v51 aktiv", "color:#12b4c4;font-weight:bold");
-    let velocity = 0, running = false;
-    const maxY = () => document.documentElement.scrollHeight - window.innerHeight;
-    const jump = (v) => window.scrollTo({ top: v, behavior: "instant" }); // ohne CSS-smooth
-    const IMPULSE = 0.34;  // Schub pro Radklick (grösser = weiter)
-    const FRICTION = 0.82; // Reibung/Ausrollen: grösser = längerer Nachlauf, kleiner = kürzer
-    const VMAX = 90;       // Höchstgeschwindigkeit pro Frame (px)
+  /* ================= Smooth-Scroll-Engine (eine für Rad, Trackpad & Anker) =======
+     Lenis-Prinzip: Rad/Trackpad verschiebt ein Ziel, der Inhalt gleitet mit
+     zeitnormalisierter Exponential-Dämpfung dorthin. Sofortige Reaktion, weiches
+     kontrolliertes Abbremsen, kein Überschwingen, kein Selbstläufer. Fingerscrollen
+     löst kein "wheel" aus und bleibt komplett nativ (wichtig für iOS). */
+  const HEADER_OFFSET = 76;
+  const smooth = !reduce;
+  const maxY = () => Math.max(0, (document.scrollingElement || document.documentElement).scrollHeight - window.innerHeight);
+  const clampY = (v) => Math.max(0, Math.min(maxY(), v));
+  const setScroll = (v) => window.scrollTo({ top: v, behavior: "instant" }); // ohne CSS-smooth
 
+  let sTarget = window.scrollY, sCurrent = window.scrollY, sRaf = null, sLast = 0;
+  const HALFLIFE = 0.10;  // Sekunden bis zur halben Restdistanz – kleiner = snappier
+  const WHEEL = 1.0;      // Rad-Faktor: 1 = gleiche Distanz wie nativ, nur weich
+
+  function sTick(now) {
+    const dt = Math.min(0.05, ((now - sLast) / 1000) || 0.016); sLast = now;
+    const k = 1 - Math.pow(2, -dt / HALFLIFE);              // FPS-unabhängiger Anteil pro Frame
+    sCurrent += (sTarget - sCurrent) * k;
+    if (Math.abs(sTarget - sCurrent) < 0.35) { sCurrent = sTarget; setScroll(sCurrent); sRaf = null; return; }
+    setScroll(sCurrent);
+    sRaf = requestAnimationFrame(sTick);
+  }
+  function sStart() { if (sRaf == null) { sCurrent = window.scrollY; sLast = performance.now(); sRaf = requestAnimationFrame(sTick); } }
+  function smoothTo(y) { if (!smooth) { setScroll(clampY(y)); return; } sTarget = clampY(y); sStart(); }
+
+  if (smooth) {
+    console.info("%cNOVUS smooth-scroll v52 aktiv", "color:#12b4c4;font-weight:bold");
     window.addEventListener("wheel", (e) => {
-      if (e.ctrlKey || e.defaultPrevented) return;               // Pinch-Zoom in Ruhe lassen
+      if (e.ctrlKey || e.defaultPrevented) return;             // Pinch-Zoom unangetastet
       if (e.target.closest && e.target.closest("[data-native-scroll]")) return;
-      const d = (e.deltaMode === 1 ? e.deltaY * 18
-              : e.deltaMode === 2 ? e.deltaY * window.innerHeight : e.deltaY) * IMPULSE;
-      // am oberen/unteren Rand nicht abfangen -> natürliches Overscroll
+      const dy = e.deltaMode === 1 ? e.deltaY * 16
+               : e.deltaMode === 2 ? e.deltaY * window.innerHeight : e.deltaY;
       const y = window.scrollY;
-      if ((d < 0 && y <= 0) || (d > 0 && y >= maxY())) { if (!running) return; }
+      // an den Rändern nativ lassen (natürliches Overscroll)
+      if ((dy < 0 && y <= 0) || (dy > 0 && y >= maxY())) { if (sRaf == null) return; }
       e.preventDefault();
-      velocity = Math.max(-VMAX, Math.min(VMAX, velocity + d)); // Schwung aufaddieren
-      if (!running) { running = true; requestAnimationFrame(step); }
+      if (sRaf == null) sTarget = window.scrollY;              // frisch andocken
+      sTarget = clampY(sTarget + dy * WHEEL);
+      sStart();
     }, { passive: false });
 
-    // Sprünge von aussen (Ankerlinks, Tasten, Scrollbalken) beenden das Ausrollen
-    window.addEventListener("scroll", () => { if (!running) smoothPos = window.scrollY; }, { passive: true });
-
-    function step() {
-      velocity *= FRICTION;
-      const cur = window.scrollY;
-      let next = cur + velocity;
-      if (next <= 0) { next = 0; velocity = 0; }
-      else if (next >= maxY()) { next = maxY(); velocity = 0; }
-      jump(next); smoothPos = next;
-      if (Math.abs(velocity) < 0.4) { running = false; return; } // ausgerollt
-      requestAnimationFrame(step);
-    }
+    // Fremdscrolls (Scrollbalken, Tastatur, Touch) übernehmen, wenn die Engine ruht
+    window.addEventListener("scroll", () => { if (sRaf == null) { sTarget = sCurrent = window.scrollY; } }, { passive: true });
   }
 
-  /* ---------- Ankerlinks ----------
-     Eigener Sprung mit Header-Abstand, damit er auch mit der Radglättung sauber
-     zusammenspielt. */
-  const HEADER_OFFSET = 76;
-  function scrollToTarget(el) {
-    const y = el.getBoundingClientRect().top + window.scrollY - HEADER_OFFSET;
-    window.scrollTo({ top: Math.max(0, y), behavior: "smooth" });
-  }
+  /* ---------- Ankerlinks & Navigation (über dieselbe Engine) ---------- */
+  function scrollToTarget(el) { smoothTo(el.getBoundingClientRect().top + window.scrollY - HEADER_OFFSET); }
   document.addEventListener("click", (e) => {
     const a = e.target.closest && e.target.closest('a[href^="#"]');
     if (!a) return;
@@ -425,7 +423,6 @@
     header.classList.remove("menu-open");
     if (toggle) toggle.setAttribute("aria-expanded", "false");
   });
-  // Direktaufruf mit #anker (z. B. aus dem Impressum zurück auf einen Abschnitt)
   if (location.hash) {
     const el = document.querySelector(location.hash);
     if (el) window.addEventListener("load", () => setTimeout(() => scrollToTarget(el), 60));
