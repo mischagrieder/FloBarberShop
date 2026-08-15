@@ -369,11 +369,12 @@
      wichtig, weil iOS requestAnimationFrame beim Scrollen pausiert. */
   let smoothPos = window.scrollY;
   if (!reduce) {
+    console.info("%cNOVUS smooth-scroll v50 aktiv", "color:#12b4c4;font-weight:bold");
     let target = window.scrollY, running = false;
     const maxY = () => document.documentElement.scrollHeight - window.innerHeight;
     const jump = (v) => window.scrollTo({ top: v, behavior: "instant" }); // ohne CSS-smooth (sonst kriecht es)
-    const EASE = 0.12;                                           // 0.08 = weicher, 0.18 = direkter
-    const SPEED = 0.9;                                           // Radweg pro Notch
+    const EASE = 0.075;                                          // kleiner = längerer, weicherer Nachlauf
+    const SPEED = 1.1;                                           // Radweg pro Notch
 
     window.addEventListener("wheel", (e) => {
       if (e.ctrlKey || e.defaultPrevented) return;               // Pinch-Zoom in Ruhe lassen
