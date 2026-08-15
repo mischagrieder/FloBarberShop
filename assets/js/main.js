@@ -363,40 +363,41 @@
     }
   }
 
-  /* ---------- Smooth Scrolling (Desktop) ----------
-     Glättet das Mausrad mit spürbarem Nachlauf. Touch-Geräte bleiben nativ:
-     iOS pausiert requestAnimationFrame beim Scrollen, dort würde jede
-     JS-Steuerung ruckeln und den Hero-Zoom blockieren. */
-  const desktopSmooth = !reduce && matchMedia("(hover:hover) and (pointer:fine)").matches;
+  /* ---------- Smooth Scrolling (nur Mausrad) ----------
+     Fängt Mausrad-Ereignisse ab und gleitet weich zum Ziel (Lenis-artig).
+     Touch-Geräte lösen kein "wheel" aus und bleiben daher komplett nativ –
+     wichtig, weil iOS requestAnimationFrame beim Scrollen pausiert. */
   let smoothPos = window.scrollY;
-  if (desktopSmooth) {
-    let target = window.scrollY, running = false, last = 0;
+  if (!reduce) {
+    let target = window.scrollY, running = false;
     const maxY = () => document.documentElement.scrollHeight - window.innerHeight;
-    const jump = (v) => window.scrollTo({ top: v, behavior: "instant" });
+    const jump = (v) => window.scrollTo({ top: v, behavior: "instant" }); // ohne CSS-smooth (sonst kriecht es)
+    const EASE = 0.12;                                           // 0.08 = weicher, 0.18 = direkter
+    const SPEED = 0.9;                                           // Radweg pro Notch
 
     window.addEventListener("wheel", (e) => {
-      if (e.ctrlKey || e.defaultPrevented) return;               // Zoom-Geste in Ruhe lassen
+      if (e.ctrlKey || e.defaultPrevented) return;               // Pinch-Zoom in Ruhe lassen
       if (e.target.closest && e.target.closest("[data-native-scroll]")) return;
-      const d = e.deltaMode === 1 ? e.deltaY * 18
-              : e.deltaMode === 2 ? e.deltaY * window.innerHeight : e.deltaY;
-      const now = performance.now();
-      if (!running || now - last > 200) target = window.scrollY; // frisch andocken
-      last = now;
+      const d = (e.deltaMode === 1 ? e.deltaY * 18
+              : e.deltaMode === 2 ? e.deltaY * window.innerHeight : e.deltaY) * SPEED;
+      if (!running) target = window.scrollY;                     // beim Andocken auf echten Stand setzen
       const next = Math.max(0, Math.min(maxY(), target + d));
-      if (next === target) return;                               // am Rand: nativ lassen
+      if (next === target && !running) return;                   // am Rand: nativ lassen
       e.preventDefault();
       target = next;
       if (!running) { running = true; requestAnimationFrame(step); }
     }, { passive: false });
 
-    window.addEventListener("scroll", () => { if (!running) target = window.scrollY; }, { passive: true });
-    window.addEventListener("resize", () => { target = window.scrollY; });
+    // Sprünge von aussen (Ankerlinks, Tasten, Scrollbalken) übernehmen
+    window.addEventListener("scroll", () => { if (!running) { target = window.scrollY; smoothPos = window.scrollY; } }, { passive: true });
+    window.addEventListener("resize", () => { if (!running) target = window.scrollY; });
 
     function step() {
       const cur = window.scrollY, diff = target - cur;
-      if (Math.abs(diff) < 3) { jump(target); running = false; return; }
-      const d = diff * 0.085;                                    // weiches Nachlaufen
-      jump(cur + (Math.abs(d) < 1 ? Math.sign(diff) : d));       // Mindestschritt gegen Sub-Pixel-Hänger
+      if (Math.abs(diff) < 0.5) { jump(target); smoothPos = target; running = false; return; }
+      const d = diff * EASE;
+      const nextPos = cur + (Math.abs(d) < 1 ? Math.sign(diff) : d); // Mindestschritt gegen Sub-Pixel-Hänger
+      jump(nextPos); smoothPos = nextPos;
       requestAnimationFrame(step);
     }
   }
