@@ -187,5 +187,5 @@ window.SHOP = {
   /* ---------- Call-to-Action ----------
      bookingUrl gesetzt => alle "Termin"-Buttons öffnen die Online-Buchung. */
   primaryCta: { label: "Termin buchen", type: "link" },
-  bookingUrl: "https://outlaw-barber.mytreatwell.ch/"
+  bookingUrl: "https://buchung.treatwell.ch/ort/novus-barber-tattoo/?utm_source=partner&utm_medium=partner-site-book-now-widget"
 };
