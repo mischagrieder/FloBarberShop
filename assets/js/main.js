@@ -363,42 +363,44 @@
     }
   }
 
-  /* ---------- Smooth Scrolling (nur Mausrad) ----------
-     Fängt Mausrad-Ereignisse ab und gleitet weich zum Ziel (Lenis-artig).
-     Touch-Geräte lösen kein "wheel" aus und bleiben daher komplett nativ –
-     wichtig, weil iOS requestAnimationFrame beim Scrollen pausiert. */
+  /* ---------- Momentum-Scrolling (nur Mausrad) ----------
+     Jeder Radklick gibt der Seite Schwung (Geschwindigkeit); die Reibung bremst
+     sie danach sanft aus – es rollt also noch ein Stück weiter und stoppt weich,
+     scrollt aber nie von selbst. Touch löst kein "wheel" aus und bleibt nativ. */
   let smoothPos = window.scrollY;
   if (!reduce) {
-    console.info("%cNOVUS smooth-scroll v50 aktiv", "color:#12b4c4;font-weight:bold");
-    let target = window.scrollY, running = false;
+    console.info("%cNOVUS momentum-scroll v51 aktiv", "color:#12b4c4;font-weight:bold");
+    let velocity = 0, running = false;
     const maxY = () => document.documentElement.scrollHeight - window.innerHeight;
-    const jump = (v) => window.scrollTo({ top: v, behavior: "instant" }); // ohne CSS-smooth (sonst kriecht es)
-    const EASE = 0.075;                                          // kleiner = längerer, weicherer Nachlauf
-    const SPEED = 1.1;                                           // Radweg pro Notch
+    const jump = (v) => window.scrollTo({ top: v, behavior: "instant" }); // ohne CSS-smooth
+    const IMPULSE = 0.34;  // Schub pro Radklick (grösser = weiter)
+    const FRICTION = 0.82; // Reibung/Ausrollen: grösser = längerer Nachlauf, kleiner = kürzer
+    const VMAX = 90;       // Höchstgeschwindigkeit pro Frame (px)
 
     window.addEventListener("wheel", (e) => {
       if (e.ctrlKey || e.defaultPrevented) return;               // Pinch-Zoom in Ruhe lassen
       if (e.target.closest && e.target.closest("[data-native-scroll]")) return;
       const d = (e.deltaMode === 1 ? e.deltaY * 18
-              : e.deltaMode === 2 ? e.deltaY * window.innerHeight : e.deltaY) * SPEED;
-      if (!running) target = window.scrollY;                     // beim Andocken auf echten Stand setzen
-      const next = Math.max(0, Math.min(maxY(), target + d));
-      if (next === target && !running) return;                   // am Rand: nativ lassen
+              : e.deltaMode === 2 ? e.deltaY * window.innerHeight : e.deltaY) * IMPULSE;
+      // am oberen/unteren Rand nicht abfangen -> natürliches Overscroll
+      const y = window.scrollY;
+      if ((d < 0 && y <= 0) || (d > 0 && y >= maxY())) { if (!running) return; }
       e.preventDefault();
-      target = next;
+      velocity = Math.max(-VMAX, Math.min(VMAX, velocity + d)); // Schwung aufaddieren
       if (!running) { running = true; requestAnimationFrame(step); }
     }, { passive: false });
 
-    // Sprünge von aussen (Ankerlinks, Tasten, Scrollbalken) übernehmen
-    window.addEventListener("scroll", () => { if (!running) { target = window.scrollY; smoothPos = window.scrollY; } }, { passive: true });
-    window.addEventListener("resize", () => { if (!running) target = window.scrollY; });
+    // Sprünge von aussen (Ankerlinks, Tasten, Scrollbalken) beenden das Ausrollen
+    window.addEventListener("scroll", () => { if (!running) smoothPos = window.scrollY; }, { passive: true });
 
     function step() {
-      const cur = window.scrollY, diff = target - cur;
-      if (Math.abs(diff) < 0.5) { jump(target); smoothPos = target; running = false; return; }
-      const d = diff * EASE;
-      const nextPos = cur + (Math.abs(d) < 1 ? Math.sign(diff) : d); // Mindestschritt gegen Sub-Pixel-Hänger
-      jump(nextPos); smoothPos = nextPos;
+      velocity *= FRICTION;
+      const cur = window.scrollY;
+      let next = cur + velocity;
+      if (next <= 0) { next = 0; velocity = 0; }
+      else if (next >= maxY()) { next = maxY(); velocity = 0; }
+      jump(next); smoothPos = next;
+      if (Math.abs(velocity) < 0.4) { running = false; return; } // ausgerollt
       requestAnimationFrame(step);
     }
   }
