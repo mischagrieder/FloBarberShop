@@ -4,6 +4,11 @@
 (function () {
   "use strict";
   document.documentElement.classList.add("js");
+
+  /* Beim Neuladen immer oben (beim Hero) starten – nicht die alte Scrollposition
+     wiederherstellen. Nur bei echtem #anker-Aufruf bleibt der Sprung erhalten. */
+  if ("scrollRestoration" in history) history.scrollRestoration = "manual";
+  if (!location.hash) { try { window.scrollTo(0, 0); } catch (e) {} }
   const S = window.SHOP || {};
   const $ = (s, c = document) => c.querySelector(s);
   const $$ = (s, c = document) => Array.from(c.querySelectorAll(s));
@@ -253,6 +258,7 @@
   const header = $("#siteHeader"), sticky = $(".sticky-cta");
   let sTicking = false;
   const heroActions = $(".hero-actions"), heroWhite = $("[data-hero-white]"), heroPin = $("[data-hero-pin]");
+  const wmSub = wmEl ? $(".wm-sub", wmEl) : null;
   /* Scroll-Weg, über den der Zoom läuft (der Hero steht dabei still) */
   const zoomRange = () => Math.max(1, heroPin ? heroPin.offsetHeight - window.innerHeight : window.innerHeight * 0.85);
 
@@ -286,12 +292,15 @@
       if (heroBg) heroBg.style.transform = `scale(${1.06 + p * 0.22})`;
       if (p < 1 || wmEl.dataset.zoomed !== "1") {
         // Hero steht still, die Wortmarke zoomt zentriert ins V
-        wmEl.style.transform = `scale(${1 + p * p * 26})`;
+        wmEl.style.transform = `scale(${1 + p * p * 22})`;
         wmEl.dataset.zoomed = p >= 1 ? "1" : "0";
       }
-      if (heroActions) heroActions.style.opacity = String(Math.max(0, 1 - p * 2.4));
-      // Weiss-Übergang zur anschliessenden hellen Sektion
-      if (heroWhite) heroWhite.style.opacity = String(Math.max(0, Math.min(1, (p - 0.55) / 0.35)));
+      // "BARBER & TATTOO" samt Deko-Linien früh ausblenden – sonst ziehen die
+      // Linien beim Skalieren als Striche quer über den Hero.
+      if (wmSub) wmSub.style.opacity = String(Math.max(0, 1 - p * 6));
+      if (heroActions) heroActions.style.opacity = String(Math.max(0, 1 - p * 3));
+      // Weiss-Übergang früher – maskiert die Skalierungs-Unschärfe des Textes
+      if (heroWhite) heroWhite.style.opacity = String(Math.max(0, Math.min(1, (p - 0.4) / 0.28)));
     }
     sTicking = false;
   };
